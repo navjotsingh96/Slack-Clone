@@ -103,6 +103,16 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "Slack-Clone:build:production",
+            "firebaseProject": "slack-clone-94f23",
+            "firebaseHostingSite": "slack-clone-94f23"
+          }
         }
       }
     }
