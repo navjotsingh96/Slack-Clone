@@ -1,0 +1,22 @@
+<div class="dialog">
+    <div class="d-flex">
+        <h1 mat-dialog-title>Add Channel</h1>
+        <div mat-dialog-content class="dialog-content">
+            <p>What would you like to call your new Channel?</p>
+            <mat-form-field appearance="fill">
+                <mat-label>Channel name</mat-label>
+                <input matInput>
+
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Channel description</mat-label>
+                <input matInput>
+            </mat-form-field>
+
+        </div>
+        <div mat-dialog-actions>
+            <button mat-button [mat-dialog-close]="true">No Thanks</button>
+            <button mat-button [mat-dialog-close]="" cdkFocusInitial>Ok</button>
+        </div>
+    </div>
+</div>

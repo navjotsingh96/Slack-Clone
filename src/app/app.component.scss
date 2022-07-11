@@ -2,6 +2,8 @@
     background-color: #232946;
     height: 100%;
     width: 300px;
+    color: #fffffe;
+    position: relative;
     h1 {
         color: #fffffe;
         border-bottom: 2px solid;
@@ -12,5 +14,43 @@
     }
     p {
         color: #b8c1ec;
+        width: 100%;
     }
+}
+
+.side-nav {
+    width: 100%;
+}
+
+.channels {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid;
+    h3 {
+        border-bottom: 2px solid;
+        width: 100%;
+        padding-bottom: 20px;
+    }
+}
+
+.cereat-channels {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.add-btn {
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #b8c1ec;
+}
+
+mat-dialog-container {
+    padding: 0;
 }

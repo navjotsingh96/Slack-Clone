@@ -2,9 +2,19 @@
 
     <mat-drawer #drawer class="side-nav" opened="true" mode="side">
         <div class="d-flex m-left-20 m-right-20">
-            <h1>Slacky</h1>
-            <p>Lorem, ipsum dolor sit amet consectetur.</p>
+            <div style="width: 100%;">
+                <h1>Slacky</h1>
+            </div>
+            <div class="channels">
+                <h3>Channels</h3>
+                <span>Test</span>
+            </div>
+            <div class="cereat-channels">
+                <button (click)="openDialog()" class="add-btn" mat-fab color="primary">
+                    <mat-icon>add</mat-icon>
+                </button>
+                <span> Add Channel</span>
+            </div>
         </div>
     </mat-drawer>
-
 </mat-drawer-container>

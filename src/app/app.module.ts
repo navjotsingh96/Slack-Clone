@@ -14,6 +14,12 @@ import { ThreadComponent } from './thread/thread.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
+import { MatTreeModule } from '@angular/material/tree';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogAddChannelsComponent } from './dialog-add-channels/dialog-add-channels.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 @NgModule({
@@ -22,7 +28,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     LoginComponent,
     HomeComponent,
     ChatRoomComponent,
-    ThreadComponent
+    ThreadComponent,
+    DialogAddChannelsComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +37,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     BrowserAnimationsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatTreeModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule
 
   ],
   providers: [],
