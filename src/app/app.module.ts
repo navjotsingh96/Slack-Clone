@@ -7,7 +7,6 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ThreadComponent } from './thread/thread.component';
@@ -20,16 +19,18 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogAddChannelsComponent } from './dialog-add-channels/dialog-add-channels.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
-
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { LoginSectionComponent } from './login-section/login-section.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     HomeComponent,
     ChatRoomComponent,
     ThreadComponent,
-    DialogAddChannelsComponent
+    DialogAddChannelsComponent,
+    SidebarComponent,
+    LoginSectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,13 +38,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     BrowserAnimationsModule,
+    MatDialogModule,
     MatSidenavModule,
     MatTreeModule,
+    MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatDialogModule,
-    MatFormFieldModule
-
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
