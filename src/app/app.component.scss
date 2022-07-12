@@ -1,13 +1,14 @@
 .side-nav-container {
-    background-color: #232946 !important;
+    // background-color: #232946 !important;
     height: 100%;
-    width: 300px;
-    color: #fffffe;
-    position: relative;
+    // width: 300px;
+    // color: #fffffe;
+    // position: relative;
 }
 
 .side-nav {
-    width: 100%;
+    // width: 100%;
+    width: 300px;
     background-color: #232946 !important;
     padding-top: 20px;
     color: #fffffe;
@@ -75,5 +76,57 @@ mat-dialog-container {
         width: 35px;
         object-fit: cover;
         border-radius: 100%;
+    }
+}
+
+.test {
+    z-index: 56666;
+    background-color: red;
+    width: 600px;
+}
+
+///////////////////////////////// Side nav /////////////////////////////////////////////
+
+.side-nav-Roland {
+    width: 300px;
+}
+
+.side-nav-container-Roland{
+    height: 100vh;
+}
+
+
+// ////////////////////////////// Chat Window //////////////////////////////////////////
+
+.chat-container{
+    padding: 16px;
+    height: calc(100vh - 32px);
+}
+
+
+
+.show-chat {
+    height: 80%;
+    overflow-y: scroll;
+}
+
+.message-container {
+    margin-top: 16px;
+    height: calc(20% - 16px);
+
+    mat-form-field {
+        width: 100%;
+    
+        bottom: 10px;
+        
+        textarea {
+            height: 100px;
+            resize: none;
+        }
+    
+        mat-icon{
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
     }
 }

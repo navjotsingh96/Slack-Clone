@@ -20,6 +20,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogAddChannelsComponent } from './dialog-add-channels/dialog-add-channels.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MessageComponent } from './message/message.component';
+
+
+
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginSectionComponent } from './login-section/login-section.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -33,6 +38,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     ChatRoomComponent,
     ThreadComponent,
     DialogAddChannelsComponent,
+    MessageComponent,
     SidebarComponent,
     LoginSectionComponent,
   ],

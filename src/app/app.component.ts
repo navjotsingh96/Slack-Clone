@@ -17,7 +17,5 @@ export class AppComponent {
     public dialog: MatDialog) {}
   
 
-  openDialog(){
-    this.dialog.open(DialogAddChannelsComponent);
-  }
+  
 }
