@@ -1,4 +1,4 @@
-<mat-drawer-container class="side-nav-container" autosize>
+<mat-drawer-container class="side-nav-container" >
 
     <mat-drawer #drawer class="side-nav" opened="true" mode="side">
         <div class="d-flex">
@@ -30,4 +30,40 @@
             </div>
         </div>
     </mat-drawer>
+
+
+    <mat-drawer-content>
+        <div class="chat-container">
+            <div class="show-chat">
+                <app-message></app-message>
+                <app-message></app-message>
+                <app-message></app-message>
+                <app-message></app-message>
+                <app-message></app-message>
+                <app-message></app-message>
+                <app-message></app-message>
+                <app-message></app-message>
+                <app-message></app-message>
+                <app-message></app-message>
+                <app-message></app-message>
+                <app-message></app-message>
+                <app-message></app-message>
+                <app-message></app-message>
+                <app-message></app-message>
+                <app-message></app-message>
+                <app-message></app-message>
+            </div>
+
+            <div class="message-container">
+                <mat-form-field appearance="outline">
+                    <mat-label>Message...</mat-label>
+                    <textarea matInput name="" id="" cols="30" rows="10"></textarea>
+                    <mat-icon matSuffix>add_photo_alternate</mat-icon>
+                    <mat-icon matSuffix>send</mat-icon>
+                </mat-form-field>
+            </div>
+
+        </div>
+    </mat-drawer-content>
+
 </mat-drawer-container>

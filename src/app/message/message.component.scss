@@ -1,0 +1,30 @@
+
+
+.chat {
+    margin-bottom: 8px;
+}
+
+.chat-user {
+    display: flex;
+
+    img {
+        height: 50px;
+    }
+}
+
+.chat-text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
+}
+
+.user-name {
+    font-weight: bold;
+}
+
+.message-time {
+    margin-left: 8px;
+    font-weight: normal;
+    font-size: 0.8rem;
+    color: gray;
+}

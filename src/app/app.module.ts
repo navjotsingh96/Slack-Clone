@@ -20,6 +20,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DialogAddChannelsComponent } from './dialog-add-channels/dialog-add-channels.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MessageComponent } from './message/message.component';
+
 
 
 @NgModule({
@@ -29,7 +32,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     HomeComponent,
     ChatRoomComponent,
     ThreadComponent,
-    DialogAddChannelsComponent
+    DialogAddChannelsComponent,
+    MessageComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
 
   ],
   providers: [],
