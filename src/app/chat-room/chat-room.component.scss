@@ -25,3 +25,56 @@
     font-size: 0.8rem;
     color: gray;
 }
+
+.bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 40px !important;
+    top: unset !important;
+}
+
+.send-btn {
+    width: 164px;
+    height: 70px;
+    border-radius: 5px 5px 5px 5px;
+    transition: opacity 1s ease-in-out;
+    margin-left: 20px;
+    &:hover {
+        mat-icon {
+            transition: opacity 255ms ease-in-out;
+            opacity: 0;
+        }
+    }
+    &::before {
+        content: "Send";
+        visibility: hidden;
+        position: absolute;
+        transition: all 255ms ease-in-out;
+        text-align: center;
+        opacity: 0;
+        top: 0;
+        bottom: 0;
+        margin-right: 5px;
+        font-size: 16px;
+        top: 0;
+        bottom: 0;
+        margin-right: 5px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        mat-icon {
+            opacity: 1;
+        }
+    }
+    &:hover::before {
+        visibility: visible;
+        opacity: 1;
+        mat-icon {
+            opacity: 0;
+        }
+    }
+}

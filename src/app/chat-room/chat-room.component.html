@@ -1,13 +1,15 @@
 <div class="chat-room m-left-350 p-absolute d-flex-center-colm">
-    <div class="chat p-absolute">
+    <div class="chat p-top-35 p-absolute">
         <div class="chat-user">
             <img src="/assets/profile-img/profile-3.png">
             <div class="chat-text">
                 <span class="user-name">Roland Vas <span class="message-time">15:30 Uhr</span> </span>
-                <span>Nachricht</span>
+                {{input}}
             </div>
         </div>
     </div>
+</div>
+<div class="bottom p-absolute">
     <div class="editor-container">
         <editor [init]="
     { toolbar: 'undo redo | styles pre | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
@@ -20,5 +22,10 @@
    }" [(ngModel)]="messageInput">
         </editor>
     </div>
-    <button (click)="msgValue(); messageInput =''">Try It</button>
+    <div class="msg-btn">
+        <button class="send-btn" mat-fab color="primary" (click)="msgValue()">
+        <mat-icon>send</mat-icon>
+    </button>
+    </div>
+
 </div>
