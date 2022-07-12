@@ -7,6 +7,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ThreadComponent } from './thread/thread.component';
@@ -22,9 +23,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginSectionComponent } from './login-section/login-section.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { FormsModule } from '@angular/forms';
+import { EditorModule } from '@tinymce/tinymce-angular';
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     HomeComponent,
     ChatRoomComponent,
     ThreadComponent,
@@ -44,7 +48,12 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
     MatFormFieldModule,
+    EditorModule,
+    FormsModule
+ 
+
   ],
   providers: [],
   bootstrap: [AppComponent]

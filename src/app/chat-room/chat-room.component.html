@@ -1,1 +1,15 @@
-<p>chat-room works!</p>
+<div class="chat-room">
+    <div class="editor-container">
+        <editor [init]="
+    { toolbar: 'undo redo | styles pre | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
+    height: 150,
+    branding: false,
+    menubar: false,
+    statusbar: true,
+    elementpath: false,
+    browser_spellcheck: true
+   }" [(ngModel)]="messageInput">
+        </editor>
+    </div>
+    <button (click)="msgValue(); messageInput =''">Try It</button>
+</div>
