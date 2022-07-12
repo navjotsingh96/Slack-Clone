@@ -1,9 +1,16 @@
 .side-nav-container {
-    background-color: #232946;
+    background-color: #232946 !important;
     height: 100%;
     width: 300px;
     color: #fffffe;
     position: relative;
+}
+
+.side-nav {
+    width: 100%;
+    background-color: #232946 !important;
+    padding-top: 20px;
+    color: #fffffe;
     h1 {
         color: #fffffe;
         border-bottom: 2px solid;
@@ -18,28 +25,25 @@
     }
 }
 
-.side-nav {
-    width: 100%;
-}
-
 .channels {
     width: 100%;
-    text-align: center;
-    padding-bottom: 20px;
-    border-bottom: 1px solid;
+    padding-bottom: 10px;
     h3 {
-        border-bottom: 2px solid;
         width: 100%;
-        padding-bottom: 20px;
+        padding-bottom: 10px;
     }
 }
 
 .cereat-channels {
     display: flex;
     align-items: center;
-    justify-content: space-around;
     width: 100%;
-    padding-top: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid;
+    background-color: #4d66df96;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .add-btn {
@@ -53,4 +57,23 @@
 
 mat-dialog-container {
     padding: 0;
+}
+
+.direct-msg {
+    width: 100%;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #4d66df96;
+    padding: 10px;
+    margin-bottom: 10px;
+    img {
+        height: 35px;
+        width: 35px;
+        object-fit: cover;
+        border-radius: 100%;
+    }
 }

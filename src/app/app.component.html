@@ -1,19 +1,32 @@
 <mat-drawer-container class="side-nav-container" autosize>
 
     <mat-drawer #drawer class="side-nav" opened="true" mode="side">
-        <div class="d-flex m-left-20 m-right-20">
+        <div class="d-flex">
             <div style="width: 100%;">
                 <h1>Slacky</h1>
             </div>
-            <div class="channels">
+            <div class="channels m-left-20">
                 <h3>Channels</h3>
-                <span>Test</span>
+                <span>Test Channel</span>
             </div>
-            <div class="cereat-channels">
+            <div class="cereat-channels p-left-20">
                 <button (click)="openDialog()" class="add-btn" mat-fab color="primary">
                     <mat-icon>add</mat-icon>
                 </button>
-                <span> Add Channel</span>
+                <span class="m-left-20"> Add Channel</span>
+            </div>
+
+            <div class="direct-msg d-flex-center-colm ">
+                <h3>Direct Message</h3>
+                <div class="user m-left-20">
+                    <img src="assets/profile-img/profile-1.png" alt="">
+                    <span class="m-left-20">Test User</span>
+                </div>
+                <div class="user m-left-20">
+                    <img src="assets/profile-img/profile-2.png" alt="">
+                    <span class="m-left-20">Test User 2</span>
+                </div>
+
             </div>
         </div>
     </mat-drawer>

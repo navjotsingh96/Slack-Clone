@@ -10,7 +10,7 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.d-flex {
+.d-flex-center-colm {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,7 +18,7 @@ body {
 }
 
 .m-left-20 {
-    margin-left: 20px;
+    margin-left: 20px !important;
 }
 
 .m-right-20 {
@@ -27,4 +27,12 @@ body {
 
 .mat-dialog-container {
     padding: 0 !important;
+}
+
+.p-left-20 {
+    padding-left: 20px;
+}
+
+.p-right-20 {
+    padding-right: 20px;
 }
