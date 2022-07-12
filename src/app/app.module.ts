@@ -7,7 +7,6 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ThreadComponent } from './thread/thread.component';
@@ -25,15 +24,19 @@ import { MessageComponent } from './message/message.component';
 
 
 
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { LoginSectionComponent } from './login-section/login-section.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     HomeComponent,
     ChatRoomComponent,
     ThreadComponent,
     DialogAddChannelsComponent,
     MessageComponent,
+    SidebarComponent,
+    LoginSectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,14 +44,16 @@ import { MessageComponent } from './message/message.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     BrowserAnimationsModule,
+    MatDialogModule,
     MatSidenavModule,
     MatTreeModule,
+    MatToolbarModule,
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
-
+    MatInputModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
