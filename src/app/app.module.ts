@@ -21,12 +21,14 @@ import { DialogAddChannelsComponent } from './dialog-add-channels/dialog-add-cha
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MessageComponent } from './message/message.component';
-
-
+import {ReactiveFormsModule} from '@angular/forms';
 
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginSectionComponent } from './login-section/login-section.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { LandingComponent } from './login/landing/landing.component';
+import { LoginComponent } from './login/login/login.component';
+import { SignUpComponent } from './login/sign-up/sign-up.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +39,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MessageComponent,
     SidebarComponent,
     LoginSectionComponent,
+    LandingComponent,
+    LoginComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +59,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatFormFieldModule,
     MatInputModule,
     MatFormFieldModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
