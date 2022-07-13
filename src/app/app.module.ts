@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -20,12 +19,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MessageComponent } from './message/message.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { LoginSectionComponent } from './login-section/login-section.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LandingComponent } from './login/landing/landing.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { MatFormField } from '@angular/material/form-field';
+import { LoginComponent } from './login/login/login.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { HotToastModule } from '@ngneat/hot-toast';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,9 +40,9 @@ import { FormsModule } from '@angular/forms';
     DialogAddChannelsComponent,
     MessageComponent,
     SidebarComponent,
-    LoginSectionComponent,
     LandingComponent,
     SignUpComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +61,13 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     MatInputModule,
     MatFormFieldModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideDatabase(() => getDatabase()),
+    provideFirestore(() => getFirestore()),
+    HotToastModule.forRoot(),
+
   ],
   providers: [],
   bootstrap: [AppComponent]
