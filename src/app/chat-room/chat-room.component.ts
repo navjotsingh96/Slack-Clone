@@ -6,16 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat-room.component.scss']
 })
 export class ChatRoomComponent implements OnInit {
-  messageInput:any;
+  messageInput!: any;
   constructor() { }
-input:any;
+  input: any;
+
   ngOnInit(): void {
   }
-  msgValue(){
+  
+  msgValue() {
     console.log(this.messageInput);
     this.input = (this.messageInput);
-    console.log(this.input.split(''));
-    
-    
   }
 }
