@@ -6,9 +6,16 @@
           "slack-clone-94f23"
         ]
       }
+    },
+    "slack-clone-c2cbe": {
+      "hosting": {
+        "Slack-Clone": [
+          "slack-clone-c2cbe"
+        ]
+      }
     }
   },
   "projects": {
-    "default": "slack-clone-94f23"
+    "default": "slack-clone-c2cbe"
   }
 }
