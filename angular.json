@@ -10,7 +10,7 @@
           "style": "scss"
         },
         "@schematics/angular:application": {
-          "strict": true
+          "strict": false
         }
       },
       "root": "",
@@ -27,8 +27,11 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets"
+              {
+                "glob": "**/*",
+                "input": "node_modules/tinymce",
+                "output": "/tinymce/"
+              }
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
@@ -112,8 +115,8 @@
             "prerender": false,
             "ssr": false,
             "browserTarget": "Slack-Clone:build:production",
-            "firebaseProject": "slack-clone-94f23",
-            "firebaseHostingSite": "slack-clone-94f23"
+            "firebaseProject": "slack-clone-c2cbe",
+            "firebaseHostingSite": "slack-clone-c2cbe"
           }
         }
       }

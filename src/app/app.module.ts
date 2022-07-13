@@ -5,30 +5,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
-
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { HomeComponent } from './home/home.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ThreadComponent } from './thread/thread.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { MatSidenavModule } from '@angular/material/sidenav';
-import {MatIconModule} from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatTreeModule } from '@angular/material/tree';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { DialogAddChannelsComponent } from './dialog-add-channels/dialog-add-channels.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MessageComponent } from './message/message.component';
-import {ReactiveFormsModule} from '@angular/forms';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginSectionComponent } from './login-section/login-section.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { LandingComponent } from './login/landing/landing.component';
-import { LoginComponent } from './login/login/login.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +37,6 @@ import { SignUpComponent } from './login/sign-up/sign-up.component';
     SidebarComponent,
     LoginSectionComponent,
     LandingComponent,
-    LoginComponent,
     SignUpComponent,
   ],
   imports: [
@@ -57,6 +53,7 @@ import { SignUpComponent } from './login/sign-up/sign-up.component';
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
+    FormsModule,
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule

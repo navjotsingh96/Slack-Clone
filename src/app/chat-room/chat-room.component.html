@@ -1,1 +1,31 @@
-<p>chat-room works!</p>
+<div class="chat-room m-left-350 p-absolute d-flex-center-colm">
+    <div class="chat p-top-35 p-absolute">
+        <div class="chat-user">
+            <img src="/assets/profile-img/profile-3.png">
+            <div class="chat-text">
+                <span class="user-name">Roland Vas <span class="message-time">15:30 Uhr</span> </span>
+                <div [innerHTML]=input></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bottom p-absolute">
+    <div class="editor-container">
+        <editor apiKey="bgeto93fjxds10methgpkyy8y7cqfcbgltl91ww9tnc7h3yt" [init]="
+    { toolbar: 'undo redo | styles pre | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
+    height: 150,
+    branding: false,
+    menubar: false,
+    statusbar: true,
+    elementpath: false,
+    browser_spellcheck: true
+   }" [(ngModel)]="messageInput">
+        </editor>
+    </div>
+    <div class="msg-btn">
+        <button class="send-btn" mat-fab color="primary" (click)="msgValue(); messageInput='';">
+        <mat-icon>send</mat-icon>
+    </button>
+    </div>
+
+</div>
