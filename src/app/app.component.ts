@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddChannelsComponent } from './dialog-add-channels/dialog-add-channels.component';
-
-
+import { AuthenticationService } from './services/authentication.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,11 +11,17 @@ import { DialogAddChannelsComponent } from './dialog-add-channels/dialog-add-cha
 })
 
 export class AppComponent {
-  title = 'Slack-Clone';
+
 
   constructor(firestore: AngularFirestore,
-    public dialog: MatDialog) {}
+    public dialog: MatDialog,
+    public authService: AuthenticationService,
+    private router: Router) {}
   
 
-  
+  logout(){
+    this.authService.logout().subscribe(() => {
+      this.router.navigate(['login']);
+    });
+  }
 }

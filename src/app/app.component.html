@@ -1,1 +1,22 @@
-<app-login></app-login>
+<div>
+    <mat-toolbar color="primary">
+        <span>Slack-Clone</span>
+        <ng-container *ngIf="authService.currentUser$ |async as user; else loginButton">
+            <button mat-button (click)="logout()">Logout
+
+            </button>
+            <mat-icon>logout</mat-icon>
+        </ng-container>
+
+        <ng-template #loginButton>
+            <button mat-button routerLink="login">Login
+                <mat-icon>login</mat-icon>
+            </button>
+        </ng-template>
+
+    </mat-toolbar>
+</div>
+
+
+
+<router-outlet></router-outlet>
