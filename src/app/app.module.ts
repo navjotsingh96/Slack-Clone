@@ -32,6 +32,8 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { HeaderComponent } from './header/header.component';
+import {MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +46,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     LandingComponent,
     SignUpComponent,
     LoginComponent,
+    HeaderComponent,
    
   ],
   imports: [
@@ -70,6 +73,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
     HotToastModule.forRoot(),
+    MatMenuModule,
+
 
 
   ],
