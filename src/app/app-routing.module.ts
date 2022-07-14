@@ -12,12 +12,7 @@ const routes: Routes = [
   { path: 'chat', component: ChatRoomComponent },
   { path: 'theard', component: ThreadComponent },
   { path: 'sidebar', component: SidebarComponent },
-  {
-    path: '',
-    pathMatch: 'full',
-    component: LandingComponent
 
-  },
   {
     path: 'login',
     component: LoginComponent
