@@ -1,0 +1,92 @@
+////////////////////////////////////////// Toolbar ////////////////////////////////////////
+
+mat-toolbar {
+    height: 10vh;
+}
+
+
+///////////////////////////////////////// Side nav ////////////////////////////////////////
+
+.side-nav-container {
+    // background-color: #232946 !important;
+    height: 90vh;
+    color: #fffffe;
+    // width: 300px;
+    // color: #fffffe;
+    // position: relative;
+}
+
+a {
+    text-decoration: none;
+    color: gray;
+    margin-bottom: 8px;
+}
+
+.side-nav {
+    // width: 100%;
+    width: 300px;
+    background-color: #232946 !important;
+    padding-top: 20px;
+    color: #fffffe;
+    h1 {
+        color: #fffffe;
+        border-bottom: 2px solid;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+    p {
+        color: #b8c1ec;
+        width: 100%;
+    }
+}
+.channels {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 10px;
+    h3 {
+        width: 100%;
+        padding-bottom: 10px;
+    }
+}
+.cereat-channels {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid;
+    background-color: #4d66df96;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.add-btn {
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #b8c1ec;
+}
+mat-dialog-container {
+    padding: 0;
+}
+.direct-msg {
+    width: 100%;
+}
+.user {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #4d66df96;
+    padding: 10px;
+    margin-bottom: 10px;
+    img {
+        height: 35px;
+        width: 35px;
+        object-fit: cover;
+        border-radius: 100%;
+    }
+}

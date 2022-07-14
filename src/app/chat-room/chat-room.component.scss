@@ -78,3 +78,39 @@
         }
     }
 }
+
+////////////////////////////// Chat Window Roland ///////////////////////////////////////
+mat-icon {
+    color: black;
+}
+
+.chat-container{
+    height: 80%;
+}
+
+.show-chat {
+    margin: 16px;
+    height: calc(80% - 32px);
+    overflow-y: scroll;
+}
+
+.message-container {
+    margin: 16px;
+    height: calc(20% - 32px);
+
+    mat-form-field {
+        width: 100%;
+
+        bottom: 10px;
+
+        textarea {
+            height: 100px;
+            resize: none;
+        }
+
+        mat-icon{
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+    }
+} 
