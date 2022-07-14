@@ -60,7 +60,6 @@ import { HotToastModule } from '@ngneat/hot-toast';
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
-    MatFormFieldModule,
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
