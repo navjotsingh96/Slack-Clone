@@ -7,6 +7,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { LandingComponent } from './login/landing/landing.component';
 import { LoginComponent } from './login/login/login.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'chat', component: ChatRoomComponent },
