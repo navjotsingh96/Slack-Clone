@@ -1,1 +1,2 @@
-<p>home works!</p>
+<app-sidebar></app-sidebar>
+<h1 *ngIf="user$ | async as user">Welcome to our Slack Clone, {{user.displayName}}!</h1>

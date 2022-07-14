@@ -22,15 +22,18 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LandingComponent } from './login/landing/landing.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatFormField } from '@angular/material/form-field';
 import { LoginComponent } from './login/login/login.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { EditorModule } from '@tinymce/tinymce-angular';
+import { HeaderComponent } from './header/header.component';
+import {MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +45,9 @@ import { HotToastModule } from '@ngneat/hot-toast';
     SidebarComponent,
     LandingComponent,
     SignUpComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -60,12 +65,17 @@ import { HotToastModule } from '@ngneat/hot-toast';
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
+    EditorModule,
+    MatFormFieldModule,
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
     HotToastModule.forRoot(),
+    MatMenuModule,
+
+
 
   ],
   providers: [],
