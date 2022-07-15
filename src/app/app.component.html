@@ -1,62 +1,16 @@
-<!-- <mat-toolbar color="primary">
-    <span>Slack-Clone</span>
-    <ng-container *ngIf="authService.currentUser$ |async as user; else loginButton">
-        <button mat-button (click)="logout()">Logout
-
-        </button>
-        <mat-icon>logout</mat-icon>
-    </ng-container>
-
-    <ng-template #loginButton>
-        <button mat-button routerLink="login">Login
-            <mat-icon>login</mat-icon>
-        </button>
-    </ng-template>
-
-</mat-toolbar>
-
+<app-header></app-header>
 
 
 <mat-drawer-container class="side-nav-container">
 
     <mat-drawer #drawer class="side-nav" opened="true" mode="side">
-        <div class="d-flex">
-            <div class="channels m-left-20">
-                <h2>test nav:</h2>
-                <a routerLink="/">start</a>
-                <a routerLink="/theard">theard</a>
-                <a routerLink="/home">home</a>
-                <a routerLink="/sidebar">sidebar</a>
-                <a routerLink="/login">login</a>
-                <a routerLink="/signup">signup</a>
-                <h2>Channels</h2>
-                <a routerLink="/chat">chat room test</a>
-            </div>
-            <div class="cereat-channels p-left-20">
-                <button (click)="openDialog()" class="add-btn" mat-fab color="primary">
-                    <mat-icon>add</mat-icon>
-                </button>
-                <span class="m-left-20"> Add Channel</span>
-            </div>
-            <div class="direct-msg d-flex-center-colm ">
-                <h3>Direct Message</h3>
-                <div class="user m-left-20">
-                    <img src="assets/profile-img/profile-1.png" alt="">
-                    <span class="m-left-20">Test User</span>
-                </div>
-                <div class="user m-left-20">
-                    <img src="assets/profile-img/profile-2.png" alt="">
-                    <span class="m-left-20">Test User 2</span>
-                </div>
-            </div>
-        </div>
+        <app-sidebar></app-sidebar>
     </mat-drawer>
+    
 
     <mat-drawer-content>
         <router-outlet></router-outlet>
     </mat-drawer-content>
 
-</mat-drawer-container> -->
+</mat-drawer-container>
 
-<app-header></app-header>
-<router-outlet></router-outlet>

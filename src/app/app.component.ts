@@ -27,9 +27,9 @@ export class AppComponent {
   //   });
   // }
 
-  // openDialog() {
-  //   this.dialog.open(DialogAddChannelsComponent);
-  // }
+  openDialog() {
+    this.dialog.open(DialogAddChannelsComponent);
+  }
 
   constructor(firestore: AngularFirestore,
     public dialog: MatDialog,
