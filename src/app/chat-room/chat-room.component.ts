@@ -33,13 +33,12 @@ export class ChatRoomComponent implements OnInit {
     // Aktuelle chat ID holen
     this.route.paramMap.subscribe((paramMap) => {
       this.chatID = paramMap.get('id');
-
       this.chat$.chatID = this.chatID;
       console.log('got id', this.chatID);
       this.getMessages();
     });
   }
-
+// to take messages from ChannelID
   getMessages() {
     this.firestore
       .collection(this.chatID)
@@ -56,7 +55,7 @@ export class ChatRoomComponent implements OnInit {
     console.log('This. all', this.allMessages);
 
   }
-
+// this function check if the channel id and chat id same is then chat will be pushed in Array
   showChannelMessages(message) {
     message.forEach(ID => {
       if (ID.chatID === this.chatID) {
@@ -67,7 +66,7 @@ export class ChatRoomComponent implements OnInit {
 
 
   }
-
+// to send message to firestroe
   submit() {
     this.firestore
       .collection(this.chatID)
@@ -81,8 +80,6 @@ export class ChatRoomComponent implements OnInit {
 
       })
     this.chat$.message = '';
-
-
   }
 }
 
