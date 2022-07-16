@@ -22,7 +22,7 @@ const routes: Routes = [
     ...canActivate(redirectTooHome) // redirects to home if logged in
   },
   {
-    path: 'login/sign-up',
+    path: 'sign-up',
     component: SignUpComponent,
     ...canActivate(redirectTooHome)   // redirectToLogin if 
   },
