@@ -22,13 +22,9 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private toast: HotToastService
   ) { }
-<<<<<<< HEAD
-    
-=======
 
 
 
->>>>>>> 89e6d630084fe34c04caecd8660f3c950073a7a1
   ngOnInit(): void {
   }
 
