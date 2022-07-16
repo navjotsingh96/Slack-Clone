@@ -11,7 +11,7 @@ import {canActivate, redirectUnauthorizedTo, redirectLoggedInTo} from '@angular/
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectTooHome = () => redirectLoggedInTo(['home']);
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: LoginComponent },
   { path: 'chat', component: ChatRoomComponent },
   { path: 'theard', component: ThreadComponent },
   { path: 'sidebar', component: SidebarComponent },
@@ -24,7 +24,7 @@ const routes: Routes = [
   {
     path: 'login/sign-up',
     component: SignUpComponent,
-    ...canActivate(redirectTooHome)   // redirects to home if logged in
+    ...canActivate(redirectTooHome)   // redirectToLogin if 
   },
 
   {
