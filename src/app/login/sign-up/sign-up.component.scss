@@ -1,3 +1,11 @@
+
+.block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20em;
+}
+
 .content {
     padding: 20px;
 }
@@ -5,6 +13,7 @@
 .form-container {
     display: block;
     max-width: 300px;
+    max-height: 300px;
     margin: 0 auto;
     background-color: #eceff1;
     padding: 48px;
@@ -27,5 +36,4 @@
 .block{
     display: flex;
     justify-content: center;
-    height: 100%;
 }
