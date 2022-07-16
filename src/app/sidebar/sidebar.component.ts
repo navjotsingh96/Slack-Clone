@@ -27,17 +27,12 @@ export class SidebarComponent implements OnInit{
       .subscribe((changes: any) => {
         this.allChannels = changes; 
         console.log('All Channels: ', this.allChannels)
-    
       })
-     
   }
 
   openDialog() {
     this.dialog.open(DialogAddChannelsComponent);
   }
- 
-
-  }
-
+}
 
 

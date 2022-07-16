@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../services/chat.service';
-import { Chat, ChatToJSON } from '../interface/chat';
+import { Chat } from '../interface/chat'; 
 import { idToken } from '@angular/fire/auth';
 
 @Component({
@@ -16,10 +16,8 @@ export class ChatRoomComponent implements OnInit {
 
   chatID: any;
   messageID: any;
-  channelID;
-  message;
+ 
   chat$: Chat;
-  chatsTry = new ChatToJSON()
 
   constructor(private route: ActivatedRoute, public chatService: ChatService, private firestore: AngularFirestore) {
     this.chat$ = {
@@ -27,59 +25,45 @@ export class ChatRoomComponent implements OnInit {
       chatID: '',
       channelID: ''
     };
-  }
+   }
 
   ngOnInit(): void {
+    
     // Aktuelle chat ID holen
-    this.route.paramMap.subscribe((paramMap) => {
-      this.chatID = paramMap.get('id');
-      this.chat$.chatID = this.chatID;
-      console.log('got id', this.chatID);
-      this.getMessages();
-    });
-  }
-// to take messages from ChannelID
-  getMessages() {
-    this.firestore
-      .collection(this.chatID)
-      .valueChanges()
-      .subscribe((message) => {
-        console.log('Messages', message);
-        /*  this.showChannelMessages(message) */
-        this.allMessages.push(message);
-        if (message[0]['chatID'] === this.chatID) {
-         this.showChannelMessages(message)
-        }
-      })
-    this.allMessages = []
-    console.log('This. all', this.allMessages);
+    this.route.params.subscribe((params) => {
+      this.chatID = params['id'];
+      // console.log('ChatID: ', this.chatID)
 
-  }
-// this function check if the channel id and chat id same is then chat will be pushed in Array
-  showChannelMessages(message) {
-    message.forEach(ID => {
-      if (ID.chatID === this.chatID) {
-        this.allMessages.push(ID);
-        console.log('fromfunction', ID);
-      }
+      // this.chatService.loadCurrentChat(params['id']);
+
+      this.chat$.chatID = this.chatID
     });
 
 
-  }
-// to send message to firestroe
+      this.firestore
+        .collection('messages')
+        // .doc(this.messageID)
+        .valueChanges({idField: 'customIdName'})
+        .subscribe((chat: any) => {
+          
+          this.allMessages = chat
+          console.log('Message from Firestore: ', this.allMessages);
+        });
+    }  
+
+  
+  
+
   submit() {
     this.firestore
-      .collection(this.chatID)
-      .add(this.chat$)
-      .then((message: any) => {
-        console.log('Suceesful', message);
-        // console.log('message', message.id)
-        this.messageID = message.id
-      }).catch((err) => {
-        console.log('Error', err);
+    .collection('messages')
+    .add(this.chat$)
+    .then( (message: any) => {
+      // console.log('message', message.id)
+      this.messageID = message.id
+    });
 
-      })
     this.chat$.message = '';
   }
-}
 
+}

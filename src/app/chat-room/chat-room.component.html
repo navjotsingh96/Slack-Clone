@@ -34,17 +34,14 @@
 
 <div class="chat-container">
     <div class="show-chat">
-        <div *ngFor="let msg of allMessages">
-            {{msg.message}}
-        </div>
-        <app-message></app-message>
+        <app-message [message]="message" *ngFor="let message of allMessages"></app-message>
     </div>
 
     <form (submit)="submit()" class="message-container">
         <mat-form-field appearance="outline">
-            <textarea matInput [(ngModel)]="chat$.message" (keyup.enter)="submit()" placeholder="Message..." id="" cols="30" rows="10" [ngModelOptions]="{standalone: true}"></textarea>
-            <mat-icon matSuffix>add_photo_alternate</mat-icon>
-            <mat-icon matSuffix (click)="submit()">send</mat-icon>
+                <textarea matInput [(ngModel)]="chat$.message" (keyup.enter)="submit()" placeholder="Message..." id="" cols="30" rows="10" [ngModelOptions]="{standalone: true}"></textarea>
+                <mat-icon matSuffix>add_photo_alternate</mat-icon>
+                <mat-icon matSuffix (click)="submit()">send</mat-icon>
         </mat-form-field>
     </form>
 

@@ -22,33 +22,31 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private toast: HotToastService
   ) { }
-
-
-
+    
   ngOnInit(): void {
   }
 
-  get email() {  // getter for email field
+  get email() {
     return this.loginForm.get('email');
   }
-  get password() {    // getter for password field
+  get password() {
     return this.loginForm.get('password');
 
   }
 
   submit() {
-    if (!this.loginForm.valid) {    
+    if (!this.loginForm.valid) {
       return;
     }
-    const { email, password } = this.loginForm.value;   // get the values from the form
-    this.authService.login(email, password).pipe(   // login user
+    const { email, password } = this.loginForm.value;
+    this.authService.login(email, password).pipe(
       this.toast.observe({
-        success: 'Login Successful',   // success message
-        loading: 'Logging in...',       // loading message
-        error: 'Login Failed'       // error message
+        success: 'Login Successful',
+        loading: 'Logging in...',
+        error: 'Login Failed'
       })
-    ).subscribe(() => {              
-      this.router.navigate(['home']);
+      ).subscribe(() =>{ 
+        this.router.navigate(['home']);
     });
   }
 }
