@@ -20,7 +20,6 @@ import { MessageComponent } from './message/message.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { LandingComponent } from './login/landing/landing.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
@@ -43,7 +42,6 @@ import {MatMenuModule} from '@angular/material/menu';
     DialogAddChannelsComponent,
     MessageComponent,
     SidebarComponent,
-    LandingComponent,
     SignUpComponent,
     LoginComponent,
     HeaderComponent,

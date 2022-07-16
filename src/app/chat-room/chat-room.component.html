@@ -34,31 +34,15 @@
 
 <div class="chat-container">
     <div class="show-chat">
-        <app-message></app-message>
-        <app-message></app-message>
-        <app-message></app-message>
-        <app-message></app-message>
-        <app-message></app-message>
-        <app-message></app-message>
-        <app-message></app-message>
-        <app-message></app-message>
-        <app-message></app-message>
-        <app-message></app-message>
-        <app-message></app-message>
-        <app-message></app-message>
-        <app-message></app-message>
-        <app-message></app-message>
-        <app-message></app-message>
-        <app-message></app-message>
+        <app-message [message]="message" *ngFor="let message of allMessages"></app-message>
     </div>
 
-    <div class="message-container">
+    <form (submit)="submit()" class="message-container">
         <mat-form-field appearance="outline">
-            <mat-label>Message...</mat-label>
-            <textarea matInput name="" id="" cols="30" rows="10"></textarea>
-            <mat-icon matSuffix>add_photo_alternate</mat-icon>
-            <mat-icon matSuffix>send</mat-icon>
+                <textarea matInput [(ngModel)]="chat$.message" (keyup.enter)="submit()" placeholder="Message..." id="" cols="30" rows="10" [ngModelOptions]="{standalone: true}"></textarea>
+                <mat-icon matSuffix>add_photo_alternate</mat-icon>
+                <mat-icon matSuffix (click)="submit()">send</mat-icon>
         </mat-form-field>
-    </div>
+    </form>
 
 </div>

@@ -1,7 +1,8 @@
-import { Component, Injectable, Input, OnInit } from '@angular/core';
-import { AppRoutingModule } from '../app-routing.module';
-import { AppModule } from '../app.module';
-import { SidebarComponent } from '../sidebar/sidebar.component';
+import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
+import { Channel } from '../interface/channel';
+
 
 @Component({
   selector: 'app-dialog-add-channels',
@@ -9,16 +10,27 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
   styleUrls: ['./dialog-add-channels.component.scss']
 })
 
-
 export class DialogAddChannelsComponent implements OnInit {
-  @Input() channelName;
-  @Input()  channelDescripton;
-  constructor() { }
+
+  Channel$: Channel;
+  
+
+  constructor(private firestore: AngularFirestore, private router: Router) {
+    this.Channel$ = {
+      channelName: '',
+    };
+   }
 
   ngOnInit(): void {
   }
+
   createChannel() {
- 
+    this.firestore
+    .collection('channels')
+    .add(this.Channel$)
+    .then( (channel: any) => {
+      this.router.navigateByUrl('/chat/' + channel.id)
+    });
 
   }
 }

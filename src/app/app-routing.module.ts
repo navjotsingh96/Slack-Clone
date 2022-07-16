@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { HomeComponent } from './home/home.component'; 
 import { ThreadComponent } from './thread/thread.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginComponent } from './login/login/login.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
 import {canActivate, redirectUnauthorizedTo, redirectLoggedInTo} from '@angular/fire/auth-guard'; 
@@ -11,8 +10,7 @@ import {canActivate, redirectUnauthorizedTo, redirectLoggedInTo} from '@angular/
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectTooHome = () => redirectLoggedInTo(['home']);
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'chat', component: ChatRoomComponent },
+  { path: 'chat/:id', component: ChatRoomComponent },
   { path: 'theard', component: ThreadComponent },
 
   {
@@ -27,7 +25,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'home',
+    path: '',
     component: HomeComponent,
     ...canActivate(redirectToLogin) // redirect to login if not logged in
   }

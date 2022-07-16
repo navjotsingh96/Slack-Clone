@@ -4,11 +4,10 @@
             <h2>test nav:</h2>
             <a routerLink="/">start</a>
             <a routerLink="/theard">theard</a>
-            <a routerLink="/home">home</a>
             <a routerLink="/login">login</a>
             <a routerLink="login/sign-up">signup</a>
             <h2>Channels</h2>
-            <a routerLink="/chat">chat room test</a>
+            <a [routerLink]=" ['/chat/' + channel.customIdName] " *ngFor="let channel of allChannels">{{ channel.channelName }}</a>
         </div>
         <div class="cereat-channels p-left-20">
             <button (click)="openDialog()" class="add-btn" mat-fab color="primary">

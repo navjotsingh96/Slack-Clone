@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-message',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessageComponent implements OnInit {
 
-  constructor() { }
+  @Input() message: any;
+
+  constructor(public authService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
