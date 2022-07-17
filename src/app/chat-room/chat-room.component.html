@@ -34,14 +34,22 @@
 
 <div class="chat-container">
     <div class="show-chat">
-        <app-message [message]="message" *ngFor="let message of allMessages"></app-message>
+        <div *ngFor="let msg of allMessages" class="chat">
+            <div class="chat-user">
+                <img src="/assets/profile-img/profile-3.png">
+                <div class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
+                    <span class="user-name"> {{user.displayName}} <span class="message-time">15:30 Uhr</span> </span>
+                    <span>{{ msg.message }}</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <form (submit)="submit()" class="message-container">
         <mat-form-field appearance="outline">
-                <textarea matInput [(ngModel)]="chat$.message" (keyup.enter)="submit()" placeholder="Message..." id="" cols="30" rows="10" [ngModelOptions]="{standalone: true}"></textarea>
-                <mat-icon matSuffix>add_photo_alternate</mat-icon>
-                <mat-icon matSuffix (click)="submit()">send</mat-icon>
+            <textarea matInput [(ngModel)]="chat$.message" (keyup.enter)="submit()" placeholder="Message..." id="" cols="30" rows="10" [ngModelOptions]="{standalone: true}"></textarea>
+            <mat-icon matSuffix>add_photo_alternate</mat-icon>
+            <mat-icon matSuffix (click)="submit()">send</mat-icon>
         </mat-form-field>
     </form>
 
