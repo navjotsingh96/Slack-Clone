@@ -33,6 +33,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
 import { HeaderComponent } from './header/header.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { LoginComponent } from './log-in/log-in.component';
+import { StartScreenComponent } from './start-screen/start-screen.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +47,7 @@ import { LoginComponent } from './log-in/log-in.component';
     LoginComponent,
     HeaderComponent,
     LoginComponent,
+    StartScreenComponent,
    
   ],
   imports: [

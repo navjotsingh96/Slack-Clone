@@ -30,7 +30,7 @@ const routes: Routes = [
   },
 
   {
-    path: '',
+    path: 'home',
     component: HomeComponent,
     ...canActivate(redirectToLogin) // redirect to login if not logged in
   }
