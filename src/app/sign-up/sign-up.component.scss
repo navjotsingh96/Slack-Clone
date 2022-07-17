@@ -1,0 +1,39 @@
+
+.block{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20em;
+}
+
+.content {
+    padding: 20px;
+}
+
+.form-container {
+    display: block;
+    max-width: 300px;
+    max-height: 300px;
+    margin: 0 auto;
+    background-color: #eceff1;
+    padding: 48px;
+    border-radius: 16px;
+}
+
+.form-container mat-form-field {
+    width: 100%;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.margin-top{
+    margin-top: 20px;
+}
+
+.block{
+    display: flex;
+    justify-content: center;
+}
