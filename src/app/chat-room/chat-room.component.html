@@ -1,4 +1,4 @@
-<div class="chat-room m-left-350 p-absolute d-flex-center-colm">
+<!-- <div class="chat-room m-left-350 p-absolute d-flex-center-colm">
     <div class="chat p-top-35 p-absolute">
         <div class="chat-user">
             <img src="/assets/profile-img/profile-3.png">
@@ -27,5 +27,30 @@
         <mat-icon>send</mat-icon>
     </button>
     </div>
+</div>  -->
+
+
+
+
+<div class="chat-container">
+    <div class="show-chat">
+        <div *ngFor="let msg of allMessages" class="chat">
+            <div class="chat-user">
+                <img src="/assets/profile-img/profile-3.png">
+                <div class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
+                    <span class="user-name"> {{user.displayName}} <span class="message-time">15:30 Uhr</span> </span>
+                    <span>{{ msg.message }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form (submit)="submit()" class="message-container">
+        <mat-form-field appearance="outline">
+            <textarea matInput [(ngModel)]="chat$.message" (keyup.enter)="submit()" placeholder="Message..." id="" cols="30" rows="10" [ngModelOptions]="{standalone: true}"></textarea>
+            <mat-icon matSuffix>add_photo_alternate</mat-icon>
+            <mat-icon matSuffix (click)="submit()">send</mat-icon>
+        </mat-form-field>
+    </form>
 
 </div>

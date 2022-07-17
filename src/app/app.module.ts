@@ -75,6 +75,7 @@ import { LoginComponent } from './log-in/log-in.component';
     MatMenuModule,
 
 
+
   ],
   providers: [],
   bootstrap: [AppComponent]

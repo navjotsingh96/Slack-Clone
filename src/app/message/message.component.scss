@@ -16,10 +16,12 @@
     display: flex;
     flex-direction: column;
     margin-left: 8px;
+    color: black;
 }
 
 .user-name {
     font-weight: bold;
+    color: unset;
 }
 
 .message-time {

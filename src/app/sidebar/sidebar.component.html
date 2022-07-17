@@ -1,34 +1,29 @@
-<mat-drawer-container class="side-nav-container" autosize>
 
-    <mat-drawer #drawer class="side-nav" opened="true" mode="side">
-        <div class="d-flex">
-            <div style="width: 100%;">
-                <h1>Slacky</h1>
+    <div class="d-flex">
+        <div class="channels m-left-20">
+            <h2>test nav:</h2>
+            <a routerLink="/">start</a>
+            <a routerLink="/theard">theard</a>
+            <a routerLink="/login">login</a>
+            <a routerLink="login/sign-up">signup</a>
+            <h2>Channels</h2>
+            <a [routerLink]=" ['/chat/' + channel.customIdName] " *ngFor="let channel of allChannels">{{ channel.channelName }}</a>
+        </div>
+        <div class="cereat-channels p-left-20">
+            <button (click)="openDialog()" class="add-btn" mat-fab color="primary">
+                <mat-icon>add</mat-icon>
+            </button>
+            <span class="m-left-20"> Add Channel</span>
+        </div>
+        <div class="direct-msg d-flex-center-colm ">
+            <h3>Direct Message</h3>
+            <div class="user m-left-20">
+                <img src="assets/profile-img/profile-1.png" alt="">
+                <span class="m-left-20">Test User</span>
             </div>
-            <div class="channels m-left-20">
-                <h3>Channels</h3>
-                <span>Test Channel</span>
-                <span>{{ channelName }}</span>
-            </div>
-            <div class="cereat-channels p-left-20">
-                <button (click)="openDialog()" class="add-btn" mat-fab color="primary">
-                    <mat-icon>add</mat-icon>
-                </button>
-                <span class="m-left-20"> Add Channel</span>
-            </div>
-
-            <div class="direct-msg d-flex-center-colm ">
-                <h3>Direct Message</h3>
-                <div class="user m-left-20">
-                    <img src="assets/profile-img/profile-1.png" alt="">
-                    <span class="m-left-20">Test User</span>
-                </div>
-                <div class="user m-left-20">
-                    <img src="assets/profile-img/profile-2.png" alt="">
-                    <span class="m-left-20">Test User 2</span>
-                </div>
-
+            <div class="user m-left-20">
+                <img src="assets/profile-img/profile-2.png" alt="">
+                <span class="m-left-20">Test User 2</span>
             </div>
         </div>
-    </mat-drawer>
-</mat-drawer-container>
+    </div>
