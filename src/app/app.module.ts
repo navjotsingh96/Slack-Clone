@@ -20,11 +20,10 @@ import { MessageComponent } from './message/message.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { SignUpComponent } from './login/sign-up/sign-up.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatFormField } from '@angular/material/form-field';
-import { LoginComponent } from './login/login/login.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
@@ -33,6 +32,8 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { HeaderComponent } from './header/header.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { LoginComponent } from './log-in/log-in.component';
+import { StartScreenComponent } from './start-screen/start-screen.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,8 @@ import {MatMenuModule} from '@angular/material/menu';
     SignUpComponent,
     LoginComponent,
     HeaderComponent,
+    LoginComponent,
+    StartScreenComponent,
    
   ],
   imports: [

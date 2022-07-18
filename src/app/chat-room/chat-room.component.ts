@@ -6,7 +6,6 @@ import { Chat } from '../interface/chat';
 import { Auth, idToken } from '@angular/fire/auth';
 import { AuthenticationService } from '../services/authentication.service';
 import { User } from '../interface/user.class';
-import { LoginComponent } from '../login/login/login.component';
 
 
 @Component({
@@ -33,7 +32,10 @@ export class ChatRoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Aktuelle chat ID holen
+    
+    /**
+     * Get currently ID from channel
+     */
     this.route.paramMap.subscribe((paramMap) => {
       this.channelID = paramMap.get('id');
       this.chat$.channelID = this.channelID;
@@ -46,6 +48,7 @@ export class ChatRoomComponent implements OnInit {
       console.log('new', this.userIdtry);
       this.getId()
     });
+    
   }
 
 

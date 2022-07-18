@@ -9,9 +9,9 @@ import { User } from 'src/app/interface/user.class';
 import { ChatRoomComponent } from 'src/app/chat-room/chat-room.component';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-log-in',
+  templateUrl: './log-in.component.html',
+  styleUrls: ['./log-in.component.scss']
 })
 
 export class LoginComponent implements OnInit {

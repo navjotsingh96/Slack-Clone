@@ -7,29 +7,25 @@ import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { of } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
-
-export function passwordMatchValidator(): ValidatorFn {
+export function passwordMatchValidator(): ValidatorFn{
   return (control: AbstractControl): ValidationErrors | null => {
     const password = control.get('password').value;
-    const confirmPassword = control.get('confirmPassword').value;
+    const confirmPassword =   control.get('confirmPassword').value;
 
-    if (password && confirmPassword && password !== confirmPassword) { // Here we check if the password and confirm password are equal
-      return {
+    if(password && confirmPassword && password !== confirmPassword){ // Here we check if the password and confirm password are equal
+      return{
         passwordsDontMatch: true
       }
-    }
+      }
     return null;
-  };
+};
 }
-
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
-
 export class SignUpComponent implements OnInit {
-
   signUpForm = new FormGroup({
     name: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required]),
@@ -47,7 +43,7 @@ export class SignUpComponent implements OnInit {
     private db: AngularFirestore
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
 
 
@@ -59,10 +55,10 @@ export class SignUpComponent implements OnInit {
   get email() {            // Here we get the email of the user
     return this.signUpForm.get('email'), this.user.get('name');
   }
-  get password() {               // Here we get the password of the user
+  get password(){               // Here we get the password of the user
     return this.signUpForm.get('password');
   }
-  get confirmPassword() {      // Here we get the confirm password of the user
+  get confirmPassword(){      // Here we get the confirm password of the user
     return this.signUpForm.get('confirmPassword');
   }
 

@@ -41,7 +41,7 @@
         <div class="show-chat">
             <input id="uid" type="text" value="{{user.uid}}">
             <div class="msg-box m-left-20" *ngFor="let msg of allMessages">
-                <div class="user-name">User <span class="message-time">{{msg.time | date :"long"}}</span></div>
+                <div class="user-name">User <span class="message-time">{{msg.time | date :"short" }}</span></div>
                 <div>
                     {{msg.message}}
                 </div>

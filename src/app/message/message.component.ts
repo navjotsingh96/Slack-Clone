@@ -10,20 +10,20 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class MessageComponent implements OnInit {
 
-  @Input() messagefromFire:any= [];
+  // @Input() messagefromFire:any= [];
 
   constructor(public authService: AuthenticationService,
     public Messages: ChatRoomComponent,
     private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
-    this.firestore
-      .collection(this.Messages.channelID)
-      .valueChanges()
-      .subscribe((msg) => {
-        console.log('msg', msg);
-        this.messagefromFire = msg;
-      })
+    // this.firestore
+    //   .collection(this.Messages.chatID)
+    //   .valueChanges()
+    //   .subscribe((msg) => {
+    //     console.log('msg', msg);
+    //     this.messagefromFire = msg;
+    //   })
 
   }
 

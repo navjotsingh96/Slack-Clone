@@ -1,0 +1,25 @@
+<div class="block">
+    <div class="form-container">
+ 
+         <h1>Welcome to our Slack-Clone</h1>
+ 
+         <form [formGroup]="loginForm" (ngSubmit)="submit()">
+             <mat-form-field>
+                 <input matInput placeholder="Email" formControlName="email">
+                 <mat-error *ngIf="email?.errors?.['required']"></mat-error>
+                 <mat-error *ngIf="email?.errors?.['email']"></mat-error>
+             </mat-form-field>
+             <mat-form-field>
+                 <input matInput placeholder="Password" formControlName="password" type="password">
+                 <mat-error *ngIf="password?.errors?.['required']"></mat-error>
+             </mat-form-field>
+             <div class="center margin-top">
+ 
+                 <button mat-raised-button color="primary" type="submit">Login</button>
+ 
+             </div>
+             <span class="center margin-top">New to our platform? <a routerLink="sign-up">Sign Up</a></span>
+ 
+         </form>
+     </div>
+ </div>
