@@ -5,6 +5,8 @@ import { DialogAddChannelsComponent } from '../dialog-add-channels/dialog-add-ch
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { Channel } from '../interface/channel';
+import { AuthenticationService } from '../services/authentication.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,10 +17,12 @@ import { Channel } from '../interface/channel';
 
 export class SidebarComponent implements OnInit {
 
+  user$ = this.authService.currentUser$;
   channels: Channel[];
   allChannels: any = [];
 
-  constructor(public dialog: MatDialog, private firestore: AngularFirestore, private router: Router) { }
+  constructor(public dialog: MatDialog, private firestore: AngularFirestore, private router: Router,
+    public authService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.firestore
@@ -35,8 +39,6 @@ export class SidebarComponent implements OnInit {
   openDialog() {
     this.dialog.open(DialogAddChannelsComponent);
   }
-
-
 }
 
 

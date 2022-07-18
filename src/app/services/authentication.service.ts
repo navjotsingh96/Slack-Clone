@@ -10,9 +10,8 @@ import { from, switchMap } from 'rxjs';
 export class AuthenticationService {
 
   currentUser$ = authState(this.auth)            // Here we get the current user
-  
 
-  constructor(private auth: Auth) { }
+  constructor(public auth: Auth) { }
 
   login(username : string, password : string){              // Here we login a user
   return from(signInWithEmailAndPassword(this.auth, username, password));

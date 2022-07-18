@@ -39,9 +39,9 @@
     <div class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
 
         <div class="show-chat">
-
+            <input id="uid" type="text" value="{{user.uid}}">
             <div class="msg-box m-left-20" *ngFor="let msg of allMessages">
-                <div class="user-name">User <span class="message-time">15:30 Uhr</span></div>
+                <div class="user-name">User <span class="message-time">{{msg.time | date :"long"}}</span></div>
                 <div>
                     {{msg.message}}
                 </div>

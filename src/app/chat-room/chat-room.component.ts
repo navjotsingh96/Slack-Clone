@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../services/chat.service';
-import { Chat, ChatToJSON } from '../interface/chat';
-import { idToken } from '@angular/fire/auth';
+import { Chat } from '../interface/chat';
+import { Auth, idToken } from '@angular/fire/auth';
 import { AuthenticationService } from '../services/authentication.service';
+import { User } from '../interface/user.class';
+import { LoginComponent } from '../login/login/login.component';
 
 
 @Component({
@@ -12,6 +14,8 @@ import { AuthenticationService } from '../services/authentication.service';
   templateUrl: './chat-room.component.html',
   styleUrls: ['./chat-room.component.scss']
 })
+@Injectable({ providedIn: 'root' })
+
 export class ChatRoomComponent implements OnInit {
 
   allMessages = [];
@@ -19,16 +23,13 @@ export class ChatRoomComponent implements OnInit {
   channelID: any;
   messageID: any;
   message;
-  chat$: Chat;
-  chatsTry = new ChatToJSON()
-
+  chat$: Chat = new Chat;
+  user: User = new User()
+  userIdtry;
+  users;
   constructor(private route: ActivatedRoute, public chatService: ChatService, private firestore: AngularFirestore,
     public authService: AuthenticationService) {
-    this.chat$ = {
-      message: '',
-      chatID: '',
-      channelID: ''
-    };
+
   }
 
   ngOnInit(): void {
@@ -39,9 +40,15 @@ export class ChatRoomComponent implements OnInit {
       console.log('got id', this.channelID);
       this.getMessages();
       this.getChannels();
-      this.allMessages =['No msesssages'];
+      this.allMessages = ['No msesssages']; // when user click on another channel it array will be empty
+
+      this.getAllUserFfromirebase();
+      console.log('new', this.userIdtry);
+      this.getId()
     });
   }
+
+
   // get Channel from DB and to show as H1
   getChannels() {
     this.firestore
@@ -55,6 +62,12 @@ export class ChatRoomComponent implements OnInit {
       })
 
   }
+  getId() {
+    this.userIdtry = (<HTMLInputElement>document.getElementById("uid")).value;
+    return  this.chat$.user = (<HTMLInputElement>document.getElementById("uid")).value;
+    return console.log('from func', this.userIdtry);
+
+  }
   // to take messages from ChannelID
   getMessages() {
     this.firestore
@@ -64,11 +77,12 @@ export class ChatRoomComponent implements OnInit {
         for (let i = 0; i < message.length; i++) {
           const msg = message[i];
           if (!msg.channelID === this.channelID) {
-            console.log('id from ',msg.channelID);
+            console.log('id from ', msg.channelID);
             this.allMessages = ['No msesssages']
-    
           } else
-            this.allMessages = message;
+            this.allMessages = message.sort((mess1: any, mess2: any) => { // neu nachrichen werden am Ende gezeigt
+              return mess1.time - mess2.time;
+            });
         }
       })
     console.log('This. all', this.allMessages);
@@ -82,17 +96,30 @@ export class ChatRoomComponent implements OnInit {
       if (!msg.channelID === this.channelID) {
         console.log('true');
         this.allMessages = []
-
       } else
         this.allMessages = (message);
     }
   }
+  getAllUserFfromirebase() {
+     this.firestore
+       .collection('users')
+       .valueChanges({ idField: 'user' })
+       .subscribe((changes) => {
+         this.users = changes;
+         console.log('Changes fron User', this.users);
+
+       })
+   }
+   checkUser(){
+    return 
+    }
+
 
   // to send message to firestroe
   submit() {
     this.firestore
       .collection(this.channelID)
-      .add(this.chat$)
+      .add(this.chat$.toJSON())
       .then((message: any) => {
         console.log('Suceesful', message);
         // console.log('message', message.id)
@@ -102,6 +129,9 @@ export class ChatRoomComponent implements OnInit {
 
       })
     this.chat$.message = '';
+  }
+  async getUserfromFirebase() {
+    console.log(this.authService.currentUser$)
   }
 }
 

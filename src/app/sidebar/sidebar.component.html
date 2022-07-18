@@ -1,5 +1,14 @@
 <div class="d-flex">
     <div class="channels m-left-20">
+        <div class="chat">
+            <div class="chat-user">
+                <img src="assets/profile-img/profile-1.png">
+                <div class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
+                    <span class="user-name"> {{user.displayName}} {{user.email}}</span>
+
+                </div>
+            </div>
+        </div>
         <h2>test nav:</h2>
         <a routerLink="/">start</a>
         <a routerLink="/theard">theard</a>
