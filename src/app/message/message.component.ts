@@ -18,7 +18,7 @@ export class MessageComponent implements OnInit {
 
   ngOnInit(): void {
     this.firestore
-      .collection(this.Messages.chatID)
+      .collection(this.Messages.channelID)
       .valueChanges()
       .subscribe((msg) => {
         console.log('msg', msg);

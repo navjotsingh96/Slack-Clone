@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../services/chat.service';
 import { Chat, ChatToJSON } from '../interface/chat';
 import { idToken } from '@angular/fire/auth';
+import { AuthenticationService } from '../services/authentication.service';
+
 
 @Component({
   selector: 'app-chat-room',
@@ -13,15 +15,15 @@ import { idToken } from '@angular/fire/auth';
 export class ChatRoomComponent implements OnInit {
 
   allMessages = [];
-
-  chatID: any;
+  activeChannel;
+  channelID: any;
   messageID: any;
-  channelID;
   message;
   chat$: Chat;
   chatsTry = new ChatToJSON()
 
-  constructor(private route: ActivatedRoute, public chatService: ChatService, private firestore: AngularFirestore) {
+  constructor(private route: ActivatedRoute, public chatService: ChatService, private firestore: AngularFirestore,
+    public authService: AuthenticationService) {
     this.chat$ = {
       message: '',
       chatID: '',
@@ -32,44 +34,64 @@ export class ChatRoomComponent implements OnInit {
   ngOnInit(): void {
     // Aktuelle chat ID holen
     this.route.paramMap.subscribe((paramMap) => {
-      this.chatID = paramMap.get('id');
-      this.chat$.chatID = this.chatID;
-      console.log('got id', this.chatID);
+      this.channelID = paramMap.get('id');
+      this.chat$.channelID = this.channelID;
+      console.log('got id', this.channelID);
       this.getMessages();
+      this.getChannels();
+      this.allMessages =['No msesssages'];
     });
   }
-// to take messages from ChannelID
+  // get Channel from DB and to show as H1
+  getChannels() {
+    this.firestore
+      .collection('channels')/* gespeicherte Daten aus firestore user collection werden geladen */
+      .doc(this.channelID)
+      .valueChanges({ idField: 'channelID' }) /* alle änderungen werden gespeichert / customIdName ID von jeder collection */
+      .subscribe((changes: any) => {
+        if (!changes.channelName) return
+        this.activeChannel = changes;
+
+      })
+
+  }
+  // to take messages from ChannelID
   getMessages() {
     this.firestore
-      .collection(this.chatID)
+      .collection(this.channelID)
       .valueChanges()
-      .subscribe((message) => {
-        console.log('Messages', message);
-        /*  this.showChannelMessages(message) */
-        this.allMessages.push(message);
-        if (message[0]['chatID'] === this.chatID) {
-         this.showChannelMessages(message)
+      .subscribe((message: any) => {
+        for (let i = 0; i < message.length; i++) {
+          const msg = message[i];
+          if (!msg.channelID === this.channelID) {
+            console.log('id from ',msg.channelID);
+            this.allMessages = ['No msesssages']
+    
+          } else
+            this.allMessages = message;
         }
       })
-    this.allMessages = []
     console.log('This. all', this.allMessages);
 
   }
-// this function check if the channel id and chat id same is then chat will be pushed in Array
+
+  // this function check if the channel id and chat id same is then chat will be pushed in Array
   showChannelMessages(message) {
-    message.forEach(ID => {
-      if (ID.chatID === this.chatID) {
-        this.allMessages.push(ID);
-        console.log('fromfunction', ID);
-      }
-    });
+    for (let i = 0; i < message.length; i++) {
+      const msg = message[i];
+      if (!msg.channelID === this.channelID) {
+        console.log('true');
+        this.allMessages = []
 
-
+      } else
+        this.allMessages = (message);
+    }
   }
-// to send message to firestroe
+
+  // to send message to firestroe
   submit() {
     this.firestore
-      .collection(this.chatID)
+      .collection(this.channelID)
       .add(this.chat$)
       .then((message: any) => {
         console.log('Suceesful', message);

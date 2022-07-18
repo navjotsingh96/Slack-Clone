@@ -33,10 +33,21 @@
 
 
 <div class="chat-container">
-    <div class="show-chat">
-        <div *ngFor="let msg of allMessages">
-            {{msg.message}}
+    <div class="channel-name">
+        <h1 class="m-left-20">{{activeChannel?.channelName}}</h1>
+    </div>
+    <div class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
+
+        <div class="show-chat">
+
+            <div class="msg-box m-left-20" *ngFor="let msg of allMessages">
+                <div class="user-name">User <span class="message-time">15:30 Uhr</span></div>
+                <div>
+                    {{msg.message}}
+                </div>
+            </div>
         </div>
+
         <app-message></app-message>
     </div>
 

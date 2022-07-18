@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -39,7 +40,8 @@ export class SignUpComponent implements OnInit {
   constructor(
     private authService: AuthenticationService,
     private toast: HotToastService,
-    private router: Router
+    private router: Router,
+    private db: AngularFirestore
   ) { }
 
   ngOnInit(): void { }
@@ -64,6 +66,7 @@ export class SignUpComponent implements OnInit {
     if (!this.signUpForm.valid) return;
 
     const { name, email, password } = this.signUpForm.value;     // Here we get the values of the form
+    this.createUserinFirebase();
     this.authService.signUp(name, email, password).pipe(      // Here we sign up the user
       this.toast.observe({                               // Here we show a toast message
         success: 'User created successfully',
@@ -73,6 +76,15 @@ export class SignUpComponent implements OnInit {
     ).subscribe(() => {                 // Here we navigate to the login page if successful
       this.router.navigate(['home']);
     })
+  }
+
+  createUserinFirebase() {
+    this.db
+      .collection('users')
+      .add(this.signUpForm)
+      .then((user) => {
+        console.log('User', user);
+      })
   }
 
 }

@@ -12,14 +12,8 @@ import { Channel } from '../interface/channel';
 
 export class DialogAddChannelsComponent implements OnInit {
 
-  Channel$: Channel;
-  
-
-  constructor(private firestore: AngularFirestore, private router: Router) {
-    this.Channel$ = {
-      channelName: '',
-    };
-   }
+  constructor(private firestore: AngularFirestore, private router: Router) {   }
+   myChannel: Channel = new Channel();
 
   ngOnInit(): void {
   }
@@ -27,7 +21,7 @@ export class DialogAddChannelsComponent implements OnInit {
   createChannel() {
     this.firestore
     .collection('channels')
-    .add(this.Channel$)
+    .add(this.myChannel.toJSON())
     .then( (channel: any) => {
       this.router.navigateByUrl('/chat/' + channel.id)
     });
