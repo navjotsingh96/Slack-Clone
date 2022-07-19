@@ -37,12 +37,18 @@
         <h1 class="m-left-20">{{activeChannel?.channelName}}</h1>
     </div>
     <div class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
+        <div class="nomsg" *ngIf="zeroMsg">
+            <h1>There are No Messages in Channel</h1>
+        </div>
 
-        <div class="show-chat">
-            <input id="uid" type="text" value="{{user.uid}}">
+        <div *ngIf="!zeroMsg" class="show-chat">
             <div class="msg-box m-left-20" *ngFor="let msg of allMessages">
-                <div class="user-name">User <span class="message-time">{{msg.time | date :"short" }}</span></div>
-                <div>
+                <div class="user-img">
+                    <img src="assets/profile-img/profile-1.png" alt="">
+                    <div class="user-name">{{msg.user}} <span class="message-time">{{msg.time | date :"short" }}</span>
+                    </div>
+                </div>
+                <div class="chat-messages">
                     {{msg.message}}
                 </div>
             </div>
@@ -58,5 +64,9 @@
             <mat-icon matSuffix (click)="submit()">send</mat-icon>
         </mat-form-field>
     </form>
+    <div style="display: none;" class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
+        <input id="uid" type="text" value="{{user.email}}">
+        <input id="user-name" type="text" value="{{user.displayName}}">
 
+    </div>
 </div>

@@ -1,15 +1,13 @@
 ////////////////////////////////////////// Toolbar ////////////////////////////////////////
-
 mat-toolbar {
     height: 10vh;
 }
 
-
 ///////////////////////////////////////// Side nav ////////////////////////////////////////
-
 .side-nav-container {
     // background-color: #232946 !important;
-    height: 90vh;
+    max-height: 94vh;
+    height: 100%;
     // color: #fffffe;
     // width: 300px;
     // color: #fffffe;

@@ -6,6 +6,7 @@ import { Chat } from '../interface/chat';
 import { Auth, idToken } from '@angular/fire/auth';
 import { AuthenticationService } from '../services/authentication.service';
 import { User } from '../interface/user.class';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { User } from '../interface/user.class';
 @Injectable({ providedIn: 'root' })
 
 export class ChatRoomComponent implements OnInit {
-
+  zeroMsg = true;
   allMessages = [];
   activeChannel;
   channelID: any;
@@ -26,29 +27,26 @@ export class ChatRoomComponent implements OnInit {
   user: User = new User()
   userIdtry;
   users;
+  userID;
   constructor(private route: ActivatedRoute, public chatService: ChatService, private firestore: AngularFirestore,
     public authService: AuthenticationService) {
 
   }
 
   ngOnInit(): void {
-    
+
     /**
      * Get currently ID from channel
      */
     this.route.paramMap.subscribe((paramMap) => {
       this.channelID = paramMap.get('id');
       this.chat$.channelID = this.channelID;
-      console.log('got id', this.channelID);
       this.getMessages();
       this.getChannels();
-      this.allMessages = ['No msesssages']; // when user click on another channel it array will be empty
-
+      this.allMessages = []; // when user click on another channel it array will be empty
       this.getAllUserFfromirebase();
-      console.log('new', this.userIdtry);
-      this.getId()
     });
-    
+
   }
 
 
@@ -61,16 +59,22 @@ export class ChatRoomComponent implements OnInit {
       .subscribe((changes: any) => {
         if (!changes.channelName) return
         this.activeChannel = changes;
-
       })
 
   }
   getId() {
-    this.userIdtry = (<HTMLInputElement>document.getElementById("uid")).value;
-    return  this.chat$.user = (<HTMLInputElement>document.getElementById("uid")).value;
-    return console.log('from func', this.userIdtry);
+    this.chat$.user = (<HTMLInputElement>document.getElementById("user-name")).value
+    console.log(this.chat$.user);;
+
 
   }
+  getUserWithId() {
+    this.allMessages.find((email => {
+      this.userID = email.user
+
+    }))
+  }
+
   // to take messages from ChannelID
   getMessages() {
     this.firestore
@@ -79,13 +83,21 @@ export class ChatRoomComponent implements OnInit {
       .subscribe((message: any) => {
         for (let i = 0; i < message.length; i++) {
           const msg = message[i];
+          console.log(message.length);
+          if (message.length === 0) {
+            this.zeroMsg = true
+          }
+          else this.zeroMsg = false
           if (!msg.channelID === this.channelID) {
             console.log('id from ', msg.channelID);
-            this.allMessages = ['No msesssages']
+            this.allMessages = [];
+
           } else
             this.allMessages = message.sort((mess1: any, mess2: any) => { // neu nachrichen werden am Ende gezeigt
               return mess1.time - mess2.time;
             });
+
+
         }
       })
     console.log('This. all', this.allMessages);
@@ -104,22 +116,19 @@ export class ChatRoomComponent implements OnInit {
     }
   }
   getAllUserFfromirebase() {
-     this.firestore
-       .collection('users')
-       .valueChanges({ idField: 'user' })
-       .subscribe((changes) => {
-         this.users = changes;
-         console.log('Changes fron User', this.users);
+    this.firestore
+      .collection('users')
+      .valueChanges({ idField: 'user' })
+      .subscribe((changes) => {
+        this.users = changes;
+        console.log('Changes fron User', this.users);
 
-       })
-   }
-   checkUser(){
-    return 
-    }
+      })
 
-
+  }
   // to send message to firestroe
   submit() {
+    this.getId();
     this.firestore
       .collection(this.channelID)
       .add(this.chat$.toJSON())
@@ -131,10 +140,9 @@ export class ChatRoomComponent implements OnInit {
         console.log('Error', err);
 
       })
+
     this.chat$.message = '';
   }
-  async getUserfromFirebase() {
-    console.log(this.authService.currentUser$)
-  }
+
 }
 

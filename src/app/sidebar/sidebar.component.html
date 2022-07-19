@@ -1,10 +1,14 @@
-<div class="d-flex">
+<div class="d-flex f-size-16">
     <div class="channels m-left-20">
         <div class="chat">
             <div class="chat-user">
-                <img src="assets/profile-img/profile-1.png">
+                <img class="user-img" src="assets/profile-img/profile-1.png">
                 <div class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
-                    <span class="user-name"> {{user.displayName}} {{user.email}}</span>
+                    <div style="margin-bottom: 5px;">
+                        <span class="user-name"> <b> {{user.displayName}}</b></span>
+                    </div>
+                    <div> <span>{{user.email}}</span>
+                    </div>
 
                 </div>
             </div>

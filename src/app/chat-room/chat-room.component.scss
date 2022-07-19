@@ -2,19 +2,29 @@
     margin-bottom: 8px;
 }
 
+.chat-container {
+    background-color: #d4d8f0;
+}
+
 
 /* From NAvi */
 
 .channel-name {
     border-bottom: 2px solid grey;
+    margin-top: 30px;
+    h1 {
+        margin-bottom: 20px;
+        font: revert;
+        color: #232946 !important;
+    }
 }
 
 .msg-box {
     margin: 20px 20px 20px 20px;
-    background-color: #3b4ea0;
+    background-color: white;
     border-radius: 5px;
     div {
-        padding: 20px 20px 20px 20px;
+        padding: 5px 10px 10px 20px;
     }
 }
 
@@ -33,6 +43,12 @@
 
 .user-name {
     font-weight: bold;
+    color: #232946 !important;
+    font-size: 18px;
+}
+
+.chat-messages {
+    color: #232946 !important;
 }
 
 .message-time {
@@ -92,6 +108,15 @@
         mat-icon {
             opacity: 0;
         }
+    }
+}
+
+.user-img {
+    display: flex;
+    align-items: center;
+    img {
+        width: 40px;
+        height: 40px;
     }
 }
 
