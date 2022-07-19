@@ -105,16 +105,18 @@ export class ChatRoomComponent implements OnInit {
   }
 
   // this function check if the channel id and chat id same is then chat will be pushed in Array
-  showChannelMessages(message) {
-    for (let i = 0; i < message.length; i++) {
-      const msg = message[i];
-      if (!msg.channelID === this.channelID) {
-        console.log('true');
-        this.allMessages = []
-      } else
-        this.allMessages = (message);
-    }
-  }
+  // showChannelMessages(message) {
+  //   for (let i = 0; i < message.length; i++) {
+  //     const msg = message[i];
+  //     if (!msg.channelID === this.channelID) {
+  //       console.log('true');
+  //       this.allMessages = []
+  //     } else
+  //       this.allMessages = (message);
+  //   }
+  // }
+
+
   getAllUserFfromirebase() {
     this.firestore
       .collection('users')

@@ -12,7 +12,7 @@ const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectTooHome = () => redirectLoggedInTo(['home']);
 const routes: Routes = [
   { path: 'chat/:id', component: ChatRoomComponent },
-  { path: '', component: LoginComponent },
+  { path: '', component: HomeComponent },
   { path: 'chat', component: ChatRoomComponent
     , canActivate: [canActivate(redirectToLogin)] },
   { path: 'theard', component: ThreadComponent,...canActivate(redirectToLogin) },
