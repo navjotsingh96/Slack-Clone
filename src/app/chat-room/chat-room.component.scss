@@ -23,8 +23,20 @@
     margin: 20px 20px 20px 20px;
     background-color: white;
     border-radius: 5px;
+    position: relative;
     div {
         padding: 5px 10px 10px 20px;
+    }
+}
+
+.right-down-corner {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    transition: all 225ms ease-in-out;
+    &:hover {
+        cursor: pointer;
+        transform: translateY(-5px);
     }
 }
 
@@ -49,6 +61,20 @@
 
 .chat-messages {
     color: #232946 !important;
+    display: flex;
+    flex-direction: column;
+}
+
+.thread {
+    margin-top: 10px;
+    margin-left: 10px;
+    transition: all 255ms ease-in-out;
+    width: fit-content;
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        color: blue;
+    }
 }
 
 .message-time {

@@ -79,7 +79,7 @@ export class ChatRoomComponent implements OnInit {
   getMessages() {
     this.firestore
       .collection(this.channelID)
-      .valueChanges()
+      .valueChanges({ idField: 'customIdName' })
       .subscribe((message: any) => {
         for (let i = 0; i < message.length; i++) {
           const msg = message[i];
@@ -100,7 +100,7 @@ export class ChatRoomComponent implements OnInit {
 
         }
       })
-    console.log('This. all', this.allMessages);
+    console.log('This. all', this.allMessages['customIdName']);
 
   }
 
@@ -143,6 +143,18 @@ export class ChatRoomComponent implements OnInit {
 
     this.chat$.message = '';
   }
-
+  deleteMesage(message) {
+    console.log('MsgId', message);
+    this.firestore
+      .collection(this.channelID)
+      .doc(message)
+      .delete()
+      .catch((error => {
+        console.log('Somthing went wrong', error);
+      }))
+      .then((done => {
+        console.log('Message sucessfully deleted', done);
+      }))
+  }
 }
 

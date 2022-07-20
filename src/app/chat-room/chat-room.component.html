@@ -50,6 +50,10 @@
                 </div>
                 <div class="chat-messages">
                     {{msg.message}}
+                    <span class="thread"> Show Therad 
+                        <a [routerLink]=" ['/thread/' + msg.customIdName]"></a></span>
+                    <mat-icon class="right-down-corner" (click)="deleteMesage(msg.customIdName)">delete_outline</mat-icon>
+
                 </div>
             </div>
         </div>
