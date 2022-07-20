@@ -70,6 +70,8 @@
     margin-left: 10px;
     transition: all 255ms ease-in-out;
     width: fit-content;
+    text-decoration: underline;
+    color: rgb(45, 45, 201);
     &:hover {
         cursor: pointer;
         text-decoration: underline;
