@@ -1,26 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ChatRoomComponent } from '../chat-room/chat-room.component';
 import { Chat } from '../interface/chat';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-thread',
   templateUrl: './thread.component.html',
   styleUrls: ['./thread.component.scss']
 })
+@Injectable({ providedIn: 'root' })
+
 export class ThreadComponent implements OnInit {
   messageID;
   threadmsg;
   chat$: Chat = new Chat;
+  userID;
+  channelID;
+  threadHeading;
   constructor(private firestore: AngularFirestore, private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    public authService: AuthenticationService,
+    public chat: ChatRoomComponent) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((parmsMap => {
       this.messageID = parmsMap.get('id');
-      console.log('I got ID of Message', this.messageID);
+      this.chat$.user;
     }))
+    this.channelID = this.router.url.split('/')[2];
+    console.log('I got ID of Message', this.channelID)
     this.getThreadMsg();
+    this.getmsg()
+  }
+
+  getmsg(){
+    this.firestore
+    .collection(this.channelID)
+    .doc(this.messageID)
+    .valueChanges()
+    .subscribe((msg =>{
+      this.threadHeading = msg;
+      console.log((this.threadHeading));
+      
+    }))
+
   }
 
   getThreadMsg() {
@@ -33,10 +58,18 @@ export class ThreadComponent implements OnInit {
       .subscribe((thread => {
         this.threadmsg = thread;
         console.log('Threads', thread);
+        this.threadmsg = thread.sort((mess1: any, mess2: any) => { // neu nachrichen werden am Ende gezeigt
+          return mess1.time - mess2.time;
+        });
 
       }))
   }
+  getId() {
+    this.chat$.user = (<HTMLInputElement>document.getElementById("user-name")).value
+    console.log(this.chat$.user);
+  }
   submit() {
+    this.getId();
     this.firestore
       .collection('threads')
       .doc(this.messageID)

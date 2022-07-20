@@ -7,11 +7,19 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginComponent } from './log-in/log-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { canActivate, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
+import { child } from 'firebase/database';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectTooHome = () => redirectLoggedInTo(['home']);
 const routes: Routes = [
-  { path: 'chat/:id', component: ChatRoomComponent },
+  {
+    path: 'chat/:id', component: ChatRoomComponent,
+   /*  children: [
+      {
+        path: 'thread/:id', component: ThreadComponent
+      }
+    ] */
+  },
   { path: '', component: LoginComponent },
   {
     path: 'chat', component: ChatRoomComponent
@@ -36,9 +44,9 @@ const routes: Routes = [
     component: HomeComponent,
     ...canActivate(redirectToLogin) // redirect to login if not logged in
   },
-  {
-    path: 'thread/:id', component: ThreadComponent
-  }
+   {
+    path: 'chat/:id/thread/:id', component: ThreadComponent // navigate with chat/id/thread/id
+  } 
 
 ];
 
