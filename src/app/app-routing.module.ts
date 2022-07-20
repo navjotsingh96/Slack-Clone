@@ -31,7 +31,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    ...canActivate(redirectToLogin) // redirects to home if logged in
+    ...canActivate(redirectTooHome) // redirects to home if logged in
   },
   {
     path: 'sign-up',
