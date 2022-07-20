@@ -2,6 +2,44 @@
     margin-bottom: 8px;
 }
 
+.chat-container {
+    background-color: #d4d8f0;
+}
+
+
+/* From NAvi */
+
+.channel-name {
+    border-bottom: 2px solid grey;
+    margin-top: 30px;
+    h1 {
+        margin-bottom: 20px;
+        font: revert;
+        color: #232946 !important;
+    }
+}
+
+.msg-box {
+    margin: 20px 20px 20px 20px;
+    background-color: white;
+    border-radius: 5px;
+    position: relative;
+    div {
+        padding: 5px 10px 10px 20px;
+    }
+}
+
+.right-down-corner {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    transition: all 225ms ease-in-out;
+    &:hover {
+        cursor: pointer;
+        transform: translateY(-5px);
+    }
+}
+
 .chat-user {
     display: flex;
     img {
@@ -17,6 +55,26 @@
 
 .user-name {
     font-weight: bold;
+    color: #232946 !important;
+    font-size: 18px;
+}
+
+.chat-messages {
+    color: #232946 !important;
+    display: flex;
+    flex-direction: column;
+}
+
+.thread {
+    margin-top: 10px;
+    margin-left: 10px;
+    transition: all 255ms ease-in-out;
+    width: fit-content;
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        color: blue;
+    }
 }
 
 .message-time {
@@ -79,12 +137,21 @@
     }
 }
 
+.user-img {
+    display: flex;
+    align-items: center;
+    img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
 ////////////////////////////// Chat Window Roland ///////////////////////////////////////
 mat-icon {
     color: black;
 }
 
-.chat-container{
+.chat-container {
     height: 80%;
 }
 
@@ -92,33 +159,29 @@ mat-icon {
     margin: 16px;
     height: calc(80% - 32px);
     overflow-y: scroll;
+    overflow: scroll;
+    height: 68vh;
 }
 
 .message-container {
     margin: 16px;
     height: calc(20% - 32px);
-
     mat-form-field {
         width: 100%;
-
         bottom: 10px;
-
         textarea {
             height: 100px;
             resize: none;
         }
-
-        mat-icon{
+        mat-icon {
             font-size: 24px;
             margin-bottom: 8px;
         }
     }
-} 
+}
 
 
 /************************************************************/
-
-
 
 .chat {
     margin-bottom: 8px;
@@ -126,7 +189,6 @@ mat-icon {
 
 .chat-user {
     display: flex;
-
     img {
         height: 50px;
     }

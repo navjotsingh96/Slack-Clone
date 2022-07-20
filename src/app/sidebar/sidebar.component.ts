@@ -5,39 +5,41 @@ import { DialogAddChannelsComponent } from '../dialog-add-channels/dialog-add-ch
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { Channel } from '../interface/channel';
+import { AuthenticationService } from '../services/authentication.service';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 
-export class SidebarComponent implements OnInit{
+export class SidebarComponent implements OnInit {
 
-  Channel$: Channel;
+  user$ = this.authService.currentUser$;
+  channels: Channel[];
   allChannels: any = [];
-  
-  constructor(public dialog: MatDialog, private firestore: AngularFirestore, private router: Router) { }
+
+  constructor(public dialog: MatDialog, private firestore: AngularFirestore, private router: Router,
+    public authService: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.firestore 
+    this.firestore
       .collection('channels')/* gespeicherte Daten aus firestore user collection werden geladen */
-      .valueChanges({idField: 'customIdName'}) /* alle änderungen werden gespeichert / customIdName ID von jeder collection */
+      .valueChanges({ idField: 'customIdName' }) /* alle änderungen werden gespeichert / customIdName ID von jeder collection */
       .subscribe((changes: any) => {
-        this.allChannels = changes; 
+        this.allChannels = changes;
         console.log('All Channels: ', this.allChannels)
-    
+
       })
-     
+
   }
 
   openDialog() {
     this.dialog.open(DialogAddChannelsComponent);
   }
- 
-
-  }
+}
 
 
 

@@ -1,24 +1,29 @@
 export interface Chat {
-    message: string,
-    chatID: string,
-    channelID: string
+    message: string;
+    channelID: string;
+    user: string;
+    time: Date;
 }
-// export class ChatToJSON {
-//     message: string;
-//     chatID: string;
-//     channelID: string;
+export class Chat {
+    message!: string;
+    channelID!: string;
+    user!: string;
+    time!: Date;
 
 
-//     constructor(msg?: any) {
-//         this.message = msg ? msg.message : '';
-//         this.chatID = msg ? msg.chatID : '';
-//         this.channelID = msg ? msg.channelID : '';
-//     }
-//     public toJSON() {
-//         return {
-//             message: this.message,
-//             chatID: this.chatID,
-//             channelID: this.channelID,
-//         }
-//     }
-// }
+    constructor(messageJSON?: Chat) {
+        this.message = messageJSON ? messageJSON.message : '';
+        this.channelID = messageJSON ? messageJSON.channelID : '';
+        this.user = messageJSON ? messageJSON.user : '';
+        this.time = messageJSON ? new Date(messageJSON.time) : new Date();
+
+    }
+    public toJSON() {
+        return {
+            message: this.message,
+            channelID: this.channelID,
+            time: this.time.getTime(),
+            user: this.user
+        }
+    }
+}

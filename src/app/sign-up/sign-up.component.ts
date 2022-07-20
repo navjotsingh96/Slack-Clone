@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AbstractControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
@@ -30,19 +31,29 @@ export class SignUpComponent implements OnInit {
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
     confirmPassword: new FormControl('', [Validators.required]),
-  }, {validators: passwordMatchValidator });
-  constructor(private authService: AuthenticationService, private toast: HotToastService, private router: Router) { }
+  }, { validators: passwordMatchValidator });
+  user = new FormGroup({
+    name: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required]),
+  })
+  constructor(
+    private authService: AuthenticationService,
+    private toast: HotToastService,
+    private router: Router,
+    private db: AngularFirestore
+  ) { }
 
   ngOnInit(): void {}
 
 
 
-  get name(){                     // Here we get the name of the user
-    return this.signUpForm.get('name');
-   
+  get name() {                     // Here we get the name of the user
+    return this.signUpForm.get('name'), this.user.get('name');
+
+
   }
-  get email(){            // Here we get the email of the user
-    return this.signUpForm.get('email');
+  get email() {            // Here we get the email of the user
+    return this.signUpForm.get('email'), this.user.get('name');
   }
   get password(){               // Here we get the password of the user
     return this.signUpForm.get('password');
@@ -51,19 +62,31 @@ export class SignUpComponent implements OnInit {
     return this.signUpForm.get('confirmPassword');
   }
 
-  submit(){
-    if(!this.signUpForm.valid) return;      
- 
-    const{ name, email , password} = this.signUpForm.value;     // Here we get the values of the form
+  submit() {
+    if (!this.signUpForm.valid) return;
+
+    const { name, email, password } = this.signUpForm.value;     // Here we get the values of the formuu
+    this.createUserinFirebase();
     this.authService.signUp(name, email, password).pipe(      // Here we sign up the user
       this.toast.observe({                               // Here we show a toast message
         success: 'User created successfully',
         loading: 'Creating user...',
         error: 'Error creating user'
       })
-    ).subscribe(() => {                 // Here we navigate to the login page if successful
+    ).subscribe(() => {      
+    // Here we navigate to the login page if successful
       this.router.navigate(['home']);
+
     })
+  }
+
+  createUserinFirebase() {
+    this.db
+      .collection('users')
+      .add(this.signUpForm.value)
+      .then((user) => {
+        console.log('User', user);
+      })
   }
 
 }
