@@ -22,13 +22,15 @@
 
     
     <mat-menu #userMenu="matMenu">
+        <button mat-menu-item routerLink="home">
+            Home
+        </button>
         <button mat-menu-item routerLink="profile">
             profile
         </button>
         <button mat-menu-item (click)="logout()">
             Logout
         </button>
-  
        
     </mat-menu>
 </mat-toolbar>
