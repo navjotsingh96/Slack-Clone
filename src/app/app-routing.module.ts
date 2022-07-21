@@ -29,23 +29,13 @@ const routes: Routes = [
   // { path: 'sidebar', component: SidebarComponent},
   
   {
-    path: 'chat/:id', component: ChatRoomComponent,
-   /*  children: [
-      {
-        path: 'thread/:id', component: ThreadComponent
-      }
-    ] */
+    path: 'chat/:id', component: ChatRoomComponent, ...canActivate(redirectToLogin)
+   
   },
-
-
-
 
 
   { path: '', component: HomeComponent, children: [
   ], ...canActivate(redirectToLogin) },
-
-
-
 
 
   // { path: '', component: LoginComponent },
@@ -54,7 +44,6 @@ const routes: Routes = [
   //   , canActivate: [canActivate(redirectToLogin)]
   // },
   { path: 'theard', component: ThreadComponent, ...canActivate(redirectToLogin) },
-  { path: 'sidebar', component: SidebarComponent },
 
   {
     path: 'login',
@@ -65,7 +54,7 @@ const routes: Routes = [
   {
     path: 'sign-up',
     component: SignUpComponent,
-    // ...canActivate(redirectToLogin)   // redirectToLogin if 
+    ...canActivate(redirectToLogin)   // redirectToLogin if 
   },
 
   {
@@ -74,7 +63,7 @@ const routes: Routes = [
     ...canActivate(redirectToLogin) // redirect to login if not logged in
   },
    {
-    path: 'chat/:id/thread/:id', component: ThreadComponent // navigate with chat/id/thread/id
+    path: 'chat/:id/thread/:id', component: ThreadComponent, ...canActivate(redirectToLogin) // navigate with chat/id/thread/id
   } 
 
 ];
