@@ -1,44 +1,39 @@
-<div class="d-flex f-size-16">
+<!-- <div class="d-flex f-size-16"> -->
+
     <div class="channels m-left-20">
         <div class="chat">
             <div class="chat-user">
-                <img class="user-img" src="assets/profile-img/profile-1.png">
                 <div class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
-                    <div style="margin-bottom: 5px;">
-                        <span class="user-name"> <b> {{user.displayName}}</b></span>
-                    </div>
-                    <div> <span>{{user.email}}</span>
-                    </div>
-
+                    <span class="user-name-sidenav"> {{user.displayName}}</span>
+                    <span> {{user.email}}</span>
                 </div>
             </div>
         </div>
-        <!-- <h2>test nav:</h2>
-        <a routerLink="/">start</a>
-        <a routerLink="/theard">theard</a>
-        <a routerLink="/login">login</a>
-        <a routerLink="login/sign-up">signup</a> -->
+        <!-- <a [routerLink]=" ['', { outlets: { 'page-list': ['home'] }}] ">Home</a> -->
+        <!-- <a [routerLink]=" ['', { outlets: { 'page-list': null }}] ">Leeren</a> -->
         <h2>Channels</h2>
         <div class="channels-main">
-            <a class="link-to-channel" [routerLink]=" ['/chat/' + channel.customIdName] " *ngFor="let channel of allChannels">
-                <li class="channel-list"></li>{{ channel.channelName }}</a>
+            <!-- <a class="link-to-channel" [routerLink]=" ['', { outlets: { 'page-list': ['chat', channel.customIdName] }}] " *ngFor="let channel of allChannels"> -->
+            <a class="link-to-channel" [routerLink]=" ['/chat/' + channel.customIdName] "
+                *ngFor="let channel of allChannels">
+                <li class="channel-list"></li>{{ channel.channelName }}
+            </a>
         </div>
     </div>
+
     <div class="cereat-channels p-left-20">
         <button (click)="openDialog()" class="add-btn" mat-fab color="primary">
-                <mat-icon>add</mat-icon>
-            </button>
+            <mat-icon>add</mat-icon>
+        </button>
         <span class="m-left-20"> Add Channel</span>
     </div>
-    <div class="direct-msg d-flex-center-colm ">
+
+    <div class="direct-msg column">
         <h3>Direct Message</h3>
-        <div class="user m-left-20">
+        <div *ngFor="let user of users" class="user-sidenav">
             <img src="assets/profile-img/profile-1.png" alt="">
-            <span class="m-left-20">Test User</span>
-        </div>
-        <div class="user m-left-20">
-            <img src="assets/profile-img/profile-2.png" alt="">
-            <span class="m-left-20">Test User 2</span>
+            <span class="m-left-20">{{ user.name }}</span>
         </div>
     </div>
-</div>
+
+<!-- </div> -->

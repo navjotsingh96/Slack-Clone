@@ -1,16 +1,6 @@
-<app-header></app-header>
+<div class="bg">
+    <app-page-list *ngIf="authService.currentUser$ | async as user"></app-page-list>
 
-
-
-<mat-drawer-container class="side-nav-container" style="background-color: #d4d8f0;">
-
-    <mat-drawer #drawer class="side-nav" opened="true" mode="side">
-        <app-sidebar></app-sidebar>
-    </mat-drawer>
-
-
-    <mat-drawer-content>
-        <router-outlet></router-outlet>
-    </mat-drawer-content>
-
-</mat-drawer-container>
+    <router-outlet *ngIf="!authService.loggedIn"></router-outlet>
+</div>
+<!-- <router-outlet name="page-list"></router-outlet> -->

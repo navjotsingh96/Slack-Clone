@@ -1,15 +1,82 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, Input, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ChatRoomComponent } from '../chat-room/chat-room.component';
+import { Chat } from '../interface/chat';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-thread',
   templateUrl: './thread.component.html',
   styleUrls: ['./thread.component.scss']
 })
-export class ThreadComponent implements OnInit {
+@Injectable({ providedIn: 'root' })
 
-  constructor() { }
+export class ThreadComponent implements OnInit {
+  messageID;
+  threadmsg;
+  chat$: Chat = new Chat;
+  userID;
+  channelID;
+  threadHeading;
+  constructor(private firestore: AngularFirestore, private router: Router,
+    private route: ActivatedRoute,
+    public authService: AuthenticationService,
+    public chat: ChatRoomComponent) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((parmsMap => {
+      this.messageID = parmsMap.get('id');
+      this.chat$.user;
+    }))
+    this.channelID = this.router.url.split('/')[2];
+    console.log('I got ID of Message', this.channelID)
+    this.getThreadMsg();
+    this.getmsg()
   }
 
+  getmsg(){
+    this.firestore
+    .collection(this.channelID)
+    .doc(this.messageID)
+    .valueChanges()
+    .subscribe((msg =>{
+      this.threadHeading = msg;
+      console.log((this.threadHeading));
+      
+    }))
+
+  }
+
+  getThreadMsg() {
+    this.threadmsg;
+    this.firestore
+      .collection('threads')
+      .doc(this.messageID)
+      .collection(this.messageID)
+      .valueChanges({ idFeld: 'Id' })
+      .subscribe((thread => {
+        this.threadmsg = thread;
+        console.log('Threads', thread);
+        this.threadmsg = thread.sort((mess1: any, mess2: any) => { // neu nachrichen werden am Ende gezeigt
+          return mess1.time - mess2.time;
+        });
+
+      }))
+  }
+  getId() {
+    this.chat$.user = (<HTMLInputElement>document.getElementById("user-name")).value
+    console.log(this.chat$.user);
+  }
+  submit() {
+    this.getId();
+    this.firestore
+      .collection('threads')
+      .doc(this.messageID)
+      .collection(this.messageID)
+      .add(this.chat$.toJSON())
+      .then((added => {
+        console.log('Added', added);
+      }))
+  }
 }

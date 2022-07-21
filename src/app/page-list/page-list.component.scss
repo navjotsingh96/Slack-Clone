@@ -1,0 +1,48 @@
+.bg2 {
+    height: 100vh;
+}
+
+.header{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 10;
+}
+
+////////////////////////////////////////// Toolbar ////////////////////////////////////////
+mat-toolbar {
+    height: 10vh;
+}
+
+///////////////////////////////////////// Side nav ////////////////////////////////////////
+
+mat-drawer{
+padding-top: 64px;
+}
+
+
+.side-nav-container {
+    height: 100%;
+    padding-top: 64px;
+}
+
+.side-nav {
+    width: 300px;
+    background-color: #232946 !important;
+    padding-top: 20px;
+    color: #fffffe;
+    padding-top: 64px;
+    h1 {
+        color: #fffffe;
+        border-bottom: 2px solid;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+    p {
+        color: #b8c1ec;
+        width: 100%;
+    }
+}

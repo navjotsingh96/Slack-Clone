@@ -58,3 +58,125 @@ body {
 .p-relative {
     position: relative;
 }
+
+.send-btn {
+    width: 164px;
+    height: 70px;
+    border-radius: 5px 5px 5px 5px;
+    transition: opacity 1s ease-in-out;
+    margin-left: 20px;
+    &:hover {
+        mat-icon {
+            transition: opacity 255ms ease-in-out;
+            opacity: 0;
+        }
+    }
+    &::before {
+        content: "Send";
+        visibility: hidden;
+        position: absolute;
+        transition: all 255ms ease-in-out;
+        text-align: center;
+        opacity: 0;
+        top: 0;
+        bottom: 0;
+        margin-right: 5px;
+        font-size: 16px;
+        top: 0;
+        bottom: 0;
+        margin-right: 5px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        mat-icon {
+            opacity: 1;
+        }
+    }
+    &:hover::before {
+        visibility: visible;
+        opacity: 1;
+        mat-icon {
+            opacity: 0;
+        }
+    }
+}
+
+.bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 40px !important;
+    top: unset !important;
+}
+
+.msg-box {
+    margin: 20px 20px 20px 20px;
+    background-color: white;
+    border-radius: 5px;
+    position: relative;
+    div {
+        padding: 5px 10px 10px 20px;
+    }
+}
+
+.right-down-corner {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    transition: all 225ms ease-in-out;
+    &:hover {
+        cursor: pointer;
+        transform: translateY(-5px);
+    }
+}
+
+.chat-user {
+    display: flex;
+    img {
+        height: 50px;
+    }
+}
+
+.chat-text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
+}
+
+.user-name {
+    font-weight: bold;
+    color: #232946 !important;
+    font-size: 18px;
+}
+
+.chat-messages {
+    color: #232946 !important;
+    display: flex;
+    flex-direction: column;
+}
+
+.message-time {
+    margin-left: 8px;
+    font-weight: normal;
+    font-size: 0.8rem;
+    color: gray;
+}
+
+.user-img {
+    display: flex;
+    align-items: center;
+    img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+pre {
+    background: #0000004d;
+    width: fit-content;
+    padding-left: 5px;
+    padding-right: 5px;
+}

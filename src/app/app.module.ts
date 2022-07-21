@@ -34,10 +34,7 @@ import { HeaderComponent } from './header/header.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { LoginComponent } from './log-in/log-in.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import {getStorage, provideStorage} from '@angular/fire/storage';
-import { ProfileComponent } from './profile/profile.component';
-import{MatCardModule} from '@angular/material/card';
+import { PageListComponent } from './page-list/page-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +49,7 @@ import{MatCardModule} from '@angular/material/card';
     HeaderComponent,
     LoginComponent,
     StartScreenComponent,
-    ProfileComponent,
+    PageListComponent,
    
   ],
   imports: [

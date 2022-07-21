@@ -1,1 +1,52 @@
-<p>thread works!</p>
+<div class="thread-container">
+    {{messageID}}
+</div>
+<div class="thread-heading m-left-20 msg-box">
+    <div class="user-img">
+        <img src="assets/profile-img/profile-1.png" alt="">
+        <div class="user-name">{{threadHeading?.user}} <span class="message-time">{{threadHeading?.time | date :"short" }}</span>
+        </div>
+    </div>
+    <div class="chat-messages">
+        {{threadHeading?.message}}
+    </div>
+</div>
+<div class="msg-box m-left-20 m-right-20">
+
+    <div class="msg-box m-left-20" *ngFor="let thread of threadmsg">
+        <div class="user-img">
+            <img src="assets/profile-img/profile-1.png" alt="">
+            <div class="user-name">{{thread?.user}} <span class="message-time">{{thread.time | date :"short" }}</span>
+            </div>
+        </div>
+        <div class="chat-messages">
+            <span [innerHTML]="thread.message"></span>
+            <mat-icon class="right-down-corner">delete_outline</mat-icon>
+        </div>
+    </div>
+</div>
+
+<div class="bottom p-absolute">
+    <div class="editor-container">
+        <editor apiKey="bgeto93fjxds10methgpkyy8y7cqfcbgltl91ww9tnc7h3yt" [init]="
+    { toolbar: 'undo redo | styles pre | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
+    height: 150,
+    branding: false,
+    menubar: false,
+    statusbar: true,
+    elementpath: false,
+    browser_spellcheck: true
+   }" [(ngModel)]="chat$.message" (keyup.enter)="submit()">
+        </editor>
+    </div>
+    <div class="msg-btn">
+        <button class="send-btn" mat-fab color="primary" (click)="submit(); chat$.message='';">
+        <mat-icon>send</mat-icon>
+    </button>
+    </div>
+    <div style="display: none;" class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
+        <input id="uid" type="text" value="{{user.email}}">
+        <input id="user-name" type="text" value="{{user.displayName}}">
+
+    </div>
+</div>

@@ -21,6 +21,8 @@ export class SidebarComponent implements OnInit {
   channels: Channel[];
   allChannels: any = [];
 
+  users
+
   constructor(public dialog: MatDialog, private firestore: AngularFirestore, private router: Router,
     public authService: AuthenticationService) { }
 
@@ -31,6 +33,15 @@ export class SidebarComponent implements OnInit {
       .subscribe((changes: any) => {
         this.allChannels = changes;
         console.log('All Channels: ', this.allChannels)
+
+      })
+
+      this.firestore
+      .collection('users')
+      .valueChanges({ idField: 'user' })
+      .subscribe((changes) => {
+        this.users = changes;
+        console.log('users aus sidenav', this.users);
 
       })
 
