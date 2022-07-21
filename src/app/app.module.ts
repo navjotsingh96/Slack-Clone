@@ -74,12 +74,9 @@ import { PageListComponent } from './page-list/page-list.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage()),
     HotToastModule.forRoot(),
-    MatCardModule,
-
     MatMenuModule,
-    MatAutocompleteModule
+    
 
   ],
   providers: [],
