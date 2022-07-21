@@ -7,6 +7,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoginComponent } from './log-in/log-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { canActivate, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
+import { ProfileComponent } from './profile/profile.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectTooHome = () => redirectLoggedInTo(['home']);
@@ -39,6 +40,9 @@ const routes: Routes = [
   {
     path: 'thread/:id', component: ThreadComponent
   }
+,
+
+  { path: 'profile', component: ProfileComponent, ...canActivate(redirectToLogin) },
 
 ];
 

@@ -3,9 +3,9 @@
         <span>Slack-Clone</span>
         <ng-container *ngIf="authService.currentUser$ |async as user; else loginButton">
             <button mat-button [matMenuTriggerFor]="userMenu">
-                <mat-icon>account_circle</mat-icon>
+                <img class="user-img" src="assets/profile-img/profile-1.png">
                 {{user.displayName}}
-                <mat-icon>expand_more</mat-icon>
+                <!-- <mat-icon>expand_more</mat-icon> -->
             </button>
         </ng-container>
 
@@ -17,8 +17,13 @@
 
     </mat-toolbar>
     <mat-menu #userMenu="matMenu">
+        <button mat-menu-item routerLink= "profile">
+            Profile
+        </button>
         <button mat-menu-item (click)="logout()">
             Logout
         </button>
+  
+       
     </mat-menu>
 </header>

@@ -27,13 +27,17 @@ import { MatFormField } from '@angular/material/form-field';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideFirestore, getFirestore} from '@angular/fire/firestore';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { HeaderComponent } from './header/header.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { LoginComponent } from './log-in/log-in.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {getStorage, provideStorage} from '@angular/fire/storage';
+import { ProfileComponent } from './profile/profile.component';
+import{MatCardModule} from '@angular/material/card';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +52,7 @@ import { StartScreenComponent } from './start-screen/start-screen.component';
     HeaderComponent,
     LoginComponent,
     StartScreenComponent,
+    ProfileComponent,
    
   ],
   imports: [
@@ -71,12 +76,13 @@ import { StartScreenComponent } from './start-screen/start-screen.component';
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
     HotToastModule.forRoot(),
+    MatCardModule,
+
     MatMenuModule,
-
-
+    MatAutocompleteModule
 
   ],
   providers: [],
