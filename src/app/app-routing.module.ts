@@ -9,6 +9,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import {canActivate, redirectUnauthorizedTo, redirectLoggedInTo} from '@angular/fire/auth-guard'; 
 import { PageListComponent } from './page-list/page-list.component';
 import { child } from 'firebase/database';
+import { ProfileComponent } from './profile/profile.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectTooHome = () => redirectLoggedInTo(['page-list']);
@@ -76,7 +77,8 @@ const routes: Routes = [
    {
     path: 'chat/:id/thread/:id', component: ThreadComponent // navigate with chat/id/thread/id
   } 
-
+  ,
+   {path: 'profile', component: ProfileComponent, ...canActivate(redirectToLogin)},
 ];
 
 @NgModule({
