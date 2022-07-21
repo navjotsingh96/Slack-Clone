@@ -1,0 +1,35 @@
+////////////////////////////////////////// Toolbar ////////////////////////////////////////
+mat-toolbar {
+    height: 10vh;
+}
+
+///////////////////////////////////////// Side nav ////////////////////////////////////////
+.side-nav-container {
+    // background-color: #232946 !important;
+    max-height: 94vh;
+    height: 100%;
+    // color: #fffffe;
+    // width: 300px;
+    // color: #fffffe;
+    // position: relative;
+}
+
+.side-nav {
+    // width: 100%;
+    width: 300px;
+    background-color: #232946 !important;
+    padding-top: 20px;
+    color: #fffffe;
+    h1 {
+        color: #fffffe;
+        border-bottom: 2px solid;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 20px;
+        padding-top: 20px;
+    }
+    p {
+        color: #b8c1ec;
+        width: 100%;
+    }
+}

@@ -34,6 +34,7 @@ import { HeaderComponent } from './header/header.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { LoginComponent } from './log-in/log-in.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
+import { PageListComponent } from './page-list/page-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { StartScreenComponent } from './start-screen/start-screen.component';
     HeaderComponent,
     LoginComponent,
     StartScreenComponent,
+    PageListComponent,
    
   ],
   imports: [

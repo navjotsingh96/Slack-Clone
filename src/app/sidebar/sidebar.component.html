@@ -14,10 +14,12 @@
             </div>
         </div>
         <h2>test nav:</h2>
-        <a routerLink="/">Home</a>
+        <a [routerLink]=" ['', { outlets: { 'page-list': ['home'] }}] ">Home</a>
+        <a [routerLink]=" ['', { outlets: { 'page-list': null }}] ">Leeren</a>
+        <a routerLink="/login">login</a>
         <h2>Channels</h2>
         <div class="channels-main">
-            <a class="link-to-channel" [routerLink]=" ['/chat/' + channel.customIdName] " *ngFor="let channel of allChannels">
+            <a class="link-to-channel" [routerLink]=" ['', { outlets: { 'page-list': ['chat', channel.customIdName] }}] " *ngFor="let channel of allChannels">
                 <li class="channel-list"></li>{{ channel.channelName }}</a>
         </div>
     </div>

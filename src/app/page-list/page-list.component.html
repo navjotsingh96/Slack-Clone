@@ -1,0 +1,18 @@
+<app-header></app-header>
+
+
+
+<mat-drawer-container class="side-nav-container" style="background-color: #d4d8f0;">
+
+    <mat-drawer #drawer class="side-nav" opened="true" mode="side">
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
+
+
+    <mat-drawer-content>
+        <router-outlet name="page-list"></router-outlet>
+    </mat-drawer-content>
+
+</mat-drawer-container>
+
+
