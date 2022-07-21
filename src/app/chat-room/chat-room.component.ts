@@ -64,9 +64,7 @@ export class ChatRoomComponent implements OnInit {
   }
   getId() {
     this.chat$.user = (<HTMLInputElement>document.getElementById("user-name")).value
-    console.log(this.chat$.user);;
-
-
+    console.log(this.chat$.user);
   }
   getUserWithId() {
     this.allMessages.find((email => {
@@ -79,11 +77,11 @@ export class ChatRoomComponent implements OnInit {
   getMessages() {
     this.firestore
       .collection(this.channelID)
-      .valueChanges()
+      .valueChanges({ idField: 'customIdName' })
       .subscribe((message: any) => {
         for (let i = 0; i < message.length; i++) {
           const msg = message[i];
-          console.log(message.length);
+          /*    console.log(message.length); */
           if (message.length === 0) {
             this.zeroMsg = true
           }
@@ -100,8 +98,6 @@ export class ChatRoomComponent implements OnInit {
 
         }
       })
-    console.log('This. all', this.allMessages);
-
   }
 
   // this function check if the channel id and chat id same is then chat will be pushed in Array
@@ -123,8 +119,6 @@ export class ChatRoomComponent implements OnInit {
       .valueChanges({ idField: 'user' })
       .subscribe((changes) => {
         this.users = changes;
-        console.log('Changes fron User', this.users);
-
       })
 
   }
@@ -140,11 +134,21 @@ export class ChatRoomComponent implements OnInit {
         this.messageID = message.id
       }).catch((err) => {
         console.log('Error', err);
-
       })
-
     this.chat$.message = '';
   }
-
+  deleteMesage(message) {
+    console.log('MsgId', message);
+    this.firestore
+      .collection(this.channelID)
+      .doc(message)
+      .delete()
+      .catch((error => {
+        console.log('Somthing went wrong', error);
+      }))
+      .then((done => {
+        console.log('Message sucessfully deleted', done);
+      }))
+  }
 }
 

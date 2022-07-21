@@ -9,12 +9,14 @@ import { from, switchMap } from 'rxjs';
 
 export class AuthenticationService {
 
+  loggedIn: boolean = false
+
   currentUser$ = authState(this.auth)            // Here we get the current user
 
   constructor(public auth: Auth) { }
 
   login(username : string, password : string){              // Here we login a user
-  return from(signInWithEmailAndPassword(this.auth, username, password));
+  return from(signInWithEmailAndPassword(this.auth, username, password))
   }
 
   signUp(name : string ,email : string, password : string){     // Here we create a new user

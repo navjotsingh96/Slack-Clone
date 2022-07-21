@@ -23,8 +23,20 @@
     margin: 20px 20px 20px 20px;
     background-color: white;
     border-radius: 5px;
+    position: relative;
     div {
         padding: 5px 10px 10px 20px;
+    }
+}
+
+.right-down-corner {
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    transition: all 225ms ease-in-out;
+    &:hover {
+        cursor: pointer;
+        transform: translateY(-5px);
     }
 }
 
@@ -49,6 +61,22 @@
 
 .chat-messages {
     color: #232946 !important;
+    display: flex;
+    flex-direction: column;
+}
+
+.thread {
+    margin-top: 10px;
+    margin-left: 10px;
+    transition: all 255ms ease-in-out;
+    width: fit-content;
+    text-decoration: underline;
+    color: rgb(45, 45, 201);
+    &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+        color: blue;
+    }
 }
 
 .message-time {
@@ -126,25 +154,26 @@ mat-icon {
 }
 
 .chat-container {
-    height: 80%;
+    // height: 80%;
 }
 
 .show-chat {
     margin: 16px;
-    height: calc(80% - 32px);
+    // height: calc(80% - 32px);
     overflow-y: scroll;
-    overflow: scroll;
-    height: 68vh;
+    // overflow: scroll;
+    height: 55vh;
 }
 
 .message-container {
     margin: 16px;
-    height: calc(20% - 32px);
+    height: 100px;
+
     mat-form-field {
         width: 100%;
         bottom: 10px;
         textarea {
-            height: 100px;
+            height: 50px !important;
             resize: none;
         }
         mat-icon {

@@ -1,3 +1,10 @@
+.column {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
 a {
     text-decoration: none;
     color: gray;
@@ -7,10 +14,8 @@ a {
 .channels {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    padding-bottom: 10px;
+    padding-top: 16px;
     h3 {
-        width: 100%;
         padding-bottom: 10px;
     }
 }
@@ -22,7 +27,6 @@ a {
 .cereat-channels {
     display: flex;
     align-items: center;
-    width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
     border-bottom: 2px solid;
@@ -45,23 +49,27 @@ mat-dialog-container {
 }
 
 .direct-msg {
-    width: 100%;
-}
+    max-width: 100%;
 
-.user {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    background-color: #4d66df96;
-    padding: 10px;
-    margin-bottom: 10px;
-    img {
-        height: 35px;
-        width: 35px;
-        object-fit: cover;
-        border-radius: 100%;
+    .user-sidenav {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        background-color: #4d66df96;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        margin-bottom: 10px;
+        img {
+            height: 35px;
+            width: 35px;
+            object-fit: cover;
+            border-radius: 100%;
+            margin-left: 10px;
+        }
     }
 }
+
+
 
 .channel-list {
     list-style: none;
@@ -82,16 +90,27 @@ mat-dialog-container {
 
 .chat-user {
     display: flex;
+    flex-direction: column;
+    margin-bottom: 32px;
 }
 
 .chat-text {
     display: flex;
     flex-direction: column;
-    margin-left: 50px;
     margin-top: 16px;
 }
 
-.user-name {
+.user-name-sidenav {
     font-size: 20px;
     padding-bottom: 5px;
+    font-weight: bold;
+    color: white;
+}
+
+
+.mid {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }

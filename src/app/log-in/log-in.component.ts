@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
 
   submit() {
     if (!this.loginForm.valid) {
+      
       return;
     }
     const { email, password } = this.loginForm.value;   // get the values from the form
@@ -59,9 +60,11 @@ export class LoginComponent implements OnInit {
 
 
     ).subscribe((user) => {
+      this.authService.loggedIn = true
       console.log('user Logged in', user.user.uid);
       this.userKey = user.user.uid;
-      this.router.navigate(['chat']);
+      this.router.navigate(['']);
+      
     });
   }
 

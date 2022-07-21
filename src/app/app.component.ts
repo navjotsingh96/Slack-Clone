@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddChannelsComponent } from './dialog-add-channels/dialog-add-channels.component';
 import { AuthenticationService } from './services/authentication.service';
 import { Auth, authState } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -37,7 +38,8 @@ export class AppComponent {
   constructor(firestore: AngularFirestore,
     public dialog: MatDialog,
     public authService: AuthenticationService,
-    public auth: Auth
+    public auth: Auth,
+    private route: Router,
   ){}
   
 }
