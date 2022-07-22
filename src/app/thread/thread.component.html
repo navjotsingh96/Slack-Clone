@@ -16,12 +16,12 @@
     <div class="msg-box m-left-20" *ngFor="let thread of threadmsg">
         <div class="user-img">
             <img src="assets/profile-img/profile-1.png" alt="">
-            <div class="user-name">{{thread?.user}} <span class="message-time">{{thread.time | date :"short" }}</span>
+            <div class="user-name">{{thread?.user}} <span class="message-time">{{thread.time | date :"short" }}</span> {{thread?.customIdName}}
             </div>
         </div>
         <div class="chat-messages">
             <span [innerHTML]="thread.message"></span>
-            <mat-icon class="right-down-corner">delete_outline</mat-icon>
+            <mat-icon class="right-down-corner" (click)="deleteThreadMsg(thread?.customIdName)">delete_outline</mat-icon>
         </div>
     </div>
 </div>

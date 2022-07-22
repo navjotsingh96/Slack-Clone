@@ -35,6 +35,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import { LoginComponent } from './log-in/log-in.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
 import { PageListComponent } from './page-list/page-list.component';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 import { ProfileComponent } from './profile/profile.component';
 @NgModule({
@@ -78,7 +80,7 @@ import { ProfileComponent } from './profile/profile.component';
     provideFirestore(() => getFirestore()),
     HotToastModule.forRoot(),
     MatMenuModule,
-    
+    MatSnackBarModule
 
   ],
   providers: [],
