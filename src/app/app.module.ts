@@ -39,6 +39,7 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 import { ProfileComponent } from './profile/profile.component';
+import { DialogEditMessagesComponent } from './dialog-edit-messages/dialog-edit-messages.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,7 @@ import { ProfileComponent } from './profile/profile.component';
     HeaderComponent,
     LoginComponent,
     StartScreenComponent,
-    PageListComponent,ProfileComponent
+    PageListComponent,ProfileComponent, DialogEditMessagesComponent
    
   ],
   imports: [

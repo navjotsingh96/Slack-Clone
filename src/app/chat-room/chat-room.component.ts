@@ -8,6 +8,8 @@ import { AuthenticationService } from '../services/authentication.service';
 import { User } from '../interface/user.class';
 import { map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogEditMessagesComponent } from '../dialog-edit-messages/dialog-edit-messages.component';
 
 
 @Component({
@@ -33,7 +35,8 @@ export class ChatRoomComponent implements OnInit {
     public chatService: ChatService,
     private firestore: AngularFirestore,
     public authService: AuthenticationService,
-    private _snackBar: MatSnackBar) {
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog) {
 
   }
 
@@ -166,7 +169,9 @@ export class ChatRoomComponent implements OnInit {
       }))
 
   }
-
+  openDialog(messageID){
+      const dialogRef = this.dialog.open(DialogEditMessagesComponent)
+  }
   openSnackBar() {
     this._snackBar.open('Message deleted', '', {
       duration: 3000
