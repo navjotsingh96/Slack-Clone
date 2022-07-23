@@ -25,7 +25,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatFormField } from '@angular/material/form-field';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideAuth, getAuth , } from '@angular/fire/auth';
 import { provideFirestore, getFirestore} from '@angular/fire/firestore';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { EditorModule } from '@tinymce/tinymce-angular';
@@ -34,10 +34,10 @@ import {MatMenuModule} from '@angular/material/menu';
 import { LoginComponent } from './log-in/log-in.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
 import { PageListComponent } from './page-list/page-list.component';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { ProfileComponent } from './profile/profile.component';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { getStorage, provideStorage } from '@angular/fire/storage';
-
+import { DialogEditMessagesComponent } from './dialog-edit-messages/dialog-edit-messages.component';
+import { provideStorage , getStorage } from '@angular/fire/storage';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,8 +52,8 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
     HeaderComponent,
     LoginComponent,
     StartScreenComponent,
-    PageListComponent,
-    ProfileComponent,
+    PageListComponent,ProfileComponent, DialogEditMessagesComponent
+   
   ],
   imports: [
     BrowserModule,
@@ -79,9 +79,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     HotToastModule.forRoot(),
-    MatMenuModule,
-    AngularFireStorageModule,
-    MatIconModule,
+
 
   ],
   providers: [],

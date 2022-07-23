@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ChatRoomComponent } from '../chat-room/chat-room.component';
 import { Chat } from '../interface/chat';
 import { AuthenticationService } from '../services/authentication.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-thread',
@@ -22,7 +23,8 @@ export class ThreadComponent implements OnInit {
   constructor(private firestore: AngularFirestore, private router: Router,
     private route: ActivatedRoute,
     public authService: AuthenticationService,
-    public chat: ChatRoomComponent) { }
+    public chat: ChatRoomComponent,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((parmsMap => {
@@ -35,16 +37,16 @@ export class ThreadComponent implements OnInit {
     this.getmsg()
   }
 
-  getmsg(){
+  getmsg() {
     this.firestore
-    .collection(this.channelID)
-    .doc(this.messageID)
-    .valueChanges()
-    .subscribe((msg =>{
-      this.threadHeading = msg;
-      console.log((this.threadHeading));
-      
-    }))
+      .collection(this.channelID)
+      .doc(this.messageID)
+      .valueChanges()
+      .subscribe((msg => {
+        this.threadHeading = msg;
+        console.log((this.threadHeading));
+
+      }))
 
   }
 
@@ -54,7 +56,7 @@ export class ThreadComponent implements OnInit {
       .collection('threads')
       .doc(this.messageID)
       .collection(this.messageID)
-      .valueChanges({ idFeld: 'Id' })
+      .valueChanges({ idField: 'customIdName' })
       .subscribe((thread => {
         this.threadmsg = thread;
         console.log('Threads', thread);
@@ -78,5 +80,27 @@ export class ThreadComponent implements OnInit {
       .then((added => {
         console.log('Added', added);
       }))
+  }
+  deleteThreadMsg(idofThread: any) {
+    console.log('Thread id', idofThread);
+    this.firestore
+      .collection('threads')
+      .doc(this.messageID)
+      .collection(this.messageID)
+      .doc(idofThread)
+      .delete()
+      .catch((error => {
+        console.log(error);
+      }))
+      .then((done => {
+        console.log('Done', done);
+        this.openSnackBar()
+      }))
+
+  }
+  openSnackBar() {
+   this._snackBar.open('Message deleted','', {
+    duration: 3000
+  });
   }
 }
