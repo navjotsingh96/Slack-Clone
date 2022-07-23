@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth, authState } from '@angular/fire/auth';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { from, switchMap } from 'rxjs';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, UserProfile } from 'firebase/auth';
+import { concatMap, from, of, switchMap ,Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,8 @@ import { from, switchMap } from 'rxjs';
 
 export class AuthenticationService {
 
-  loggedIn: boolean = false
+
+  // loggedIn: boolean = false
 
   currentUser$ = authState(this.auth)            // Here we get the current user
 
@@ -22,6 +23,18 @@ export class AuthenticationService {
   signUp(name : string ,email : string, password : string){     // Here we create a new user
     return from(createUserWithEmailAndPassword(this.auth, email , password))
     .pipe(switchMap(({ user }) => updateProfile(user, {displayName: name})));
+    
+  }
+
+  updateProfileData(profileData: Partial<UserProfile>): Observable<any>{
+    const user = this.auth.currentUser;
+    return of(user).pipe(
+      concatMap(user => {
+        if(!user) throw new Error('not found');
+
+        return updateProfile(user, profileData);
+      })
+    )
     
   }
 

@@ -11,7 +11,7 @@ export class ChatService {
   constructor(private firestore: AngularFirestore) { }
 
   loadCurrentChat(paramsID: string) {
-    this.currentChatID = paramsID;
+    this.currentChatID = paramsID; 
     
     this.firestore
       .collection('channels')
