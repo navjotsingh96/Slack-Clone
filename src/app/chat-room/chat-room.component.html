@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div class="chat-messages">
-                    {{msg.message}}
+                    {{msg.message}} <span (click)="openDialog(msg.customIdName)">Edit</span>
                     <span class="thread"> 
                         <a [replaceUrl]="true"  [routerLink]=" ['/chat/'+ msg.channelID + '/thread/' + msg.customIdName]">Show Therad </a></span>
                     <mat-icon class="right-down-corner" (click)="deleteMesage(msg.customIdName)">delete_outline</mat-icon>
@@ -57,8 +57,6 @@
                 </div>
             </div>
         </div>
-
-        <app-message></app-message>
     </div>
 
     <form (submit)="submit()" class="message-container">

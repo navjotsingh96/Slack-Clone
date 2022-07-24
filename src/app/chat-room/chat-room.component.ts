@@ -7,6 +7,9 @@ import { Auth, idToken } from '@angular/fire/auth';
 import { AuthenticationService } from '../services/authentication.service';
 import { User } from '../interface/user.class';
 import { map } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogEditMessagesComponent } from '../dialog-edit-messages/dialog-edit-messages.component';
 
 
 @Component({
@@ -28,8 +31,12 @@ export class ChatRoomComponent implements OnInit {
   userIdtry;
   users;
   userID;
-  constructor(private route: ActivatedRoute, public chatService: ChatService, private firestore: AngularFirestore,
-    public authService: AuthenticationService) {
+  constructor(private route: ActivatedRoute,
+    public chatService: ChatService,
+    private firestore: AngularFirestore,
+    public authService: AuthenticationService,
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog) {
 
   }
 
@@ -148,7 +155,27 @@ export class ChatRoomComponent implements OnInit {
       }))
       .then((done => {
         console.log('Message sucessfully deleted', done);
+        this.openSnackBar();
       }))
+  }
+  saveMessage(message) {
+    this.firestore
+      .collection(this.channelID)
+      .doc(message)
+      .update(this.chat$.toJSON())
+      .then((done => {
+        console.log('Added', done);
+
+      }))
+
+  }
+  openDialog(messageID){
+      const dialogRef = this.dialog.open(DialogEditMessagesComponent)
+  }
+  openSnackBar() {
+    this._snackBar.open('Message deleted', '', {
+      duration: 3000
+    });
   }
 }
 

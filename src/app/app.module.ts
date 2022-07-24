@@ -35,6 +35,12 @@ import {MatMenuModule} from '@angular/material/menu';
 import { LoginComponent } from './log-in/log-in.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
 import { PageListComponent } from './page-list/page-list.component';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSelectModule} from '@angular/material/select';
+
+import { ProfileComponent } from './profile/profile.component';
+import { DialogEditMessagesComponent } from './dialog-edit-messages/dialog-edit-messages.component';
+import { DialogAddDmComponent } from './dialog-add-dm/dialog-add-dm.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,10 +55,11 @@ import { PageListComponent } from './page-list/page-list.component';
     HeaderComponent,
     LoginComponent,
     StartScreenComponent,
-    PageListComponent,
+    PageListComponent,ProfileComponent, DialogEditMessagesComponent, DialogAddDmComponent
    
   ],
   imports: [
+    MatSelectModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -76,7 +83,7 @@ import { PageListComponent } from './page-list/page-list.component';
     provideFirestore(() => getFirestore()),
     HotToastModule.forRoot(),
     MatMenuModule,
-    
+    MatSnackBarModule
 
   ],
   providers: [],

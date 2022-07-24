@@ -1,6 +1,7 @@
 export interface User {
     name: string;
-    key: string;
+    UID: string;
+    email: string;
   }
   
   export class User {

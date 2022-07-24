@@ -5,6 +5,16 @@
     text-align: center;
 }
 
+.dm{
+    margin: 16px;
+    display: flex;
+    justify-content: space-between;
+    
+    mat-icon{
+        cursor: pointer;
+    }
+}
+
 a {
     text-decoration: none;
     color: gray;
