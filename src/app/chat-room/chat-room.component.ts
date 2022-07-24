@@ -131,18 +131,26 @@ export class ChatRoomComponent implements OnInit {
   }
   // to send message to firestroe
   submit() {
-    this.getId();
-    this.firestore
-      .collection(this.channelID)
-      .add(this.chat$.toJSON())
-      .then((message: any) => {
-        console.log('Suceesful', message);
-        // console.log('message', message.id)
-        this.messageID = message.id
-      }).catch((err) => {
-        console.log('Error', err);
-      })
-    this.chat$.message = '';
+    if (this.chat$.message) {
+      this.getId();
+      this.firestore
+        .collection(this.channelID)
+        .add(this.chat$.toJSON())
+        .then((message: any) => {
+          console.log('Suceesful', message);
+          // console.log('message', message.id)
+          this.messageID = message.id
+        }).catch((err) => {
+          console.log('Error', err);
+        })
+      this.chat$.message = '';
+
+    } if (!this.chat$.message) {
+      this.enterMessageSnackBar()
+      console.log('Please enter message');
+
+    }
+
   }
   deleteMesage(message) {
     console.log('MsgId', message);
@@ -169,13 +177,22 @@ export class ChatRoomComponent implements OnInit {
       }))
 
   }
-  openDialog(messageID){
-      const dialogRef = this.dialog.open(DialogEditMessagesComponent)
+  openDialog(messageID) {
+    const dialogRef = this.dialog.open(DialogEditMessagesComponent)
+    dialogRef.componentInstance.messageID = messageID;
+    dialogRef.componentInstance.channelID = this.channelID;
+    console.log(messageID);
   }
   openSnackBar() {
     this._snackBar.open('Message deleted', '', {
       duration: 3000
     });
   }
+  enterMessageSnackBar(){
+    this._snackBar.open('Please write something', '', {
+      duration: 3000
+    });
+  }
+
 }
 

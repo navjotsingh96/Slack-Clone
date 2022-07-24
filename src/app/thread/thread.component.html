@@ -1,6 +1,3 @@
-<div class="thread-container">
-    {{messageID}}
-</div>
 <div class="thread-heading m-left-20 msg-box">
     <div class="user-img">
         <img src="assets/profile-img/profile-1.png" alt="">
@@ -16,11 +13,19 @@
     <div class="msg-box m-left-20" *ngFor="let thread of threadmsg">
         <div class="user-img">
             <img src="assets/profile-img/profile-1.png" alt="">
-            <div class="user-name">{{thread?.user}} <span class="message-time">{{thread.time | date :"short" }}</span> {{thread?.customIdName}}
+            <div class="user-name">{{thread?.user}} <span class="message-time">{{thread.time | date :"short" }}</span>
             </div>
         </div>
         <div class="chat-messages">
             <span [innerHTML]="thread.message"></span>
+            <button mat-icon-button class="edit-option" [matMenuTriggerFor]="editMessage">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+            <mat-menu #editMessage="matMenu">
+                <button (click)="openDialog(thread.customIdName)" mat-menu-item>Edit</button>
+                <button (click)="deleteThreadMsg(thread.customIdName)" mat-menu-item>Delete</button>
+            </mat-menu>
+
             <mat-icon class="right-down-corner" (click)="deleteThreadMsg(thread?.customIdName)">delete_outline</mat-icon>
         </div>
     </div>

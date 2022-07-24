@@ -5,6 +5,8 @@ import { User } from '../interface/user.class';
 import { AuthenticationService } from '../services/authentication.service';
 import { ImageUploadService } from '../services/image-upload.service';
 import { HotToastService } from '@ngneat/hot-toast';
+import { LoginComponent } from '../log-in/log-in.component';
+import { user } from '@angular/fire/auth';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -18,6 +20,7 @@ export class ProfileComponent implements OnInit {
     public storage: AngularFireStorage,
     private imageUploadService: ImageUploadService,
     private toast: HotToastService,
+    public login : LoginComponent
   ) { }
 
 
