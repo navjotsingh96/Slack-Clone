@@ -2,6 +2,7 @@ export interface User {
     name: string;
     UID: string;
     email: string;
+    photoUrl: string;
   }
   
   export class User {
