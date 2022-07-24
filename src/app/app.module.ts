@@ -82,12 +82,9 @@ import { DialogAddDmComponent } from './dialog-add-dm/dialog-add-dm.component';
     provideStorage(() => getStorage()),
     HotToastModule.forRoot(),
     MatMenuModule,
-<<<<<<< HEAD
     MatFormFieldModule,
-=======
     MatSnackBarModule
 
->>>>>>> 905c54c3632db18331a62ed17dc1ef79cc9a0838
 
   ],
   providers: [],

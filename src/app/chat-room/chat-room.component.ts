@@ -169,8 +169,13 @@ export class ChatRoomComponent implements OnInit {
       }))
 
   }
-  openDialog(messageID){
-      const dialogRef = this.dialog.open(DialogEditMessagesComponent)
+  openDialog(messageID) {
+    const dialogRef = this.dialog.open(DialogEditMessagesComponent)
+    dialogRef.componentInstance.messageID = messageID;
+    dialogRef.componentInstance.channelID = this.channelID;
+
+    console.log(messageID);
+
   }
   openSnackBar() {
     this._snackBar.open('Message deleted', '', {
