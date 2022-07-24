@@ -79,7 +79,8 @@ import { provideStorage , getStorage } from '@angular/fire/storage';
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     HotToastModule.forRoot(),
-
+    MatMenuModule,
+    MatFormFieldModule,
 
   ],
   providers: [],
