@@ -15,8 +15,14 @@
                     </div>
                 </div>
                 <div class="chat-messages">
-                    <span [innerHTML]="msg?.message">></span>
-                    <span (click)="openDialog(msg.customIdName)">Edit</span>
+                    <span [innerHTML]="msg?.message"></span>
+                    <button mat-icon-button class="edit-option" [matMenuTriggerFor]="editMessage">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                    <mat-menu #editMessage="matMenu">
+                        <button (click)="openDialog(msg.customIdName)" mat-menu-item>Edit</button>
+                    </mat-menu>
+
                     <span class="thread"> 
                         <a [replaceUrl]="true"  [routerLink]=" ['/chat/'+ msg.channelID + '/thread/' + msg.customIdName]">Show Therad </a></span>
                     <mat-icon class="right-down-corner" (click)="deleteMesage(msg.customIdName)">delete_outline</mat-icon>

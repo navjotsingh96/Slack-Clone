@@ -18,7 +18,13 @@
         </div>
         <div class="chat-messages">
             <span [innerHTML]="thread.message"></span>
-            <span (click)="openDialog(thread.customIdName)">Edit</span>
+            <button mat-icon-button class="edit-option" [matMenuTriggerFor]="editMessage">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+            <mat-menu #editMessage="matMenu">
+                <button (click)="openDialog(thread.customIdName)" mat-menu-item>Edit</button>
+                <button (click)="deleteThreadMsg(thread.customIdName)" mat-menu-item>Delete</button>
+            </mat-menu>
 
             <mat-icon class="right-down-corner" (click)="deleteThreadMsg(thread?.customIdName)">delete_outline</mat-icon>
         </div>
