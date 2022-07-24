@@ -25,14 +25,14 @@ export class ProfileComponent implements OnInit {
   }
 
   uploadImage(event: any, user: User) {
-    this.imageUploadService.uploadImage(event.target.files[0], `img/${user.key}`).pipe(
-        this.toast.observe({
+    this.imageUploadService.uploadImage(event.target.files[0], `img/${user.key}`).pipe(   
+        this.toast.observe({  
           loading: 'Uploading...',
           success: 'Upload Successfully',
           error: 'Upload Failed'
         }
         ), 
-        concatMap((photoUrl)=> this.authService.updateProfileData({photoUrl}) )
+        concatMap((photoUrl)=> this.authService.updateProfileData({photoUrl}) )   
         ).subscribe();
 
   }
