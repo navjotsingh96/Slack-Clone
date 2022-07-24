@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Channel } from '../interface/channel';
 import { AuthenticationService } from '../services/authentication.service';
 import { AsyncPipe } from '@angular/common';
+import { DialogAddDmComponent } from '../dialog-add-dm/dialog-add-dm.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -49,6 +50,10 @@ export class SidebarComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(DialogAddChannelsComponent);
+  }
+
+  OpenAddDmChannel() {
+    this.dialog.open(DialogAddDmComponent);
   }
 }
 

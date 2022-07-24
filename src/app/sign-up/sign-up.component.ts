@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { of } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+
 export function passwordMatchValidator(): ValidatorFn{
   return (control: AbstractControl): ValidationErrors | null => {
     const password = control.get('password').value;
@@ -25,6 +26,7 @@ export function passwordMatchValidator(): ValidatorFn{
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss']
 })
+
 export class SignUpComponent implements OnInit {
   signUpForm = new FormGroup({
     name: new FormControl('', Validators.required),
@@ -36,6 +38,8 @@ export class SignUpComponent implements OnInit {
     name: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required]),
   })
+
+
   constructor(
     private authService: AuthenticationService,
     private toast: HotToastService,

@@ -38,6 +38,7 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { ProfileComponent } from './profile/profile.component';
 import { DialogEditMessagesComponent } from './dialog-edit-messages/dialog-edit-messages.component';
 import { provideStorage , getStorage } from '@angular/fire/storage';
+import { DialogAddDmComponent } from './dialog-add-dm/dialog-add-dm.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,10 +53,11 @@ import { provideStorage , getStorage } from '@angular/fire/storage';
     HeaderComponent,
     LoginComponent,
     StartScreenComponent,
-    PageListComponent,ProfileComponent, DialogEditMessagesComponent
+    PageListComponent,ProfileComponent, DialogEditMessagesComponent, DialogAddDmComponent
    
   ],
   imports: [
+    MatTreeModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -80,7 +82,12 @@ import { provideStorage , getStorage } from '@angular/fire/storage';
     provideStorage(() => getStorage()),
     HotToastModule.forRoot(),
     MatMenuModule,
+<<<<<<< HEAD
     MatFormFieldModule,
+=======
+    MatSnackBarModule
+
+>>>>>>> 905c54c3632db18331a62ed17dc1ef79cc9a0838
 
   ],
   providers: [],

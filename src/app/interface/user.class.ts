@@ -1,7 +1,7 @@
 export interface User {
     name: string;
-    key: string;
-    photoUrl: string;
+    UID: string;
+    email: string;
   }
   
   export class User {

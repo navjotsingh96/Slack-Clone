@@ -1,12 +1,18 @@
 <div class="block" *ngIf="user$ |async as user">
 
 
-    <div class="form-container mat-elevation-z5 text-center" >
+    <div class="form-container mat-elevation-z5 text-center">
         <h1> {{user.displayName}}</h1>
         <img [src]="user.photoURL ?? 'assets/profile-img/profile-1.png'">
+<<<<<<< HEAD
         <!-- <button mat-mini-fab (click)="inputField.click()"> -->
             <mat-icon>edit</mat-icon>
         <!-- </button>     -->
+=======
+        <!--  <button mat-mini-fab (click)="inputField.click()">
+            <mat-icon>edit</mat-icon>
+        </button> -->
+>>>>>>> 905c54c3632db18331a62ed17dc1ef79cc9a0838
     </div>
     <!-- <input type="file" hidden #inputField (change)="uploadImage($event, user)"> -->
 </div>

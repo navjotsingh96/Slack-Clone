@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth, authState } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, UserProfile } from 'firebase/auth';
 import { concatMap, from, of, switchMap ,Observable} from 'rxjs';
 
@@ -10,11 +12,16 @@ import { concatMap, from, of, switchMap ,Observable} from 'rxjs';
 export class AuthenticationService {
 
 
-  // loggedIn: boolean = false
+  loggedIn: boolean = false
+
+  
 
   currentUser$ = authState(this.auth)            // Here we get the current user
 
-  constructor(public auth: Auth) { }
+  constructor(public auth: Auth, private firestore: AngularFirestore,) {
+    
+    
+   }
 
   login(username : string, password : string){              // Here we login a user
   return from(signInWithEmailAndPassword(this.auth, username, password))

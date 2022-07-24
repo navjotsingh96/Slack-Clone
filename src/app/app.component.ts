@@ -40,6 +40,6 @@ export class AppComponent {
     public authService: AuthenticationService,
     public auth: Auth,
     private route: Router,
-  ){}
+  ) {}
   
 }
