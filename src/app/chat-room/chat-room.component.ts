@@ -3,10 +3,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../services/chat.service';
 import { Chat } from '../interface/chat';
-import { Auth, idToken } from '@angular/fire/auth';
 import { AuthenticationService } from '../services/authentication.service';
 import { User } from '../interface/user.class';
-import { map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditMessagesComponent } from '../dialog-edit-messages/dialog-edit-messages.component';
@@ -83,7 +81,7 @@ export class ChatRoomComponent implements OnInit {
   }
   getId() {
     this.chat$.user = (<HTMLInputElement>document.getElementById("user-name")).value
-    console.log(this.chat$.user);
+
   }
   getUserWithId() {
     this.allMessages.find((email => {
@@ -100,7 +98,6 @@ export class ChatRoomComponent implements OnInit {
       .subscribe((message: any) => {
         for (let i = 0; i < message.length; i++) {
           const msg = message[i];
-          /*    console.log(message.length); */
           if (message.length === 0) {
             this.zeroMsg = true
           }
@@ -108,7 +105,6 @@ export class ChatRoomComponent implements OnInit {
           if (!msg.channelID === this.channelID) {
             console.log('id from ', msg.channelID);
             this.allMessages = [];
-
           } else
             this.allMessages = message.sort((mess1: any, mess2: any) => { // neu nachrichen werden am Ende gezeigt
               return mess1.time - mess2.time;
@@ -118,19 +114,6 @@ export class ChatRoomComponent implements OnInit {
         }
       })
   }
-
-  // this function check if the channel id and chat id same is then chat will be pushed in Array
-  // showChannelMessages(message) {
-  //   for (let i = 0; i < message.length; i++) {
-  //     const msg = message[i];
-  //     if (!msg.channelID === this.channelID) {
-  //       console.log('true');
-  //       this.allMessages = []
-  //     } else
-  //       this.allMessages = (message);
-  //   }
-  // }
-
 
   getAllUserFfromirebase() {
     this.firestore
@@ -143,26 +126,23 @@ export class ChatRoomComponent implements OnInit {
   }
   // to send message to firestroe
   submit() {
+    if (!this.chat$.message) {
+      this.enterMessageSnackBar()
+    }
     if (this.chat$.message) {
       this.getId();
       this.firestore
         .collection(this.channelID)
         .add(this.chat$.toJSON())
         .then((message: any) => {
-          console.log('Suceesful', message);
-          // console.log('message', message.id)
           this.messageID = message.id
         }).catch((err) => {
           console.log('Error', err);
         })
-      this.chat$.message = '';
 
     } if (!this.chat$.message) {
       this.enterMessageSnackBar()
-      console.log('Please enter message');
-
     }
-
   }
   deleteMesage(message) {
     console.log('MsgId', message);
@@ -174,7 +154,7 @@ export class ChatRoomComponent implements OnInit {
         console.log('Somthing went wrong', error);
       }))
       .then((done => {
-        console.log('Message sucessfully deleted', done);
+
         this.openSnackBar();
       }))
   }
@@ -183,24 +163,20 @@ export class ChatRoomComponent implements OnInit {
       .collection(this.channelID)
       .doc(message)
       .update(this.chat$.toJSON())
-      .then((done => {
-        console.log('Added', done);
-
-      }))
-
   }
+
   openDialog(messageID) {
     const dialogRef = this.dialog.open(DialogEditMessagesComponent)
     dialogRef.componentInstance.messageID = messageID;
     dialogRef.componentInstance.channelID = this.channelID;
-    console.log(messageID);
+
   }
   openSnackBar() {
     this._snackBar.open('Message deleted', '', {
       duration: 3000
     });
   }
-  enterMessageSnackBar(){
+  enterMessageSnackBar() {
     this._snackBar.open('Please write something', '', {
       duration: 3000
     });
