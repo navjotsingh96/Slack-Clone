@@ -98,7 +98,6 @@ export class ThreadComponent implements OnInit {
         console.log(error);
       }))
       .then((done => {
-        console.log('Done', done);
         this.openSnackBar()
       }))
 
