@@ -5,6 +5,8 @@ import { ChatRoomComponent } from '../chat-room/chat-room.component';
 import { Chat } from '../interface/chat';
 import { AuthenticationService } from '../services/authentication.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogEditMessagesComponent } from '../dialog-edit-messages/dialog-edit-messages.component';
 
 @Component({
   selector: 'app-thread',
@@ -24,7 +26,8 @@ export class ThreadComponent implements OnInit {
     private route: ActivatedRoute,
     public authService: AuthenticationService,
     public chat: ChatRoomComponent,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((parmsMap => {
@@ -35,6 +38,8 @@ export class ThreadComponent implements OnInit {
     console.log('I got ID of Message', this.channelID)
     this.getThreadMsg();
     this.getmsg()
+    console.log('THread messag id', this.messageID);
+    
   }
 
   getmsg() {
@@ -102,5 +107,11 @@ export class ThreadComponent implements OnInit {
    this._snackBar.open('Message deleted','', {
     duration: 3000
   });
+  }
+  openDialog(messageID) {
+    const dialogRef = this.dialog.open(DialogEditMessagesComponent)
+    dialogRef.componentInstance.threadMessageID = messageID;
+    dialogRef.componentInstance.messageID = this.messageID;
+    console.log('from thrread',messageID);
   }
 }

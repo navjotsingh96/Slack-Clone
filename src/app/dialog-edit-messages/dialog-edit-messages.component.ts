@@ -1,6 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ThreadComponent } from '../thread/thread.component';
 
 
 
@@ -16,18 +17,19 @@ export class DialogEditMessagesComponent implements OnInit {
   messageID: any;
   channelID: any;
   time:any;
+  threadMessageID:any;
   constructor(private firestore: AngularFirestore,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private threds : ThreadComponent
   ) { }
 
   ngOnInit(): void {
-    console.log('ID from', this.messageID);
-    console.log('ID from', this.channelID);
     this.getMsg();
 
   }
   // get Messages from Channel and value
   getMsg(){
+    if(this.channelID){
     this.firestore
       .collection(this.channelID)
       .doc(this.messageID)
@@ -36,7 +38,29 @@ export class DialogEditMessagesComponent implements OnInit {
         this.value = message['message'];
       }));
   }
+  if(!this.channelID){
+      this.firestore
+        .collection('threads')
+        .doc(this.messageID)
+        .collection(this.messageID)
+        .doc(this.threadMessageID)
+        .valueChanges({ idField: 'customIdName' })
+        .subscribe((thread => {
+          console.log('Threads', thread['message']);
+          this.value = thread['message']
+        
+          }));
+        }
+  }
 
+update(){
+  if(this.channelID){
+    this.updateMessage();
+  }
+  if(!this.channelID){
+    this.updateThread();
+  }
+}
   //update changes
   updateMessage() {
     this.firestore
@@ -47,6 +71,24 @@ export class DialogEditMessagesComponent implements OnInit {
        this.openSnackBar();
       }))
   }
+  //update changes of threads
+
+  updateThread() {
+    this.firestore
+    .collection('threads')
+    .doc(this.messageID)
+    .collection(this.messageID)
+    .doc(this.threadMessageID)
+    .update({message: this.value})
+    .catch((error => {
+      console.log(error);
+    }))
+    .then((done => {
+      console.log('Done', done);
+      this.openSnackBar()
+    }))
+    }
+
   openSnackBar() {
     this._snackBar.open('Message edit Sucessfully', '', {
       duration: 3000

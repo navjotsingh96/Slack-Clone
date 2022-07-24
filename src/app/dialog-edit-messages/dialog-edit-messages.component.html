@@ -16,26 +16,8 @@
             </editor>
         </div>
         <div mat-dialog-actions>
-            <button mat-button>No Thanks</button>
-            <button mat-button [mat-dialog-close]="" (click)="updateMessage()" cdkFocusInitial>Ok</button>
+            <button mat-button [mat-dialog-close]="true">Cancel</button>
+            <button mat-button [mat-dialog-close]="" (click)="update()" cdkFocusInitial>Send</button>
         </div>
     </div>
 </div>
-<!-- <div class="bottom p-absolute">
-    <div class="editor-container">
-        <editor apiKey="bgeto93fjxds10methgpkyy8y7cqfcbgltl91ww9tnc7h3yt" [init]="
-    { toolbar: 'undo redo | styles pre | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
-    height: 150,
-    branding: false,
-    menubar: false,
-    statusbar: true,
-    elementpath: false,
-    browser_spellcheck: true
-   }" [(ngModel)]="messageInput">
-        </editor>
-    </div>
-    <div class="msg-btn">
-        <button class="send-btn" mat-fab color="primary" (click)="msgValue(); messageInput='';">
-        <mat-icon>send</mat-icon>
-    </button>
-    </div> -->
