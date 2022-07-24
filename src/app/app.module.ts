@@ -25,8 +25,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatFormField } from '@angular/material/form-field';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { provideAuth, getAuth , } from '@angular/fire/auth';
 import { provideFirestore, getFirestore} from '@angular/fire/firestore';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { EditorModule } from '@tinymce/tinymce-angular';
@@ -36,10 +35,9 @@ import { LoginComponent } from './log-in/log-in.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
 import { PageListComponent } from './page-list/page-list.component';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatSelectModule} from '@angular/material/select';
-
 import { ProfileComponent } from './profile/profile.component';
 import { DialogEditMessagesComponent } from './dialog-edit-messages/dialog-edit-messages.component';
+import { provideStorage , getStorage } from '@angular/fire/storage';
 import { DialogAddDmComponent } from './dialog-add-dm/dialog-add-dm.component';
 @NgModule({
   declarations: [
@@ -59,7 +57,7 @@ import { DialogAddDmComponent } from './dialog-add-dm/dialog-add-dm.component';
    
   ],
   imports: [
-    MatSelectModule,
+    MatTreeModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -81,9 +79,9 @@ import { DialogAddDmComponent } from './dialog-add-dm/dialog-add-dm.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
     HotToastModule.forRoot(),
-    MatMenuModule,
-    MatSnackBarModule
+
 
   ],
   providers: [],
