@@ -38,6 +38,7 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { ProfileComponent } from './profile/profile.component';
 import { DialogEditMessagesComponent } from './dialog-edit-messages/dialog-edit-messages.component';
 import { provideStorage , getStorage } from '@angular/fire/storage';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,6 +80,8 @@ import { provideStorage , getStorage } from '@angular/fire/storage';
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     HotToastModule.forRoot(),
+    MatMenuModule,
+    MatSnackBarModule
 
 
   ],

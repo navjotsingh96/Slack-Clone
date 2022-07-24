@@ -10,7 +10,7 @@ import { concatMap, from, of, switchMap ,Observable} from 'rxjs';
 export class AuthenticationService {
 
 
-  // loggedIn: boolean = false
+  loggedIn: boolean = false
 
   currentUser$ = authState(this.auth)            // Here we get the current user
 
