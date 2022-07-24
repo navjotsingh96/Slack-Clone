@@ -1,12 +1,7 @@
 export interface User {
     name: string;
-<<<<<<< HEAD
     UID: string;
     email: string;
-=======
-    key: string;
-    photoUrl: string;
->>>>>>> 5eb13e6ef28722b98f9b1e7d68c9ff2fed5feddf
   }
   
   export class User {

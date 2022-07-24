@@ -4,6 +4,11 @@
 
 .chat-container {
     background-color: #d4d8f0;
+    // position: absolute;
+    // right: 0;
+    // top: 70px;
+    // z-index: 5;
+    // left: 300px;
 }
 
 
@@ -164,7 +169,6 @@ mat-icon {
 .message-container {
     margin: 16px;
     height: 100px;
-
     mat-form-field {
         width: 100%;
         bottom: 10px;

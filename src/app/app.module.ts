@@ -81,6 +81,8 @@ import { DialogAddDmComponent } from './dialog-add-dm/dialog-add-dm.component';
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     HotToastModule.forRoot(),
+    MatMenuModule,
+    MatSnackBarModule
 
 
   ],
