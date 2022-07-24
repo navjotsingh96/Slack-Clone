@@ -10,6 +10,11 @@ import { map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditMessagesComponent } from '../dialog-edit-messages/dialog-edit-messages.component';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { ThisReceiver } from '@angular/compiler';
 
 
 @Component({
@@ -20,6 +25,8 @@ import { DialogEditMessagesComponent } from '../dialog-edit-messages/dialog-edit
 @Injectable({ providedIn: 'root' })
 
 export class ChatRoomComponent implements OnInit {
+  uploadPercent: Observable<number>;
+  downloadURL: Observable<string>;
   zeroMsg = true;
   allMessages = [];
   activeChannel;
@@ -31,12 +38,17 @@ export class ChatRoomComponent implements OnInit {
   userIdtry;
   users;
   userID;
+
+
+
   constructor(private route: ActivatedRoute,
     public chatService: ChatService,
     private firestore: AngularFirestore,
     public authService: AuthenticationService,
     private _snackBar: MatSnackBar,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private storage: AngularFireStorage
+    ) {
 
   }
 
@@ -193,6 +205,10 @@ export class ChatRoomComponent implements OnInit {
       duration: 3000
     });
   }
-
+  uploadFile(event) {
+    const file = event.target.files[0];
+    const filePath = 'img/' + file.name;
+    const task = this.storage.upload(filePath, file);
 }
 
+}

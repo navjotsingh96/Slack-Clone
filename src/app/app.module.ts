@@ -39,6 +39,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { DialogEditMessagesComponent } from './dialog-edit-messages/dialog-edit-messages.component';
 import { provideStorage , getStorage } from '@angular/fire/storage';
 import { DialogAddDmComponent } from './dialog-add-dm/dialog-add-dm.component';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,10 +81,13 @@ import { DialogAddDmComponent } from './dialog-add-dm/dialog-add-dm.component';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
     HotToastModule.forRoot(),
     MatMenuModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    AngularFireStorageModule
 
 
   ],

@@ -32,6 +32,7 @@
 </div>
 
 <div class="bottom p-absolute">
+   
     <div class="editor-container">
         <editor apiKey="bgeto93fjxds10methgpkyy8y7cqfcbgltl91ww9tnc7h3yt" [init]="
     { toolbar: 'undo redo | styles pre | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
@@ -48,10 +49,15 @@
         <button class="send-btn" mat-fab color="primary" (click)="submit(); chat$.message='';">
         <mat-icon>send</mat-icon>
     </button>
-    </div>
+    </div>^
+    <!-- <div class="upload-img">
+        <input type="file" (change)="uploadFile($event)" />
+    <div>{{ uploadPercent | async }}</div>
+    <a [href]="downloadURL | async">{{ downloadURL | async }}</a>
+    </div> -->
     <div style="display: none;" class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
         <input id="uid" type="text" value="{{user.email}}">
         <input id="user-name" type="text" value="{{user.displayName}}">
-
     </div>
 </div>
+

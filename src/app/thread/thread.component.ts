@@ -7,7 +7,9 @@ import { AuthenticationService } from '../services/authentication.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditMessagesComponent } from '../dialog-edit-messages/dialog-edit-messages.component';
-
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-thread',
   templateUrl: './thread.component.html',
@@ -16,6 +18,8 @@ import { DialogEditMessagesComponent } from '../dialog-edit-messages/dialog-edit
 @Injectable({ providedIn: 'root' })
 
 export class ThreadComponent implements OnInit {
+  uploadPercent: Observable<number>;
+  downloadURL: Observable<string>;
   messageID;
   threadmsg;
   chat$: Chat = new Chat;
@@ -27,7 +31,9 @@ export class ThreadComponent implements OnInit {
     public authService: AuthenticationService,
     public chat: ChatRoomComponent,
     private _snackBar: MatSnackBar,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private storage: AngularFireStorage  )
+    { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((parmsMap => {
@@ -41,6 +47,14 @@ export class ThreadComponent implements OnInit {
     console.log('THread messag id', this.messageID);
     
   }
+
+
+
+
+
+
+
+
 
   getmsg() {
     this.firestore
@@ -114,4 +128,22 @@ export class ThreadComponent implements OnInit {
     dialogRef.componentInstance.messageID = this.messageID;
     console.log('from thrread',messageID);
   }
+
+
+
+  uploadFile(event) {
+    const file = event.target.files[0];
+    const filePath = 'name-your-file-path-here';
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    
+    task.snapshotChanges().pipe(
+      finalize(() => this.downloadURL = fileRef.getDownloadURL() )
+   )
+  .subscribe()
+
+
+    }
+
 }
+
