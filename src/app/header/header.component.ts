@@ -15,6 +15,8 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
+    console.log();
+    
   }
   logout(){
     this.authService.logout().subscribe(() => {
@@ -23,9 +25,9 @@ export class HeaderComponent implements OnInit {
       this.authService.loggedIn = false;
     });
   }
-
+  
   changeProfileImg(){
-
+    
     console.log('change profile img');
   }
 }
