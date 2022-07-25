@@ -23,8 +23,8 @@ import { ThisReceiver } from '@angular/compiler';
 @Injectable({ providedIn: 'root' })
 
 export class ChatRoomComponent implements OnInit {
-  uploadPercent: Observable<number>;
-  downloadURL: Observable<string>;
+  // uploadPercent: Observable<number>;
+  // downloadURL: Observable<string>;
   zeroMsg = true;
   allMessages = [];
   activeChannel;
@@ -45,7 +45,6 @@ export class ChatRoomComponent implements OnInit {
     public authService: AuthenticationService,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private storage: AngularFireStorage
     ) {
 
   }
@@ -181,10 +180,10 @@ export class ChatRoomComponent implements OnInit {
       duration: 3000
     });
   }
-  uploadFile(event) {
-    const file = event.target.files[0];
-    const filePath = 'img/' + file.name;
-    const task = this.storage.upload(filePath, file);
-}
+//   uploadFile(event) {
+//     const file = event.target.files[0];
+//     const filePath = 'img/' + file.name;
+//     const task = this.storage.upload(filePath, file);
+// }
 
 }
