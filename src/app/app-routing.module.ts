@@ -55,7 +55,7 @@ const routes: Routes = [
   {
     path: 'sign-up',
     component: SignUpComponent,
-    ...canActivate(redirectToLogin)   // redirectToLogin if 
+    // ...canActivate(redirectToLogin)   // redirectToLogin if 
   },
 
   {
