@@ -7,18 +7,17 @@ export interface UserInterface {
   }
   
   export class User {
-    updateProfileData(arg0: { photoUrl: string; }): any {
-      throw new Error('Method not implemented.');
-    }
+    [x: string]: any;
+
     displayName!: string;
     key!: string; // User UID from Firebase Auth
-    photoUrl: string;
+    photoUrl!: string;
     email!: string;
     uid: string;
   
     constructor(userJSON?: any) {
-      this.displayName = userJSON ? userJSON.name : '';
-      this.key = userJSON ? userJSON.key : '';
+      this.displayName = userJSON ? userJSON.displayName : '';
+      // this.key = userJSON ? userJSON.key : '';
       this.photoUrl = userJSON ? userJSON.photoUrl : '';
       this.email = userJSON ? userJSON.email : '';
       this.uid = userJSON ? userJSON.uid : '';
