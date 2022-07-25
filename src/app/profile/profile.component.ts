@@ -13,21 +13,27 @@ import { HotToastService } from '@ngneat/hot-toast';
 })
 export class ProfileComponent implements OnInit {
   
-  user$ = this.authService.currentUser$;
+  user: User | undefined;
   constructor(
     private authService: AuthenticationService,
     public storage: AngularFireStorage,
     private imageUploadService: ImageUploadService,
     private toast: HotToastService,
-    // public login : LoginComponent,
-  ) { }
+  ) { 
 
-
+    this.authService.currentUser$.subscribe(user =>{
+      if(user){
+        this.user = new User(user);
+        console.log(this.user);
+      }
+    });
+  }
+  
   ngOnInit(): void {
   }
 
-  uploadImage(event: any, user: User) {
-    this.imageUploadService.uploadImage(event.target.files[0], `img/${user.key}`).pipe(   
+  uploadImage(event: any) {
+    this.imageUploadService.uploadImage(event.target.files[0], `img/${Math.random()}`).pipe(   
         this.toast.observe({  
           loading: 'Uploading...',
           success: 'Upload Successfully',
