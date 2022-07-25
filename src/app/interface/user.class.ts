@@ -1,26 +1,35 @@
-export interface User {
+export interface UserInterface {
     name: string;
     UID: string;
     email: string;
     photoUrl: string;
+    key?: string;
   }
   
   export class User {
-    name!: string;
+    updateProfileData(arg0: { photoUrl: string; }): any {
+      throw new Error('Method not implemented.');
+    }
+    displayName!: string;
     key!: string; // User UID from Firebase Auth
     photoUrl: string;
+    email!: string;
+    uid: string;
   
-    constructor(userJSON?: User) {
-      this.name = userJSON ? userJSON.name : '';
+    constructor(userJSON?: any) {
+      this.displayName = userJSON ? userJSON.name : '';
       this.key = userJSON ? userJSON.key : '';
       this.photoUrl = userJSON ? userJSON.photoUrl : '';
+      this.email = userJSON ? userJSON.email : '';
+      this.uid = userJSON ? userJSON.uid : '';
     }
   
     toJSON() {
       return {
-        name: this.name,
+        name: this.displayName,
         key: this.key,
         photoUrl: this.photoUrl,
+        eamil: this.email,
       };
     }
   }
