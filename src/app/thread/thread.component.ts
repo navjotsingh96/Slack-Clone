@@ -130,19 +130,19 @@ export class ThreadComponent implements OnInit {
 
 
 
-  uploadFile(event) {
-    const file = event.target.files[0];
-    const filePath = 'name-your-file-path-here';
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, file);
+  // uploadFile(event) {
+  //   const file = event.target.files[0];
+  //   const filePath = 'name-your-file-path-here';
+  //   const fileRef = this.storage.ref(filePath);
+  //   const task = this.storage.upload(filePath, file);
     
-    task.snapshotChanges().pipe(
-      finalize(() => this.downloadURL = fileRef.getDownloadURL() )
-   )
-  .subscribe()
+  //   task.snapshotChanges().pipe(
+  //     finalize(() => this.downloadURL = fileRef.getDownloadURL() )
+  //  )
+  // .subscribe()
 
 
-    }
+  //   }
 
 }
 
