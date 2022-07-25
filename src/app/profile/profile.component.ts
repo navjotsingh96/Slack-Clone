@@ -12,7 +12,6 @@ import { HotToastService } from '@ngneat/hot-toast';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  
   user: User | undefined;
   constructor(
     private authService: AuthenticationService,
@@ -33,16 +32,16 @@ export class ProfileComponent implements OnInit {
   }
 
   uploadImage(event: any) {
-    this.imageUploadService.uploadImage(event.target.files[0], `img/${Math.random()}`).pipe(   
-        this.toast.observe({  
-          loading: 'Uploading...',
-          success: 'Upload Successfully',
-          error: 'Upload Failed'
-        }
-        ), 
-        concatMap((photoUrl)=> this.authService.updateProfileData({photoUrl}) )   
-        ).subscribe();
-
+    this.imageUploadService.uploadImage(event.target.files[0], `img/${this.user.uid}`).pipe(   
+      this.toast.observe({  
+        loading: 'Uploading...',
+        success: 'Upload Successfully',
+        error: 'Upload Failed'
+      }
+      ), 
+      concatMap((photoUrl)=> this.authService.updateProfileData({photoUrl}) )   
+      ).subscribe();
+      
   }
 }
 
