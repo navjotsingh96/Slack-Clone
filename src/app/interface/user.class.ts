@@ -11,14 +11,14 @@ export interface UserInterface {
 
     displayName!: string;
     key!: string; // User UID from Firebase Auth
-    photoUrl!: string;
+    photoURL!: string;
     email!: string;
     uid: string;
   
     constructor(userJSON?: any) {
       this.displayName = userJSON ? userJSON.displayName : '';
       // this.key = userJSON ? userJSON.key : '';
-      this.photoUrl = userJSON ? userJSON.photoUrl : '';
+      this.photoURL = userJSON ? userJSON.photoURL : '';
       this.email = userJSON ? userJSON.email : '';
       this.uid = userJSON ? userJSON.uid : '';
     }
@@ -27,7 +27,7 @@ export interface UserInterface {
       return {
         name: this.displayName,
         key: this.key,
-        photoUrl: this.photoUrl,
+        photoUrl: this.photoURL,
         eamil: this.email,
       };
     }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { concatMap , Observable} from 'rxjs';
+import { concatMap , map, Observable} from 'rxjs';
 import { User } from '../interface/user.class';
 import { AuthenticationService } from '../services/authentication.service';
 import { ImageUploadService } from '../services/image-upload.service';
@@ -33,15 +33,17 @@ export class ProfileComponent implements OnInit {
 
   uploadImage(event: any) {
     this.imageUploadService.uploadImage(event.target.files[0], `img/${this.user.uid}`).pipe(   
+  
       this.toast.observe({  
         loading: 'Uploading...',
         success: 'Upload Successfully',
         error: 'Upload Failed'
       }
       ), 
-      concatMap((photoUrl)=> this.authService.updateProfileData({photoUrl}) )   
+      map((photoURL)=> this.authService.updateProfileData({photoURL}) )   
       ).subscribe();
-      
+      console.log()
   }
+
 }
 
