@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { concatMap, map, Observable } from 'rxjs';
+import { map,  } from 'rxjs'
 import { User } from '../interface/user.class';
 import { AuthenticationService } from '../services/authentication.service';
 import { ImageUploadService } from '../services/image-upload.service';
@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
         console.log(photoUrl);
         this.authService.updateProfileData({photoUrl});
       })
-    ).subscribe();
+      ).subscribe();
   }
 
 }

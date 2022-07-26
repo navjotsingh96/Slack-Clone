@@ -38,18 +38,8 @@ export class AuthenticationService {
   }
 
   updateProfileData(profileData: Partial<User>): Observable<any> {
-    const user = this.auth.currentUser
-    return from(updateProfile(user, profileData))
-    
-      // concatMap(user => {
-    //     if (!user) throw new Error('not found');
-    //     console.log('Update Profile', profileData);
-    //     console.log('Update User', user);
-        // return updateProfile(user, profileData);
-
-    //   })
-    // )
-
+    const user = this.auth.currentUser;
+    return from(updateProfile(user, profileData));
   }
 
   logout() {                                           // Here we logout a user

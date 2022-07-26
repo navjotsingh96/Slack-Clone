@@ -17,7 +17,7 @@ export interface UserInterface {
     constructor(userJSON?: any) {
       this.displayName = userJSON ? userJSON.displayName : '';
       // this.key = userJSON ? userJSON.key : '';
-      this.photoUrl = userJSON ? userJSON.photoUrl : '';
+      this.photoUrl = userJSON ? userJSON.photoURL : '';
       this.email = userJSON ? userJSON.email : '';
       this.uid = userJSON ? userJSON.uid : '';
     }
