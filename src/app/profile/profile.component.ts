@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit {
       }),
       map((photoUrl) => {
         console.log(photoUrl);
-        this.authService.updateProfileData({ photoURL: photoUrl });
+        this.authService.updateProfileData({photoUrl});
       })
     ).subscribe();
   }
