@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit {
   }
 
   uploadImage(event: any) {
+    debugger;
     this.imageUploadService.uploadImage(event.target.files[0], `img/${this.user.uid}`).pipe(
       this.toast.observe({
         loading: 'Uploading...',
