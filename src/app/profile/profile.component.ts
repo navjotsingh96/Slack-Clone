@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { concatMap , map, Observable} from 'rxjs';
+import { concatMap, map, Observable } from 'rxjs';
 import { User } from '../interface/user.class';
 import { AuthenticationService } from '../services/authentication.service';
 import { ImageUploadService } from '../services/image-upload.service';
@@ -18,31 +18,31 @@ export class ProfileComponent implements OnInit {
     public storage: AngularFireStorage,
     private imageUploadService: ImageUploadService,
     private toast: HotToastService,
-  ) { 
+  ) {
 
-    this.authService.currentUser$.subscribe(user =>{
-      if(user){
+    this.authService.currentUser$.subscribe(user => {
+      if (user) {
         this.user = new User(user);
         console.log(this.user);
       }
     });
   }
-  
+
   ngOnInit(): void {
   }
 
   uploadImage(event: any) {
-    this.imageUploadService.uploadImage(event.target.files[0], `img/${this.user.uid}`).pipe(   
-  
-      this.toast.observe({  
+    this.imageUploadService.uploadImage(event.target.files[0], `img/${this.user.uid}`).pipe(
+      this.toast.observe({
         loading: 'Uploading...',
         success: 'Upload Successfully',
         error: 'Upload Failed'
-      }
-      ), 
-      map((photoURL)=> this.authService.updateProfileData({photoURL}) )   
-      ).subscribe();
-      console.log()
+      }),
+      map((photoUrl) => {
+        console.log(photoUrl);
+        this.authService.updateProfileData({ photoURL: photoUrl });
+      })
+    ).subscribe();
   }
 
 }

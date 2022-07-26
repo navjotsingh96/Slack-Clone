@@ -15,7 +15,7 @@ export class ImageUploadService {
     const storageRef = ref(this.storage, path);
     const uploadTask = from(uploadBytes(storageRef, image));
     return uploadTask.pipe(
-      switchMap((result) => getDownloadURL(result.ref))
+      switchMap((result) => from(getDownloadURL(result.ref)))
       );
     } 
 }

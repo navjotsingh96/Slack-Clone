@@ -39,15 +39,16 @@ export class AuthenticationService {
 
   updateProfileData(profileData: Partial<User>): Observable<any> {
     const user = this.auth.currentUser
-    return of(user).pipe(
-      concatMap(user => {
-        if (!user) throw new Error('not found');
-        console.log('Update User', user);
-        console.log('Update Profile', profileData);
-        return updateProfile(user, profileData);
+    return from(updateProfile(user, profileData))
+    
+      // concatMap(user => {
+    //     if (!user) throw new Error('not found');
+    //     console.log('Update Profile', profileData);
+    //     console.log('Update User', user);
+        // return updateProfile(user, profileData);
 
-      })
-    )
+    //   })
+    // )
 
   }
 
