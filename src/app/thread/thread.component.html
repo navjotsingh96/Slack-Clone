@@ -8,9 +8,9 @@
         <span [innerHTML]="threadHeading?.message"></span>
     </div>
 </div>
-<div class="msg-box m-left-20 m-right-20">
+<div class="msg-box m-left-20 m-right-20 thread-container" #ThreadContainer>
 
-    <div class="msg-box m-left-20" *ngFor="let thread of threadmsg">
+    <div class="msg-box m-left-20 border-bottom" *ngFor="let thread of threadmsg">
         <div class="user-img">
             <img src="assets/profile-img/profile-1.png" alt="">
             <div class="user-name">{{thread?.user}} <span class="message-time">{{thread.time | date :"short" }}</span>
@@ -32,7 +32,7 @@
 </div>
 
 <div class="bottom p-absolute">
-   
+
     <div class="editor-container">
         <editor apiKey="bgeto93fjxds10methgpkyy8y7cqfcbgltl91ww9tnc7h3yt" [init]="
     { toolbar: 'undo redo | styles pre | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
@@ -60,4 +60,3 @@
         <input id="user-name" type="text" value="{{user.displayName}}">
     </div>
 </div>
-

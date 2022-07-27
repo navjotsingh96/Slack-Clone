@@ -1,13 +1,19 @@
-.img-upload{
+.img-upload {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
+.thread-container {
+    height: 60vh;
+    overflow: scroll;
+}
 
-.upload-img{
+.upload-img {
+    position: absolute;
+    top: 0;
+}
 
-position: absolute;
-top: 0;
-
+.border-bottom {
+    border-bottom: 2px solid;
 }
