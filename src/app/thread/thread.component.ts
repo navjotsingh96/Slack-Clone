@@ -1,4 +1,4 @@
-import { Component, Injectable, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Injectable, Input, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChatRoomComponent } from '../chat-room/chat-room.component';
@@ -26,6 +26,10 @@ export class ThreadComponent implements OnInit {
   userID;
   channelID;
   threadHeading;
+  @ViewChild('ThreadContainer') threadContainer : ElementRef
+
+
+
   constructor(private firestore: AngularFirestore, private router: Router,
     private route: ActivatedRoute,
     public authService: AuthenticationService,
@@ -98,6 +102,7 @@ export class ThreadComponent implements OnInit {
       .add(this.chat$.toJSON())
       .then((added => {
         console.log('Added', added);
+        this.scrollObjectDown(this.threadContainer)
       }))
   }
   deleteThreadMsg(idofThread: any) {
@@ -128,6 +133,9 @@ export class ThreadComponent implements OnInit {
     console.log('from thrread',messageID);
   }
 
+scrollObjectDown(object: ElementRef) {
+    object.nativeElement.scrollTop = object.nativeElement.scrollHeight;
+  }
 
 
   // uploadFile(event) {

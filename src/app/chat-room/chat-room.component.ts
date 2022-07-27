@@ -1,4 +1,4 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, ElementRef, Injectable, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../services/chat.service';
@@ -38,6 +38,8 @@ export class ChatRoomComponent implements OnInit {
   userID;
 
 
+  @ViewChild('showChat')messagesChannelDiv!: ElementRef;
+  
 
   constructor(private route: ActivatedRoute,
     public chatService: ChatService,
@@ -61,6 +63,7 @@ export class ChatRoomComponent implements OnInit {
       this.getChannels();
       this.allMessages = []; // when user click on another channel it array will be empty
       this.getAllUserFfromirebase();
+
     });
 
   }
@@ -76,12 +79,12 @@ export class ChatRoomComponent implements OnInit {
         if (!changes.channelName) return
         this.activeChannel = changes;
       })
-
   }
+
   getId() {
     this.chat$.user = (<HTMLInputElement>document.getElementById("user-name")).value
-
   }
+
   getUserWithId() {
     this.allMessages.find((email => {
       this.userID = email.user
@@ -121,7 +124,6 @@ export class ChatRoomComponent implements OnInit {
       .subscribe((changes) => {
         this.users = changes;
       })
-
   }
   // to send message to firestroe
   submit() {
@@ -134,7 +136,8 @@ export class ChatRoomComponent implements OnInit {
         .collection(this.channelID)
         .add(this.chat$.toJSON())
         .then((message: any) => {
-          this.messageID = message.id
+          this.messageID = message.id;
+          this.scrollObjectDown(this.messagesChannelDiv);
         }).catch((err) => {
           console.log('Error', err);
         })
@@ -142,7 +145,9 @@ export class ChatRoomComponent implements OnInit {
     } if (!this.chat$.message) {
       this.enterMessageSnackBar()
     }
+    this.chat$.message='';
   }
+
   deleteMesage(message) {
     console.log('MsgId', message);
     this.firestore
@@ -157,6 +162,7 @@ export class ChatRoomComponent implements OnInit {
         this.openSnackBar();
       }))
   }
+
   saveMessage(message) {
     this.firestore
       .collection(this.channelID)
@@ -170,16 +176,23 @@ export class ChatRoomComponent implements OnInit {
     dialogRef.componentInstance.channelID = this.channelID;
 
   }
+
   openSnackBar() {
     this._snackBar.open('Message deleted', '', {
       duration: 3000
     });
   }
+
   enterMessageSnackBar() {
     this._snackBar.open('Please write something', '', {
       duration: 3000
     });
   }
+
+  scrollObjectDown(object: ElementRef) {
+    object.nativeElement.scrollTop = object.nativeElement.scrollHeight;
+  }
+
 //   uploadFile(event) {
 //     const file = event.target.files[0];
 //     const filePath = 'img/' + file.name;
