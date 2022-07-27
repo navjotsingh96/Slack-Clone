@@ -12,7 +12,6 @@ export class ImageUploadService {
 
 
   uploadImage(image: File, path:string): Observable<string>{
-    debugger;
     const storageRef = ref(this.storage, path);
     const uploadTask = from(uploadBytes(storageRef, image));
     return uploadTask.pipe(

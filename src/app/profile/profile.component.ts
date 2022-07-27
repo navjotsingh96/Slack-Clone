@@ -32,16 +32,15 @@ export class ProfileComponent implements OnInit {
   }
 
   uploadImage(event: any) {
-    debugger;
-    this.imageUploadService.uploadImage(event.target.files[0], `img/${this.user.uid}`).pipe(
+    this.imageUploadService.uploadImage(event.target.files[0], `img/${this.user.photoURL}`).pipe(
       this.toast.observe({
         loading: 'Uploading...',
         success: 'Upload Successfully',
         error: 'Upload Failed'
       }),
-      map((photoUrl) => {
-        console.log(photoUrl);
-        this.authService.updateProfileData({photoUrl});
+      map((photoURL) => {
+        console.log(photoURL);
+        this.authService.updateProfileData({photoURL});
       })
       ).subscribe();
   }

@@ -37,9 +37,10 @@ export class AuthenticationService {
 
   }
 
-  updateProfileData(profileData: Partial<User>): Observable<any> {
-    const user = this.auth.currentUser;
+  updateProfileData(profileData: any): Observable<any> {
+    const user = this.auth.currentUser;           // i think here is the problem with the user
     return from(updateProfile(user, profileData));
+
   }
 
   logout() {                                           // Here we logout a user
