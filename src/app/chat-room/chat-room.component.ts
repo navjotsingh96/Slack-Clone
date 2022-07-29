@@ -36,10 +36,14 @@ export class ChatRoomComponent implements OnInit {
   userIdtry;
   users;
   userID;
+  userTry: User | undefined;
 
 
-  @ViewChild('showChat')messagesChannelDiv!: ElementRef;
-  
+  selectedFile: File = null;
+  fb;
+  downloadURL: Observable<string>;
+  @ViewChild('showChat') messagesChannelDiv!: ElementRef;
+
 
   constructor(private route: ActivatedRoute,
     public chatService: ChatService,
@@ -47,7 +51,8 @@ export class ChatRoomComponent implements OnInit {
     public authService: AuthenticationService,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
-    ) {
+    private storage: AngularFireStorage,
+  ) {
 
   }
 
@@ -63,6 +68,7 @@ export class ChatRoomComponent implements OnInit {
       this.getChannels();
       this.allMessages = []; // when user click on another channel it array will be empty
       this.getAllUserFfromirebase();
+      console.log(this.userTry);
 
     });
 
@@ -130,7 +136,21 @@ export class ChatRoomComponent implements OnInit {
     if (!this.chat$.message) {
       this.enterMessageSnackBar()
     }
-    if (this.chat$.message) {
+    if(this.fb){
+      console.log('true');
+      this.getId()
+      this.chat$.image = this.fb
+      this.firestore
+      .collection(this.channelID)
+      .add(this.chat$.toJSON())
+      .then((message: any) => {
+        this.messageID = message.id;
+        this.scrollObjectDown(this.messagesChannelDiv);
+      }).catch((err) => {
+        console.log('Error', err);
+      })
+    }
+    if (this.chat$.message && !this.fb) {
       this.getId();
       this.firestore
         .collection(this.channelID)
@@ -145,7 +165,7 @@ export class ChatRoomComponent implements OnInit {
     } if (!this.chat$.message) {
       this.enterMessageSnackBar()
     }
-    this.chat$.message='';
+    this.chat$.message = '';
   }
 
   deleteMesage(message) {
@@ -158,7 +178,6 @@ export class ChatRoomComponent implements OnInit {
         console.log('Somthing went wrong', error);
       }))
       .then((done => {
-
         this.openSnackBar();
       }))
   }
@@ -192,11 +211,35 @@ export class ChatRoomComponent implements OnInit {
   scrollObjectDown(object: ElementRef) {
     object.nativeElement.scrollTop = object.nativeElement.scrollHeight;
   }
-
-//   uploadFile(event) {
-//     const file = event.target.files[0];
-//     const filePath = 'img/' + file.name;
-//     const task = this.storage.upload(filePath, file);
-// }
+  onFileSelected(event) {
+    var n = Date.now();
+    const file = event.target.files[0];
+    const filePath = `uploadedImages/${file.name}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fb = url;
+            }
+            console.log(this.fb);
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log(url);
+        }
+      });
+  }
+  uploadFile(event) {
+    const file = event.target.files[0];
+    const filePath = 'img/' + file.name;
+    const task = this.storage.upload(filePath, file);
+  }
 
 }

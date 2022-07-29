@@ -16,6 +16,7 @@
                 </div>
                 <div class="chat-messages">
                     <span [innerHTML]="msg?.message"></span>
+                    <img *ngIf="msg.image" class="msg-image" [src]="msg?.image">
                     <button mat-icon-button class="edit-option" [matMenuTriggerFor]="editMessage">
                         <mat-icon>more_vert</mat-icon>
                       </button>
@@ -54,9 +55,9 @@
    }" [(ngModel)]="chat$.message" (keyup.enter)="submit()" placeholder="Message...">
             </editor>
         </div>
-        <!-- <input type="file" (change)="uploadFile($event)" />
-        <div>{{ uploadPercent | async }}</div>
-        <a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->
+        <div class="form-group col-12">
+            <input type="file" id="file" #userPhoto (change)="onFileSelected($event)" name="image" autocomplete="off" />
+        </div>
         <div class="msg-btn">
             <button (click)="submit()" class="send-btn" mat-fab color="primary">
         <mat-icon>send</mat-icon>
@@ -64,8 +65,8 @@
         </div>
     </div>
     <div>
-        <!-- <div>
-        <input type="file" (change)="uploadFile($event)">
+        <!--  <div>
+            <input type="file" (change)="uploadFile($event)">
         </div> -->
     </div>
     <div style="display: none;" class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
