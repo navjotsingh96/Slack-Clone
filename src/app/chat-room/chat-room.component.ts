@@ -13,6 +13,8 @@ import { finalize } from 'rxjs/operators';
 
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ThisReceiver } from '@angular/compiler';
+import { ProfileComponent } from '../profile/profile.component';
+import { user } from '@angular/fire/auth';
 
 
 @Component({
@@ -23,8 +25,6 @@ import { ThisReceiver } from '@angular/compiler';
 @Injectable({ providedIn: 'root' })
 
 export class ChatRoomComponent implements OnInit {
-  // uploadPercent: Observable<number>;
-  // downloadURL: Observable<string>;
   zeroMsg = true;
   allMessages = [];
   activeChannel;
@@ -32,11 +32,9 @@ export class ChatRoomComponent implements OnInit {
   messageID: any;
   message;
   chat$: Chat = new Chat;
-  user: User = new User()
-  userIdtry;
   users;
   userID;
-  userTry: User | undefined;
+  userTry: []
 
 
   selectedFile: File = null;
@@ -52,6 +50,7 @@ export class ChatRoomComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
     private storage: AngularFireStorage,
+
   ) {
 
   }
@@ -69,7 +68,13 @@ export class ChatRoomComponent implements OnInit {
       this.allMessages = []; // when user click on another channel it array will be empty
       this.getAllUserFfromirebase();
       console.log(this.userTry);
+      this.getUSerID;
     });
+
+  }
+  getUSerID(user) {
+    console.log(user);
+    console.log(this.userTry);
 
   }
 
@@ -141,7 +146,7 @@ export class ChatRoomComponent implements OnInit {
     if (!this.fb) {
       this.submitMessage();
     }
-    if(this.chat$.message && this.fb){
+    if (this.chat$.message && this.fb) {
       this.sumbitImageWithMessage()
     }
     this.chat$.message = '';
