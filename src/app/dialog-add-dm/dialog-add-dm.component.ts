@@ -82,8 +82,10 @@ export class DialogAddDmComponent implements OnInit {
     .add(this.directMessage)
     .then( (DM: any) => {
       console.log(DM)
+      // window.location.reload();
       this.dialogRef.close();
-      this.router.navigateByUrl('/chat/' + DM.id)
+      this.router.navigateByUrl('/chat/' + DM.id);
+     
     });
   }
   

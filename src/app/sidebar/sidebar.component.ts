@@ -52,12 +52,12 @@ export class SidebarComponent implements OnInit {
       .subscribe((DM) => {
         
         
-        DM.forEach((DM: any) => {  // Loop all direct message channels
+        DM.forEach((msg: any) => {  // Loop all direct message channels
       
-           DM.users.forEach((user: any) => { // Loop all users ind direct message channels
+           msg.users.forEach((user: any) => { // Loop all users ind direct message channels
             if (user.email ==  this.authService.auth.currentUser.email) {
               // this.DM_channels = DM;
-              this.DM_channels.push(DM);
+              this.DM_channels.push(msg);
               console.log('all dm channels for me:', this.DM_channels)
             }
           });
@@ -82,18 +82,18 @@ export class SidebarComponent implements OnInit {
   /**
    * Checking that the current user has direct message, if yes show it
    */
-  filteUser() {
-    this.DM_channels.forEach((DM: any) => {  // Loop all direct message channels
+  // filteUser() {
+  //   this.DM_channels.forEach((DM: any) => {  // Loop all direct message channels
       
-      DM.users.forEach((user: any) => { // Loop all users ind direct message channels
-        if (user.email ==  this.authService.auth.currentUser.email) {
-          this.DM = true;
-          console.log('all dm channels for me:', this.DM_channels)
-        }
-      });
+  //     DM.users.forEach((user: any) => { // Loop all users in direct message channels
+  //       if (user.email ==  this.authService.auth.currentUser.email) {
+  //         this.DM = true;
+  //         console.log('all dm channels for me (filteUser):', this.DM_channels)
+  //       }
+  //     });
       
-    });
-  }
+  //   });
+  // }
 
 }
 

@@ -1,37 +1,3 @@
-<!-- <div class="chat-room m-left-350 p-absolute d-flex-center-colm">
-    <div class="chat p-top-35 p-absolute">
-        <div class="chat-user">
-            <img src="/assets/profile-img/profile-3.png">
-            <div class="chat-text">
-                <span class="user-name">Roland Vas <span class="message-time">15:30 Uhr</span> </span>
-                <div [innerHTML]=input></div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="bottom p-absolute">
-    <div class="editor-container">
-        <editor apiKey="bgeto93fjxds10methgpkyy8y7cqfcbgltl91ww9tnc7h3yt" [init]="
-    { toolbar: 'undo redo | styles pre | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
-    height: 150,
-    branding: false,
-    menubar: false,
-    statusbar: true,
-    elementpath: false,
-    browser_spellcheck: true
-   }" [(ngModel)]="messageInput">
-        </editor>
-    </div>
-    <div class="msg-btn">
-        <button class="send-btn" mat-fab color="primary" (click)="msgValue(); messageInput='';">
-        <mat-icon>send</mat-icon>
-    </button>
-    </div>
-</div>  -->
-
-
-
-
 <div class="chat-container">
     <div class="channel-name">
         <h1 class="m-left-20">{{activeChannel?.channelName}}</h1>
@@ -41,7 +7,7 @@
             <h1>There are No Messages in Channel</h1>
         </div>
 
-        <div *ngIf="!zeroMsg" class="show-chat">
+        <div *ngIf="!zeroMsg" #showChat class="show-chat">
             <div class="msg-box m-left-20" *ngFor="let msg of allMessages">
                 <div class="user-img">
                     <img src="assets/profile-img/profile-1.png" alt="">
@@ -49,26 +15,68 @@
                     </div>
                 </div>
                 <div class="chat-messages">
-                    {{msg.message}} <span (click)="openDialog(msg.customIdName)">Edit</span>
+                    <span [innerHTML]="msg?.message"></span>
+                    <div *ngIf="msg.image" class="image-container">
+                        <img class="msg-image" [src]="msg?.image">
+                        <div class="image-overlay">
+                            <button (click)="deleteImage(msg.image, msg.customIdName)">Delete</button>
+
+                        </div>
+
+                    </div>
+                    <button mat-icon-button class="edit-option" [matMenuTriggerFor]="editMessage">
+                        <mat-icon>more_vert</mat-icon>
+                      </button>
+                    <mat-menu #editMessage="matMenu">
+                        <button (click)="openDialog(msg.customIdName)" mat-menu-item>Edit</button>
+                    </mat-menu>
+
                     <span class="thread"> 
                         <a [replaceUrl]="true"  [routerLink]=" ['/chat/'+ msg.channelID + '/thread/' + msg.customIdName]">Show Therad </a></span>
-                    <mat-icon class="right-down-corner" (click)="deleteMesage(msg.customIdName)">delete_outline</mat-icon>
+                    <mat-icon class="right-down-corner" (click)="deleteMesage(msg.customIdName, msg.image)">delete_outline</mat-icon>
 
                 </div>
             </div>
         </div>
     </div>
 
-    <form (submit)="submit()" class="message-container">
+
+    <!-- <form (submit)="submit()" class="message-container">
         <mat-form-field appearance="outline">
             <textarea matInput [(ngModel)]="chat$.message" (keyup.enter)="submit()" placeholder="Message..." id="" cols="30" rows="10" [ngModelOptions]="{standalone: true}"></textarea>
             <mat-icon matSuffix>add_photo_alternate</mat-icon>
             <mat-icon matSuffix (click)="submit()">send</mat-icon>
         </mat-form-field>
-    </form>
+    </form> -->
+
+    <div class="bottom p-absolute">
+        <div class="editor-container">
+            <editor apiKey="bgeto93fjxds10methgpkyy8y7cqfcbgltl91ww9tnc7h3yt" [init]="
+    { toolbar: 'undo redo | styles pre | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
+    height: 150,
+    branding: false,
+    menubar: false,
+    statusbar: true,
+    elementpath: false,
+    browser_spellcheck: true
+   }" [(ngModel)]="chat$.message" (keyup.enter)="submit()" placeholder="Message...">
+            </editor>
+        </div>
+        <div class="file-upload">
+            <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+            <input hidden #fileInput (change)="uploadFile($event)" type="file" id="file" name="image" accept=".png, .jpg">
+        </div>
+        <div class="msg-btn">
+            <button (click)="submit()" class="send-btn" mat-fab color="primary">
+        <mat-icon>send</mat-icon>
+    </button>
+        </div>
+    </div>
+    <div>
+    </div>
     <div style="display: none;" class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
         <input id="uid" type="text" value="{{user.email}}">
         <input id="user-name" type="text" value="{{user.displayName}}">
-
     </div>
+
 </div>

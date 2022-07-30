@@ -1,32 +1,46 @@
-<div class="thread-container">
-    {{messageID}}
-</div>
 <div class="thread-heading m-left-20 msg-box">
     <div class="user-img">
         <img src="assets/profile-img/profile-1.png" alt="">
         <div class="user-name">{{threadHeading?.user}} <span class="message-time">{{threadHeading?.time | date :"short" }}</span>
+
         </div>
     </div>
+
     <div class="chat-messages">
-        {{threadHeading?.message}}
+        <span [innerHTML]="threadHeading?.message"></span>
+        <div *ngIf="threadHeading?.image" class="image-container">
+            <img class="msg-image-threads" [src]="threadHeading?.image">
+        </div>
     </div>
 </div>
-<div class="msg-box m-left-20 m-right-20">
+<div class="msg-box m-left-20 m-right-20 thread-container" #ThreadContainer>
 
-    <div class="msg-box m-left-20" *ngFor="let thread of threadmsg">
+    <div class="msg-box m-left-20 border-bottom" *ngFor="let thread of threadmsg">
         <div class="user-img">
             <img src="assets/profile-img/profile-1.png" alt="">
-            <div class="user-name">{{thread?.user}} <span class="message-time">{{thread.time | date :"short" }}</span> {{thread?.customIdName}}
+            <div class="user-name">{{thread?.user}} <span class="message-time">{{thread.time | date :"short" }}</span>
             </div>
         </div>
         <div class="chat-messages">
             <span [innerHTML]="thread.message"></span>
-            <mat-icon class="right-down-corner" (click)="deleteThreadMsg(thread?.customIdName)">delete_outline</mat-icon>
+            <button mat-icon-button class="edit-option" [matMenuTriggerFor]="editMessage">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+            <div *ngIf="thread?.image" class="image-container">
+                <img class="msg-image-threads" [src]="thread?.image">
+            </div>
+            <mat-menu #editMessage="matMenu">
+                <button (click)="openDialog(thread.customIdName)" mat-menu-item>Edit</button>
+                <button (click)="deleteMesage(thread.customIdName, thread?.image)" mat-menu-item>Delete</button>
+            </mat-menu>
+
+            <mat-icon class="right-down-corner" (click)="deleteMesage(thread?.customIdName, thread?.image)">delete_outline</mat-icon>
         </div>
     </div>
 </div>
 
 <div class="bottom p-absolute">
+
     <div class="editor-container">
         <editor apiKey="bgeto93fjxds10methgpkyy8y7cqfcbgltl91ww9tnc7h3yt" [init]="
     { toolbar: 'undo redo | styles pre | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
@@ -39,14 +53,22 @@
    }" [(ngModel)]="chat$.message" (keyup.enter)="submit()">
         </editor>
     </div>
+    <div class="file-upload">
+        <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+        <input hidden #fileInput (change)="uploadFile($event)" type="file" id="file" name="image" accept=".png, .jpg">
+    </div>
     <div class="msg-btn">
         <button class="send-btn" mat-fab color="primary" (click)="submit(); chat$.message='';">
         <mat-icon>send</mat-icon>
     </button>
     </div>
+    <!-- <div class="upload-img">
+        <input type="file" (change)="uploadFile($event)" />
+    <div>{{ uploadPercent | async }}</div>
+    <a [href]="downloadURL | async">{{ downloadURL | async }}</a>
+    </div> -->
     <div style="display: none;" class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
         <input id="uid" type="text" value="{{user.email}}">
         <input id="user-name" type="text" value="{{user.displayName}}">
-
     </div>
 </div>

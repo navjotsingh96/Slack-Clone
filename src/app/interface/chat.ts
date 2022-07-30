@@ -1,14 +1,19 @@
+import { Url } from "url";
+
 export interface Chat {
     message: string;
     channelID: string;
     user: string;
     time: Date;
+    image: string;
 }
 export class Chat {
     message!: string;
     channelID!: string;
     user!: string;
     time!: Date;
+    image!: string
+
 
 
     constructor(messageJSON?: Chat) {
@@ -16,6 +21,8 @@ export class Chat {
         this.channelID = messageJSON ? messageJSON.channelID : '';
         this.user = messageJSON ? messageJSON.user : '';
         this.time = messageJSON ? new Date(messageJSON.time) : new Date();
+        this.image = messageJSON ? messageJSON.image : '';
+
 
     }
     public toJSON() {
@@ -23,7 +30,8 @@ export class Chat {
             message: this.message,
             channelID: this.channelID,
             time: this.time.getTime(),
-            user: this.user
+            user: this.user,
+            image: this.image
         }
     }
 }

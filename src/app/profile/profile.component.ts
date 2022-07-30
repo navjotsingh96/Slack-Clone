@@ -1,40 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { concatMap , Observable} from 'rxjs';
+import { map,  } from 'rxjs'
 import { User } from '../interface/user.class';
 import { AuthenticationService } from '../services/authentication.service';
 import { ImageUploadService } from '../services/image-upload.service';
 import { HotToastService } from '@ngneat/hot-toast';
+import { ChatRoomComponent } from '../chat-room/chat-room.component';
+// import { LoginComponent } from '../log-in/log-in.component';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
+@Injectable({ providedIn: 'root' })
+
 export class ProfileComponent implements OnInit {
-  
-  user$ = this.authService.currentUser$;
+  user: User | undefined;
   constructor(
     private authService: AuthenticationService,
     public storage: AngularFireStorage,
     private imageUploadService: ImageUploadService,
     private toast: HotToastService,
-  ) { }
+    private chatComp : ChatRoomComponent
+  ) {
 
+    this.authService.currentUser$.subscribe(user => {
+      if (user) {
+        this.user = new User(user);
+        console.log(this.user);
+        this.chatComp.getUSerID(this.user)
+      }
+    });
+  }
 
   ngOnInit(): void {
+    console.log('User form profile', this.user);
+    
   }
 
-  uploadImage(event: any, user: User) {
-    this.imageUploadService.uploadImage(event.target.files[0], `img/${user.key}`).pipe(
-        this.toast.observe({
-          loading: 'Uploading...',
-          success: 'Upload Successfully',
-          error: 'Upload Failed'
-        }
-        ), 
-        concatMap((photoUrl)=> this.authService.updateProfileData({photoUrl}) )
-        ).subscribe();
-
+  uploadImage(event: any) {
+    this.imageUploadService.uploadImage(event.target.files[0], `img/${this.user.photoURL}`).pipe(
+      this.toast.observe({
+        loading: 'Uploading...',
+        success: 'Upload Successfully',
+        error: 'Upload Failed'
+      }),
+      map((photoURL) => {
+        console.log(photoURL);
+        this.authService.updateProfileData({photoURL});
+      })
+      ).subscribe();
   }
+
 }
 

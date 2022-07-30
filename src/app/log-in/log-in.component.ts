@@ -3,8 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HotToastService } from '@ngneat/hot-toast';
-import { getAuth, user } from '@angular/fire/auth';
-import { map } from 'rxjs';
 import { User } from 'src/app/interface/user.class';
 import { ChatRoomComponent } from 'src/app/chat-room/chat-room.component';
 
@@ -28,7 +26,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router,
     private toast: HotToastService,
-    private chat: ChatRoomComponent
+    private chat: ChatRoomComponent,
 
   ) { }
 
@@ -63,11 +61,9 @@ export class LoginComponent implements OnInit {
       this.authService.loggedIn = true
       console.log('user Logged in', user.user.uid);
       this.userKey = user.user.uid;
-      this.router.navigate(['']);
-      
+      this.router.navigate(['home']);
     });
   }
-
-
+  
 }
 

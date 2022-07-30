@@ -1,15 +1,20 @@
-import { Component, Injectable, OnInit } from '@angular/core';
+import { Component, ElementRef, Injectable, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { ChatService } from '../services/chat.service';
 import { Chat } from '../interface/chat';
-import { Auth, idToken } from '@angular/fire/auth';
 import { AuthenticationService } from '../services/authentication.service';
 import { User } from '../interface/user.class';
-import { map } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditMessagesComponent } from '../dialog-edit-messages/dialog-edit-messages.component';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { ThisReceiver } from '@angular/compiler';
+import { ProfileComponent } from '../profile/profile.component';
+import { user } from '@angular/fire/auth';
 
 
 @Component({
@@ -27,16 +32,26 @@ export class ChatRoomComponent implements OnInit {
   messageID: any;
   message;
   chat$: Chat = new Chat;
-  user: User = new User()
-  userIdtry;
   users;
   userID;
+  userTry: []
+
+
+  selectedFile: File = null;
+  fb;
+  downloadURL: Observable<string>;
+  @ViewChild('showChat') messagesChannelDiv!: ElementRef;
+
+
   constructor(private route: ActivatedRoute,
     public chatService: ChatService,
     private firestore: AngularFirestore,
     public authService: AuthenticationService,
     private _snackBar: MatSnackBar,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private storage: AngularFireStorage,
+
+  ) {
 
   }
 
@@ -52,7 +67,14 @@ export class ChatRoomComponent implements OnInit {
       this.getChannels();
       this.allMessages = []; // when user click on another channel it array will be empty
       this.getAllUserFfromirebase();
+      console.log(this.userTry);
+      this.getUSerID;
     });
+
+  }
+  getUSerID(user) {
+    console.log(user);
+    console.log(this.userTry);
 
   }
 
@@ -67,12 +89,12 @@ export class ChatRoomComponent implements OnInit {
         if (!changes.channelName) return
         this.activeChannel = changes;
       })
-
   }
+
   getId() {
     this.chat$.user = (<HTMLInputElement>document.getElementById("user-name")).value
-    console.log(this.chat$.user);
   }
+
   getUserWithId() {
     this.allMessages.find((email => {
       this.userID = email.user
@@ -88,7 +110,6 @@ export class ChatRoomComponent implements OnInit {
       .subscribe((message: any) => {
         for (let i = 0; i < message.length; i++) {
           const msg = message[i];
-          /*    console.log(message.length); */
           if (message.length === 0) {
             this.zeroMsg = true
           }
@@ -96,7 +117,6 @@ export class ChatRoomComponent implements OnInit {
           if (!msg.channelID === this.channelID) {
             console.log('id from ', msg.channelID);
             this.allMessages = [];
-
           } else
             this.allMessages = message.sort((mess1: any, mess2: any) => { // neu nachrichen werden am Ende gezeigt
               return mess1.time - mess2.time;
@@ -107,19 +127,6 @@ export class ChatRoomComponent implements OnInit {
       })
   }
 
-  // this function check if the channel id and chat id same is then chat will be pushed in Array
-  // showChannelMessages(message) {
-  //   for (let i = 0; i < message.length; i++) {
-  //     const msg = message[i];
-  //     if (!msg.channelID === this.channelID) {
-  //       console.log('true');
-  //       this.allMessages = []
-  //     } else
-  //       this.allMessages = (message);
-  //   }
-  // }
-
-
   getAllUserFfromirebase() {
     this.firestore
       .collection('users')
@@ -127,25 +134,65 @@ export class ChatRoomComponent implements OnInit {
       .subscribe((changes) => {
         this.users = changes;
       })
-
   }
   // to send message to firestroe
   submit() {
+    if (!this.chat$.message && !this.fb) {
+      this.enterMessageSnackBar()
+    }
+    if (this.fb && !this.chat$.message) {
+      this.sumbitImageWithMessage()
+    }
+    if (!this.fb) {
+      this.submitMessage();
+    }
+    if (this.chat$.message && this.fb) {
+      this.sumbitImageWithMessage()
+    }
+    this.chat$.message = '';
+    this.chat$.image = '';
+  }
+
+  //Upload image and show
+  sumbitImageWithMessage() {
+    this.getId()
+    this.chat$.image = this.fb
+    this.firestore
+      .collection(this.channelID)
+      .add(this.chat$.toJSON())
+      .then((message: any) => {
+        this.messageID = message.id;
+        this.scrollObjectDown(this.messagesChannelDiv);
+      }).catch((err) => {
+        console.log('Error', err);
+      })
+  }
+
+  //Upload message to firestore
+  submitMessage() {
     this.getId();
     this.firestore
       .collection(this.channelID)
       .add(this.chat$.toJSON())
       .then((message: any) => {
-        console.log('Suceesful', message);
-        // console.log('message', message.id)
-        this.messageID = message.id
+        this.messageID = message.id;
+        this.scrollObjectDown(this.messagesChannelDiv);
       }).catch((err) => {
         console.log('Error', err);
       })
-    this.chat$.message = '';
   }
-  deleteMesage(message) {
-    console.log('MsgId', message);
+
+  // delete compelte message
+  deleteMesage(message, id) {
+    if (id) {
+      this.deleteMesageStorage(id);
+      this.deletemessageFirestore(message)
+    } else
+      this.deletemessageFirestore(message)
+  }
+
+  // delete message from firestore. IF user delete only msg
+  deletemessageFirestore(message) {
     this.firestore
       .collection(this.channelID)
       .doc(message)
@@ -154,28 +201,79 @@ export class ChatRoomComponent implements OnInit {
         console.log('Somthing went wrong', error);
       }))
       .then((done => {
-        console.log('Message sucessfully deleted', done);
         this.openSnackBar();
       }))
   }
+
+  // delete images from storage. If user want to delete compelte msg with image
+  deleteMesageStorage(downloadURL) {
+    this.storage.storage.refFromURL(downloadURL).delete();
+
+  }
+  // to save edit messages
   saveMessage(message) {
     this.firestore
       .collection(this.channelID)
       .doc(message)
       .update(this.chat$.toJSON())
-      .then((done => {
-        console.log('Added', done);
+  }
 
-      }))
+  openDialog(messageID) {
+    const dialogRef = this.dialog.open(DialogEditMessagesComponent)
+    dialogRef.componentInstance.messageID = messageID;
+    dialogRef.componentInstance.channelID = this.channelID;
 
   }
-  openDialog(messageID){
-      const dialogRef = this.dialog.open(DialogEditMessagesComponent)
-  }
+
   openSnackBar() {
     this._snackBar.open('Message deleted', '', {
       duration: 3000
     });
   }
-}
 
+  enterMessageSnackBar() {
+    this._snackBar.open('Please write something', '', {
+      duration: 3000
+    });
+  }
+
+  scrollObjectDown(object: ElementRef) {
+    object.nativeElement.scrollTop = object.nativeElement.scrollHeight;
+  }
+
+  // upload filte to storage
+  uploadFile(event) {
+    const file = event.target.files[0];
+    const filePath = `uploadedImages/${file.name}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fb = url;
+            }
+            console.log(this.fb);
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log(url);
+        }
+      });
+  }
+
+
+  // if user delete only image 
+  deleteImage(downloadURL, id) {
+    this.storage.storage.refFromURL(downloadURL).delete()
+    this.firestore
+      .collection(this.channelID)
+      .doc(id)
+      .update({ image: '' })
+  }
+}

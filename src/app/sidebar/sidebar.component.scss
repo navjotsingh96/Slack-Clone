@@ -5,12 +5,11 @@
     text-align: center;
 }
 
-.dm{
+.dm {
     margin: 16px;
     display: flex;
     justify-content: space-between;
-    
-    mat-icon{
+    mat-icon {
         cursor: pointer;
     }
 }
@@ -60,7 +59,6 @@ mat-dialog-container {
 
 .direct-msg {
     max-width: 100%;
-
     .user-sidenav {
         display: flex;
         align-items: center;
@@ -80,18 +78,22 @@ mat-dialog-container {
     }
 }
 
-
-
 .channel-list {
     list-style: none;
     &::before {
         content: '#';
         padding-right: 15px;
     }
+    &:active {
+        background-color: black;
+    }
 }
 
 .link-to-channel {
     display: flex;
+    &:focus-within {
+        background-color: black;
+    }
 }
 
 .user-img {
@@ -117,7 +119,6 @@ mat-dialog-container {
     font-weight: bold;
     color: white;
 }
-
 
 .mid {
     display: flex;

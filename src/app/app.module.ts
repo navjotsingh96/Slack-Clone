@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { HomeComponent } from './home/home.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { ThreadComponent } from './thread/thread.component';
@@ -23,23 +21,23 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
-import { MatFormField } from '@angular/material/form-field';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-import { provideAuth, getAuth , } from '@angular/fire/auth';
-import { provideFirestore, getFirestore} from '@angular/fire/firestore';
+import { provideAuth, getAuth, } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import { HeaderComponent } from './header/header.component';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { LoginComponent } from './log-in/log-in.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
 import { PageListComponent } from './page-list/page-list.component';
 import { MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { ProfileComponent } from './profile/profile.component';
 import { DialogEditMessagesComponent } from './dialog-edit-messages/dialog-edit-messages.component';
-import { provideStorage , getStorage } from '@angular/fire/storage';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 import { DialogAddDmComponent } from './dialog-add-dm/dialog-add-dm.component';
 import {MatSelectModule} from '@angular/material/select';
+import { AngularFireModule } from '@angular/fire/compat';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,16 +52,17 @@ import {MatSelectModule} from '@angular/material/select';
     HeaderComponent,
     LoginComponent,
     StartScreenComponent,
-    PageListComponent,ProfileComponent, DialogEditMessagesComponent, DialogAddDmComponent,
-   
+    PageListComponent,
+    ProfileComponent,
+    DialogEditMessagesComponent,
+    DialogAddDmComponent
+
   ],
   imports: [
     MatTreeModule,
     MatSelectModule,
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
     BrowserAnimationsModule,
     MatDialogModule,
     MatSidenavModule,
@@ -78,6 +77,7 @@ import {MatSelectModule} from '@angular/material/select';
     EditorModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
