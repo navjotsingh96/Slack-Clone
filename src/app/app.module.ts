@@ -34,11 +34,12 @@ import {MatMenuModule} from '@angular/material/menu';
 import { LoginComponent } from './log-in/log-in.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
 import { PageListComponent } from './page-list/page-list.component';
-import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { ProfileComponent } from './profile/profile.component';
 import { DialogEditMessagesComponent } from './dialog-edit-messages/dialog-edit-messages.component';
 import { provideStorage , getStorage } from '@angular/fire/storage';
 import { DialogAddDmComponent } from './dialog-add-dm/dialog-add-dm.component';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,11 +54,12 @@ import { DialogAddDmComponent } from './dialog-add-dm/dialog-add-dm.component';
     HeaderComponent,
     LoginComponent,
     StartScreenComponent,
-    PageListComponent,ProfileComponent, DialogEditMessagesComponent, DialogAddDmComponent
+    PageListComponent,ProfileComponent, DialogEditMessagesComponent, DialogAddDmComponent,
    
   ],
   imports: [
     MatTreeModule,
+    MatSelectModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -82,12 +84,9 @@ import { DialogAddDmComponent } from './dialog-add-dm/dialog-add-dm.component';
     provideStorage(() => getStorage()),
     HotToastModule.forRoot(),
     MatMenuModule,
-<<<<<<< HEAD
     MatFormFieldModule,
-=======
     MatSnackBarModule
 
->>>>>>> 905c54c3632db18331a62ed17dc1ef79cc9a0838
 
   ],
   providers: [],

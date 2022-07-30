@@ -39,13 +39,14 @@ export class SignUpComponent implements OnInit {
     email: new FormControl('', [Validators.required]),
   })
 
-
   constructor(
     private authService: AuthenticationService,
     private toast: HotToastService,
     private router: Router,
     private db: AngularFirestore
-  ) { }
+  ) { 
+    
+  }
 
   ngOnInit(): void {}
 
@@ -80,7 +81,7 @@ export class SignUpComponent implements OnInit {
     ).subscribe(() => {      
     // Here we navigate to the login page if successful
       this.router.navigate(['home']);
-
+      
     })
   }
 

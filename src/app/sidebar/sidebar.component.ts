@@ -18,34 +18,56 @@ import { DialogAddDmComponent } from '../dialog-add-dm/dialog-add-dm.component';
 
 export class SidebarComponent implements OnInit {
 
-  user$ = this.authService.currentUser$;
-  channels: Channel[];
   allChannels: any = [];
 
-  users
+  DM_channels: any = [];
 
-  constructor(public dialog: MatDialog, private firestore: AngularFirestore, private router: Router,
+  DM: boolean = false;
+
+  constructor(
+    public dialog: MatDialog, 
+    private firestore: AngularFirestore, 
     public authService: AuthenticationService) { }
 
   ngOnInit(): void {
+
+    /**
+     * Load data form firestore for channels
+     */
     this.firestore
-      .collection('channels')/* gespeicherte Daten aus firestore user collection werden geladen */
-      .valueChanges({ idField: 'customIdName' }) /* alle änderungen werden gespeichert / customIdName ID von jeder collection */
+      .collection('channels')
+      .valueChanges({ idField: 'customIdName' }) 
       .subscribe((changes: any) => {
         this.allChannels = changes;
-        console.log('All Channels: ', this.allChannels)
-
+        // console.log('All Channels: ', this.allChannels)
       })
 
+
+      /**
+       * Load data form firestore for direct message
+       */
       this.firestore
-      .collection('users')
-      .valueChanges({ idField: 'user' })
-      .subscribe((changes) => {
-        this.users = changes;
-        console.log('users aus sidenav', this.users);
-
+      .collection('directMessage')
+      .valueChanges({ idField: 'dmID' })
+      .subscribe((DM) => {
+        
+        
+        DM.forEach((DM: any) => {  // Loop all direct message channels
+      
+           DM.users.forEach((user: any) => { // Loop all users ind direct message channels
+            if (user.email ==  this.authService.auth.currentUser.email) {
+              // this.DM_channels = DM;
+              this.DM_channels.push(DM);
+              console.log('all dm channels for me:', this.DM_channels)
+            }
+          });
+          
+        });
       })
-
+      
+     
+     
+      
   }
 
   openDialog() {
@@ -55,6 +77,24 @@ export class SidebarComponent implements OnInit {
   OpenAddDmChannel() {
     this.dialog.open(DialogAddDmComponent);
   }
+
+
+  /**
+   * Checking that the current user has direct message, if yes show it
+   */
+  filteUser() {
+    this.DM_channels.forEach((DM: any) => {  // Loop all direct message channels
+      
+      DM.users.forEach((user: any) => { // Loop all users ind direct message channels
+        if (user.email ==  this.authService.auth.currentUser.email) {
+          this.DM = true;
+          console.log('all dm channels for me:', this.DM_channels)
+        }
+      });
+      
+    });
+  }
+
 }
 
 
