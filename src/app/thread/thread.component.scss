@@ -5,8 +5,9 @@
 }
 
 .thread-container {
-    height: 60vh;
-    overflow: scroll;
+    height: 35vh;
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 .upload-img {
@@ -16,4 +17,8 @@
 
 .border-bottom {
     border-bottom: 2px solid;
+}
+
+.msg-image-threads {
+    width: 50% !important;
 }

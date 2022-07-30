@@ -69,7 +69,6 @@ export class ChatRoomComponent implements OnInit {
       this.allMessages = []; // when user click on another channel it array will be empty
       this.getAllUserFfromirebase();
       console.log(this.userTry);
-
     });
 
   }
@@ -133,14 +132,27 @@ export class ChatRoomComponent implements OnInit {
   }
   // to send message to firestroe
   submit() {
-    if (!this.chat$.message) {
+    if (!this.chat$.message && !this.fb) {
       this.enterMessageSnackBar()
     }
-    if(this.fb){
-      console.log('true');
-      this.getId()
-      this.chat$.image = this.fb
-      this.firestore
+    if (this.fb && !this.chat$.message) {
+      this.sumbitImageWithMessage()
+    }
+    if (!this.fb) {
+      this.submitMessage();
+    }
+    if(this.chat$.message && this.fb){
+      this.sumbitImageWithMessage()
+    }
+    this.chat$.message = '';
+    this.chat$.image = '';
+  }
+
+  //Upload image and show
+  sumbitImageWithMessage() {
+    this.getId()
+    this.chat$.image = this.fb
+    this.firestore
       .collection(this.channelID)
       .add(this.chat$.toJSON())
       .then((message: any) => {
@@ -149,27 +161,33 @@ export class ChatRoomComponent implements OnInit {
       }).catch((err) => {
         console.log('Error', err);
       })
-    }
-    if (this.chat$.message && !this.fb) {
-      this.getId();
-      this.firestore
-        .collection(this.channelID)
-        .add(this.chat$.toJSON())
-        .then((message: any) => {
-          this.messageID = message.id;
-          this.scrollObjectDown(this.messagesChannelDiv);
-        }).catch((err) => {
-          console.log('Error', err);
-        })
-
-    } if (!this.chat$.message) {
-      this.enterMessageSnackBar()
-    }
-    this.chat$.message = '';
   }
 
-  deleteMesage(message) {
-    console.log('MsgId', message);
+  //Upload message to firestore
+  submitMessage() {
+    this.getId();
+    this.firestore
+      .collection(this.channelID)
+      .add(this.chat$.toJSON())
+      .then((message: any) => {
+        this.messageID = message.id;
+        this.scrollObjectDown(this.messagesChannelDiv);
+      }).catch((err) => {
+        console.log('Error', err);
+      })
+  }
+
+  // delete compelte message
+  deleteMesage(message, id) {
+    if (id) {
+      this.deleteMesageStorage(id);
+      this.deletemessageFirestore(message)
+    } else
+      this.deletemessageFirestore(message)
+  }
+
+  // delete message from firestore. IF user delete only msg
+  deletemessageFirestore(message) {
     this.firestore
       .collection(this.channelID)
       .doc(message)
@@ -182,6 +200,12 @@ export class ChatRoomComponent implements OnInit {
       }))
   }
 
+  // delete images from storage. If user want to delete compelte msg with image
+  deleteMesageStorage(downloadURL) {
+    this.storage.storage.refFromURL(downloadURL).delete();
+
+  }
+  // to save edit messages
   saveMessage(message) {
     this.firestore
       .collection(this.channelID)
@@ -211,8 +235,9 @@ export class ChatRoomComponent implements OnInit {
   scrollObjectDown(object: ElementRef) {
     object.nativeElement.scrollTop = object.nativeElement.scrollHeight;
   }
-  onFileSelected(event) {
-    var n = Date.now();
+
+  // upload filte to storage
+  uploadFile(event) {
     const file = event.target.files[0];
     const filePath = `uploadedImages/${file.name}`;
     const fileRef = this.storage.ref(filePath);
@@ -236,10 +261,14 @@ export class ChatRoomComponent implements OnInit {
         }
       });
   }
-  uploadFile(event) {
-    const file = event.target.files[0];
-    const filePath = 'img/' + file.name;
-    const task = this.storage.upload(filePath, file);
-  }
 
+
+  // if user delete only image 
+  deleteImage(downloadURL, id) {
+    this.storage.storage.refFromURL(downloadURL).delete()
+    this.firestore
+      .collection(this.channelID)
+      .doc(id)
+      .update({ image: '' })
+  }
 }

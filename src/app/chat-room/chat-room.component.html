@@ -16,7 +16,14 @@
                 </div>
                 <div class="chat-messages">
                     <span [innerHTML]="msg?.message"></span>
-                    <img *ngIf="msg.image" class="msg-image" [src]="msg?.image">
+                    <div *ngIf="msg.image" class="image-container">
+                        <img class="msg-image" [src]="msg?.image">
+                        <div class="image-overlay">
+                            <button (click)="deleteImage(msg.image, msg.customIdName)">Delete</button>
+
+                        </div>
+
+                    </div>
                     <button mat-icon-button class="edit-option" [matMenuTriggerFor]="editMessage">
                         <mat-icon>more_vert</mat-icon>
                       </button>
@@ -26,7 +33,7 @@
 
                     <span class="thread"> 
                         <a [replaceUrl]="true"  [routerLink]=" ['/chat/'+ msg.channelID + '/thread/' + msg.customIdName]">Show Therad </a></span>
-                    <mat-icon class="right-down-corner" (click)="deleteMesage(msg.customIdName)">delete_outline</mat-icon>
+                    <mat-icon class="right-down-corner" (click)="deleteMesage(msg.customIdName, msg.image)">delete_outline</mat-icon>
 
                 </div>
             </div>
@@ -55,8 +62,9 @@
    }" [(ngModel)]="chat$.message" (keyup.enter)="submit()" placeholder="Message...">
             </editor>
         </div>
-        <div class="form-group col-12">
-            <input type="file" id="file" #userPhoto (change)="onFileSelected($event)" name="image" autocomplete="off" />
+        <div class="file-upload">
+            <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+            <input hidden #fileInput (change)="uploadFile($event)" type="file" id="file" name="image" accept=".png, .jpg">
         </div>
         <div class="msg-btn">
             <button (click)="submit()" class="send-btn" mat-fab color="primary">
@@ -65,9 +73,6 @@
         </div>
     </div>
     <div>
-        <!--  <div>
-            <input type="file" (change)="uploadFile($event)">
-        </div> -->
     </div>
     <div style="display: none;" class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
         <input id="uid" type="text" value="{{user.email}}">

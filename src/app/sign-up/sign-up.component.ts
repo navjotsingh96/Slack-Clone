@@ -5,7 +5,6 @@ import { FormControl } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
-import { of } from 'rxjs';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 
 export function passwordMatchValidator(): ValidatorFn{
