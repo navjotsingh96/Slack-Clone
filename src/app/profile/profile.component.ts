@@ -5,8 +5,6 @@ import { User } from '../interface/user.class';
 import { AuthenticationService } from '../services/authentication.service';
 import { ImageUploadService } from '../services/image-upload.service';
 import { HotToastService } from '@ngneat/hot-toast';
-import { ChatRoomComponent } from '../chat-room/chat-room.component';
-// import { LoginComponent } from '../log-in/log-in.component';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -21,20 +19,17 @@ export class ProfileComponent implements OnInit {
     public storage: AngularFireStorage,
     private imageUploadService: ImageUploadService,
     private toast: HotToastService,
-    private chatComp : ChatRoomComponent
   ) {
 
     this.authService.currentUser$.subscribe(user => {
       if (user) {
         this.user = new User(user);
         console.log(this.user);
-        this.chatComp.getUSerID(this.user)
       }
     });
   }
 
   ngOnInit(): void {
-    console.log('User form profile', this.user);
     
   }
 

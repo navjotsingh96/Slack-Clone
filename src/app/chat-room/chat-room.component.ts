@@ -10,11 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogEditMessagesComponent } from '../dialog-edit-messages/dialog-edit-messages.component';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { ThisReceiver } from '@angular/compiler';
-import { ProfileComponent } from '../profile/profile.component';
-import { user } from '@angular/fire/auth';
 
 
 @Component({
@@ -25,6 +21,7 @@ import { user } from '@angular/fire/auth';
 @Injectable({ providedIn: 'root' })
 
 export class ChatRoomComponent implements OnInit {
+  user: User | undefined;
   zeroMsg = true;
   allMessages = [];
   activeChannel;
@@ -44,6 +41,7 @@ export class ChatRoomComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute,
+
     public chatService: ChatService,
     private firestore: AngularFirestore,
     public authService: AuthenticationService,
@@ -52,11 +50,18 @@ export class ChatRoomComponent implements OnInit {
     private storage: AngularFireStorage,
 
   ) {
+    this.authService.currentUser$.subscribe(user => {
+    if (user) {
+      this.user = new User(user);
+      console.log(this.user);
+    }
+  });
 
   }
 
   ngOnInit(): void {
-
+    debugger
+    console.log(this.userID)
     /**
      * Get currently ID from channel
      */
@@ -67,16 +72,10 @@ export class ChatRoomComponent implements OnInit {
       this.getChannels();
       this.allMessages = []; // when user click on another channel it array will be empty
       this.getAllUserFfromirebase();
-      console.log(this.userTry);
-      this.getUSerID;
     });
 
   }
-  getUSerID(user) {
-    console.log(user);
-    console.log(this.userTry);
 
-  }
 
 
   // get Channel from DB and to show as H1
@@ -276,4 +275,7 @@ export class ChatRoomComponent implements OnInit {
       .doc(id)
       .update({ image: '' })
   }
+
+
+  
 }
