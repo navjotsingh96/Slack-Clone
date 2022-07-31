@@ -2,6 +2,7 @@ export interface UserInterface {
     displayName: string;
     UID: string;
     email: string;
+    password: string;
     photoUrl: string;
     key?: string;
   }

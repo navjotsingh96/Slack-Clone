@@ -31,11 +31,12 @@ import { MatMenuModule } from '@angular/material/menu';
 import { LoginComponent } from './log-in/log-in.component';
 import { StartScreenComponent } from './start-screen/start-screen.component';
 import { PageListComponent } from './page-list/page-list.component';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { ProfileComponent } from './profile/profile.component';
 import { DialogEditMessagesComponent } from './dialog-edit-messages/dialog-edit-messages.component';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { DialogAddDmComponent } from './dialog-add-dm/dialog-add-dm.component';
+import {MatSelectModule} from '@angular/material/select';
 import { AngularFireModule } from '@angular/fire/compat';
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { AngularFireModule } from '@angular/fire/compat';
   ],
   imports: [
     MatTreeModule,
+    MatSelectModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -83,7 +85,7 @@ import { AngularFireModule } from '@angular/fire/compat';
     HotToastModule.forRoot(),
     MatMenuModule,
     MatFormFieldModule,
-    MatSnackBarModule,
+    MatSnackBarModule
 
 
   ],
