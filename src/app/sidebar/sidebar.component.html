@@ -33,10 +33,12 @@
         <h3>Direct Message</h3>
         <mat-icon (click)="OpenAddDmChannel()">add</mat-icon>
     </div>
-    <div  class="user-sidenav">
-        <img src="assets/profile-img/profile-1.png" alt="">
-        <span class="m-left-20">User name</span>
-    </div>
+    
+        <div class="user-sidenav" *ngFor="let channel of DM_channels" [routerLink]=" ['/chat/' + channel.dmID]" >
+            <img src="assets/profile-img/profile-1.png" alt="">
+            <span class="m-left-20">{{ channel.name }}</span>
+        </div>
+    
 </div>
 
 <!-- </div> -->
