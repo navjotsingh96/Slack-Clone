@@ -60,7 +60,7 @@ export class ChatRoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    debugger
+
     console.log(this.userID)
     /**
      * Get currently ID from channel
@@ -120,8 +120,6 @@ export class ChatRoomComponent implements OnInit {
             this.allMessages = message.sort((mess1: any, mess2: any) => { // neu nachrichen werden am Ende gezeigt
               return mess1.time - mess2.time;
             });
-
-
         }
       })
   }

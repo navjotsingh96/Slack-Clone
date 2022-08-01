@@ -31,10 +31,11 @@ export class AuthenticationService {
     return from(signInWithEmailAndPassword(this.auth, username, password))
   }
 
-  signUp(name: string, email: string, password: string) {     // Here we create a new user
+  signUp(name: string, email: string, password: string) {  
+     // Here we create a new user
     return from(createUserWithEmailAndPassword(this.auth, email, password))
-      .pipe(switchMap(({ user }) => updateProfile(user, { displayName: name })));
-
+      .pipe(switchMap(({ user }) => updateProfile(user, { displayName: name }))) 
+      this.creatUserIndataBase() 
   }
 
   updateProfileData(profileData: any): Observable<any> {
@@ -46,6 +47,17 @@ export class AuthenticationService {
   logout() {                                           // Here we logout a user
     return from(this.auth.signOut());
   }
-
+  creatUserIndataBase() {
+    this.firestore
+      .collection('tryUsers')
+      .add(this.user)
+      .catch((err => {
+        console.log(err);
+      }))
+      .then((done =>{
+        console.log(done);
+        
+      }))
+  }
 
 }

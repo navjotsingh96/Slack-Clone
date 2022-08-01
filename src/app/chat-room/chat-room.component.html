@@ -24,7 +24,7 @@
                         </div>
 
                     </div>
-                    <button mat-icon-button class="edit-option" [matMenuTriggerFor]="editMessage">
+                    <button *ngIf="user.displayName == msg.user" mat-icon-button class="edit-option" [matMenuTriggerFor]="editMessage">
                         <mat-icon>more_vert</mat-icon>
                       </button>
                     <mat-menu #editMessage="matMenu">
@@ -33,7 +33,7 @@
 
                     <span class="thread"> 
                         <a [replaceUrl]="true"  [routerLink]=" ['/chat/'+ msg.channelID + '/thread/' + msg.customIdName]">Show Therad </a></span>
-                    <mat-icon class="right-down-corner" (click)="deleteMesage(msg.customIdName, msg.image)">delete_outline</mat-icon>
+                    <mat-icon *ngIf="user.displayName == msg.user" class="right-down-corner" (click)="deleteMesage(msg.customIdName, msg.image)">delete_outline</mat-icon>
 
                 </div>
             </div>
