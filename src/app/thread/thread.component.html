@@ -1,7 +1,9 @@
 <div class="thread-heading m-left-20 msg-box">
     <div class="user-img">
-        <img src="assets/profile-img/profile-1.png" alt="">
-        <div class="user-name">{{threadHeading?.user}} <span class="message-time">{{threadHeading?.time | date :"short" }}</span>
+
+        <img [src]="findUSerbyId(threadHeading?.user).photoURL || 'assets/profile-img/profile-1.png'" alt="User-Image">
+        <div class="user-name">{{findUSerbyId(threadHeading?.user).name}}
+            <span class="message-time">{{threadHeading?.time | date :"short" }}</span>
 
         </div>
     </div>
@@ -17,8 +19,9 @@
 
     <div class="msg-box m-left-20 border-bottom" *ngFor="let thread of threadmsg">
         <div class="user-img">
-            <img src="assets/profile-img/profile-1.png" alt="">
-            <div class="user-name">{{thread?.user}} <span class="message-time">{{thread.time | date :"short" }}</span>
+            <img [src]="findUSerbyId(thread?.user).photoURL || 'assets/profile-img/profile-1.png'" alt="User-Image">
+            <div class="user-name">{{findUSerbyId(thread?.user).name}}
+                <span class="message-time">{{thread.time | date :"short" }}</span>
             </div>
         </div>
         <div class="chat-messages">

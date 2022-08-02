@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit {
   DM_channels: any = [];
 
   DM: boolean = false;
-
+  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   constructor(
     public dialog: MatDialog, 
     private firestore: AngularFirestore, 

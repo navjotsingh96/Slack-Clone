@@ -27,11 +27,10 @@ export class ChatRoomComponent implements OnInit {
   activeChannel;
   channelID: any;
   messageID: any;
-  message;
+
   chat$: Chat = new Chat;
   users;
   userID;
-  userTry;
   allUser: any = [];
 
   selectedFile: File = null;
@@ -125,8 +124,8 @@ export class ChatRoomComponent implements OnInit {
   }
 
 
-  findUSerbyId(UID) {
-    return this.users.find((userCorrect => (userCorrect.uid == UID)))
+ findUSerbyId(UID) {
+    return  this.users.find((userCorrect => (userCorrect.uid == UID)))
 
   }
 

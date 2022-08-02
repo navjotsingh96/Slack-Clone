@@ -10,6 +10,7 @@ import { DialogEditMessagesComponent } from '../dialog-edit-messages/dialog-edit
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { User } from '../interface/user.class';
 @Component({
   selector: 'app-thread',
   templateUrl: './thread.component.html',
@@ -23,9 +24,10 @@ export class ThreadComponent implements OnInit {
   messageID;
   threadmsg;
   chat$: Chat = new Chat;
-  userID;
+  users;
   channelID;
   threadHeading;
+  user: User = new User;
   @ViewChild('ThreadContainer') threadContainer: ElementRef
 
   fb;
@@ -36,22 +38,27 @@ export class ThreadComponent implements OnInit {
     public chat: ChatRoomComponent,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private storage: AngularFireStorage) { }
+    private storage: AngularFireStorage) {
+
+    this.authService.currentUser$.subscribe(user => {
+      if (user) {
+        this.user = new User(user);
+        console.log(this.user);
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((parmsMap => {
       this.messageID = parmsMap.get('id');
-      this.chat$.user;
     }))
+    this.getAllUserFfromirebase();
     this.channelID = this.router.url.split('/')[2];
-    console.log('I got ID of Message', this.channelID)
     this.getThreadMsg();
     this.getmsg();
-    console.log('THread messag id', this.messageID);
-
   }
 
-
+// get Message for Thread as used as Heading
   getmsg() {
     this.firestore
       .collection(this.channelID)
@@ -59,12 +66,10 @@ export class ThreadComponent implements OnInit {
       .valueChanges()
       .subscribe((msg => {
         this.threadHeading = msg;
-        console.log((this.threadHeading));
-
       }))
-
   }
 
+// get saved ThreadMessage form Firestore
   getThreadMsg() {
     this.threadmsg;
     this.firestore
@@ -74,19 +79,34 @@ export class ThreadComponent implements OnInit {
       .valueChanges({ idField: 'customIdName' })
       .subscribe((thread => {
         this.threadmsg = thread;
-        console.log('Threads', thread);
         this.threadmsg = thread.sort((mess1: any, mess2: any) => { // neu nachrichen werden am Ende gezeigt
           return mess1.time - mess2.time;
         });
-
       }))
   }
 
-  getId() {
-    this.chat$.user = (<HTMLInputElement>document.getElementById("user-name")).value
-    console.log(this.chat$.user);
+  // to set User UID
+  setUserUID() {
+    return this.chat$.user = this.user.uid;
   }
 
+  // Find user with UID
+  findUSerbyId(UID) {    
+    return this.users.find((userCorrect => (userCorrect.uid == UID)))
+
+  }
+
+  // to take User from firebase and saves in User to use findUserbyid function
+  getAllUserFfromirebase() {
+    this.firestore
+      .collection('users')
+      .valueChanges({ idField: 'user' })
+      .subscribe((changes) => {
+        this.users = changes;
+      })
+  }
+
+// to send and save messages in DB with or without image
   submit() {
     if (!this.chat$.message && !this.fb) {
       this.enterMessageSnackBar()
@@ -106,7 +126,7 @@ export class ThreadComponent implements OnInit {
 
   //Upload image and show
   sumbitImageWithMessage() {
-    this.getId()
+    this.setUserUID()
     this.chat$.image = this.fb
     this.firestore
       .collection('threads')
@@ -124,7 +144,7 @@ export class ThreadComponent implements OnInit {
   //Upload message to firestore
 
   submitMessage() {
-    this.getId();
+    this.setUserUID()
     this.firestore
       .collection('threads')
       .doc(this.messageID)
@@ -139,11 +159,9 @@ export class ThreadComponent implements OnInit {
   // delete compelte message
   deleteMesage(idofThread, url) {
     if (url) {
-      console.log('true');
       this.deleteThreadStorage(url)
       this.deleteThreadFirestore(idofThread);
     } else
-      console.log('false');
     this.deleteThreadFirestore(idofThread);
   }
 
@@ -168,7 +186,7 @@ export class ThreadComponent implements OnInit {
 
   }
 
-
+// if user want to delete only Image from messages
   deleteImage(idofThread, downloadURL) {
     this.storage.storage.refFromURL(downloadURL).delete()
     this.firestore
@@ -179,17 +197,21 @@ export class ThreadComponent implements OnInit {
       .update({ image: '' })
   }
 
+  //feedback on message delete
   openSnackBar() {
     this._snackBar.open('Message deleted', '', {
       duration: 3000
     });
   }
+
+  //feedback if editior is empty
   enterMessageSnackBar() {
     this._snackBar.open('Please write something', '', {
       duration: 3000
     });
   }
 
+  // edit message
   openDialog(messageID) {
     const dialogRef = this.dialog.open(DialogEditMessagesComponent)
     dialogRef.componentInstance.threadMessageID = messageID;
@@ -197,10 +219,12 @@ export class ThreadComponent implements OnInit {
     console.log('from thrread', messageID);
   }
 
+  // scroll down if new message were sent
   scrollObjectDown(object: ElementRef) {
     object.nativeElement.scrollTop = object.nativeElement.scrollHeight;
   }
 
+  // to Upload images in thread
   uploadFile(event) {
     const file = event.target.files[0];
     const filePath = `threadImages/${file.name}`;
@@ -225,7 +249,5 @@ export class ThreadComponent implements OnInit {
         }
       });
   }
-
-
 }
 
