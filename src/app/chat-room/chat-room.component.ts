@@ -11,6 +11,7 @@ import { DialogEditMessagesComponent } from '../dialog-edit-messages/dialog-edit
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { UserDetailsComponent } from '../user-details/user-details.component';
 
 
 @Component({
@@ -32,6 +33,9 @@ export class ChatRoomComponent implements OnInit {
   users;
   userID;
   allUser: any = [];
+
+
+  UserDetailsArray;
 
   selectedFile: File = null;
   fb;
@@ -57,7 +61,7 @@ export class ChatRoomComponent implements OnInit {
       }
     });
   }
- 
+
   ngOnInit(): void {
 
     console.log(this.userID)
@@ -73,8 +77,8 @@ export class ChatRoomComponent implements OnInit {
       this.getAllUserFfromirebase();
     });
   }
-   // set User in firbase in  collection with uid
-   setUserinFirebase() {
+  // set User in firbase in  collection with uid
+  setUserinFirebase() {
     this.firestore
       .collection('users')
       .doc(this.user.uid)
@@ -96,7 +100,7 @@ export class ChatRoomComponent implements OnInit {
 
   // to set User UID
   setUserUID() {
-   return this.chat$.user = this.user.uid;
+    return this.chat$.user = this.user.uid;
   }
 
 
@@ -124,8 +128,8 @@ export class ChatRoomComponent implements OnInit {
   }
 
 
- findUSerbyId(UID) {
-    return  this.users.find((userCorrect => (userCorrect.uid == UID)))
+  findUSerbyId(UID) {
+    return this.users.find((userCorrect => (userCorrect.uid == UID)))
 
   }
 
@@ -225,7 +229,7 @@ export class ChatRoomComponent implements OnInit {
       .update(this.chat$.toJSON())
   }
 
-// Open dialog on Edit
+  // Open dialog on Edit
   openDialog(messageID) {
     const dialogRef = this.dialog.open(DialogEditMessagesComponent)
     dialogRef.componentInstance.messageID = messageID;
@@ -233,14 +237,14 @@ export class ChatRoomComponent implements OnInit {
 
   }
 
-// feedback on message delete succesfully
+  // feedback on message delete succesfully
   openSnackBar() {
     this._snackBar.open('Message deleted', '', {
       duration: 3000
     });
   }
 
-// feedback if nothing write in Editor
+  // feedback if nothing write in Editor
   enterMessageSnackBar() {
     this._snackBar.open('Please write something', '', {
       duration: 3000
@@ -286,5 +290,13 @@ export class ChatRoomComponent implements OnInit {
       .collection(this.channelID)
       .doc(id)
       .update({ image: '' })
+  }
+
+  // to user details if user click on chat user
+  UserDetails(details) {
+    console.log(details);
+    this.UserDetailsArray = this.findUSerbyId(details)
+    const dialogRef = this.dialog.open(UserDetailsComponent)
+    dialogRef.componentInstance.userDetailsArray = this.UserDetailsArray;
   }
 }

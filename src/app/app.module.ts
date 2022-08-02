@@ -39,6 +39,7 @@ import { DialogAddDmComponent } from './dialog-add-dm/dialog-add-dm.component';
 import { MatSelectModule } from '@angular/material/select';
 import { AngularFireModule } from '@angular/fire/compat';
 import { MatListModule } from '@angular/material/list';
+import { UserDetailsComponent } from './user-details/user-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +57,8 @@ import { MatListModule } from '@angular/material/list';
     PageListComponent,
     ProfileComponent,
     DialogEditMessagesComponent,
-    DialogAddDmComponent
+    DialogAddDmComponent,
+    UserDetailsComponent
 
   ],
   imports: [
