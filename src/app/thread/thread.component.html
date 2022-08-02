@@ -1,5 +1,5 @@
 <div class="thread-heading m-left-20 msg-box">
-    <div class="user-img">
+    <div class="user-img" (click)="UserDetails(threadHeading.user)">
 
         <img [src]="findUSerbyId(threadHeading?.user).photoURL || 'assets/profile-img/profile-1.png'" alt="User-Image">
         <div class="user-name">{{findUSerbyId(threadHeading?.user).name}}
@@ -18,7 +18,7 @@
 <div class="msg-box m-left-20 m-right-20 thread-container" #ThreadContainer>
 
     <div class="msg-box m-left-20 border-bottom" *ngFor="let thread of threadmsg">
-        <div class="user-img">
+        <div class="user-img" (click)="UserDetails(thread.user)">
             <img [src]="findUSerbyId(thread?.user).photoURL || 'assets/profile-img/profile-1.png'" alt="User-Image">
             <div class="user-name">{{findUSerbyId(thread?.user).name}}
                 <span class="message-time">{{thread.time | date :"short" }}</span>

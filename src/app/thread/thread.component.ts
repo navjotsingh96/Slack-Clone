@@ -11,6 +11,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { User } from '../interface/user.class';
+import { UserDetailsComponent } from '../user-details/user-details.component';
 @Component({
   selector: 'app-thread',
   templateUrl: './thread.component.html',
@@ -28,6 +29,7 @@ export class ThreadComponent implements OnInit {
   channelID;
   threadHeading;
   user: User = new User;
+  UserDetailsArray;
   @ViewChild('ThreadContainer') threadContainer: ElementRef
 
   fb;
@@ -248,6 +250,12 @@ export class ThreadComponent implements OnInit {
           console.log(url);
         }
       });
+  }
+  UserDetails(details) {
+    console.log(details);
+    this.UserDetailsArray = this.findUSerbyId(details)
+    const dialogRef = this.dialog.open(UserDetailsComponent)
+    dialogRef.componentInstance.userDetailsArray = this.UserDetailsArray;
   }
 }
 
