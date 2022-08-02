@@ -31,8 +31,8 @@ export class ChatRoomComponent implements OnInit {
   chat$: Chat = new Chat;
   users;
   userID;
-  userTry: []
-
+  userTry;
+  allUser: any = [];
 
   selectedFile: File = null;
   fb;
@@ -51,14 +51,14 @@ export class ChatRoomComponent implements OnInit {
 
   ) {
     this.authService.currentUser$.subscribe(user => {
-    if (user) {
-      this.user = new User(user);
-      console.log(this.user);
-    }
-  });
-
+      if (user) {
+        this.user = new User(user);
+        console.log(this.user);
+        this.setUserinFirebase()
+      }
+    });
   }
-
+ 
   ngOnInit(): void {
 
     console.log(this.userID)
@@ -73,9 +73,14 @@ export class ChatRoomComponent implements OnInit {
       this.allMessages = []; // when user click on another channel it array will be empty
       this.getAllUserFfromirebase();
     });
-
   }
-
+   // set User in firbase in  collection with uid
+   setUserinFirebase() {
+    this.firestore
+      .collection('users')
+      .doc(this.user.uid)
+      .set(this.user.toJSON())
+  }
 
 
   // get Channel from DB and to show as H1
@@ -90,16 +95,11 @@ export class ChatRoomComponent implements OnInit {
       })
   }
 
-  getId() {
-    this.chat$.user = (<HTMLInputElement>document.getElementById("user-name")).value
+  // to set User UID
+  setUserUID() {
+   return this.chat$.user = this.user.uid;
   }
 
-  getUserWithId() {
-    this.allMessages.find((email => {
-      this.userID = email.user
-
-    }))
-  }
 
   // to take messages from ChannelID
   getMessages() {
@@ -124,15 +124,25 @@ export class ChatRoomComponent implements OnInit {
       })
   }
 
+
+  findUSerbyId(UID) {
+    return this.users.find((userCorrect => (userCorrect.uid == UID)))
+
+  }
+
+  //to get All user from firebase
   getAllUserFfromirebase() {
     this.firestore
       .collection('users')
       .valueChanges({ idField: 'user' })
       .subscribe((changes) => {
         this.users = changes;
+        console.log(this.users);
+
       })
   }
-  // to send message to firestroe
+
+  //  save messages and images to firestroe
   submit() {
     if (!this.chat$.message && !this.fb) {
       this.enterMessageSnackBar()
@@ -152,7 +162,7 @@ export class ChatRoomComponent implements OnInit {
 
   //Upload image and show
   sumbitImageWithMessage() {
-    this.getId()
+    this.setUserUID()
     this.chat$.image = this.fb
     this.firestore
       .collection(this.channelID)
@@ -167,7 +177,7 @@ export class ChatRoomComponent implements OnInit {
 
   //Upload message to firestore
   submitMessage() {
-    this.getId();
+    this.setUserUID();
     this.firestore
       .collection(this.channelID)
       .add(this.chat$.toJSON())
@@ -207,6 +217,7 @@ export class ChatRoomComponent implements OnInit {
     this.storage.storage.refFromURL(downloadURL).delete();
 
   }
+
   // to save edit messages
   saveMessage(message) {
     this.firestore
@@ -215,6 +226,7 @@ export class ChatRoomComponent implements OnInit {
       .update(this.chat$.toJSON())
   }
 
+// Open dialog on Edit
   openDialog(messageID) {
     const dialogRef = this.dialog.open(DialogEditMessagesComponent)
     dialogRef.componentInstance.messageID = messageID;
@@ -222,18 +234,21 @@ export class ChatRoomComponent implements OnInit {
 
   }
 
+// feedback on message delete succesfully
   openSnackBar() {
     this._snackBar.open('Message deleted', '', {
       duration: 3000
     });
   }
 
+// feedback if nothing write in Editor
   enterMessageSnackBar() {
     this._snackBar.open('Please write something', '', {
       duration: 3000
     });
   }
 
+  // scroll down if new message were sent
   scrollObjectDown(object: ElementRef) {
     object.nativeElement.scrollTop = object.nativeElement.scrollHeight;
   }
@@ -273,7 +288,4 @@ export class ChatRoomComponent implements OnInit {
       .doc(id)
       .update({ image: '' })
   }
-
-
-  
 }

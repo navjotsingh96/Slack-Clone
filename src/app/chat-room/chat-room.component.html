@@ -10,8 +10,9 @@
         <div *ngIf="!zeroMsg" #showChat class="show-chat">
             <div class="msg-box m-left-20" *ngFor="let msg of allMessages">
                 <div class="user-img">
-                    <img src="assets/profile-img/profile-1.png" alt="">
-                    <div class="user-name">{{msg.user}} <span class="message-time">{{msg.time | date :"short" }}</span>
+                    <img [src]="findUSerbyId(msg.user)?.photoURL" alt="">
+                    <div #{{msg?.user}} class="user-name">{{findUSerbyId(msg.user)?.name}}
+                        <span class="message-time">{{msg.time | date :"short" }}</span>
                     </div>
                 </div>
                 <div class="chat-messages">

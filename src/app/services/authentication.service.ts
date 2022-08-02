@@ -34,7 +34,7 @@ export class AuthenticationService {
   signUp(name: string, email: string, password: string) {  
      // Here we create a new user
     return from(createUserWithEmailAndPassword(this.auth, email, password))
-      .pipe(switchMap(({ user }) => updateProfile(user, { displayName: name }))) 
+      .pipe(switchMap(({ user }) => updateProfile(user, { displayName: name })))
       this.creatUserIndataBase() 
   }
 
