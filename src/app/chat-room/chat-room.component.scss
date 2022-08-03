@@ -17,10 +17,19 @@
 .channel-name {
     border-bottom: 2px solid grey;
     margin-top: 30px;
+    position: relative;
+    display: flex;
     h1 {
         margin-bottom: 20px;
         font: revert;
         color: #232946 !important;
+    }
+}
+
+.edit-channel {
+    cursor: pointer;
+    mat-icon {
+        width: 50px;
     }
 }
 

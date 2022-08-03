@@ -1,6 +1,7 @@
 <div class="chat-container">
     <div class="channel-name">
         <h1 class="m-left-20">{{activeChannel?.channelName}}</h1>
+        <mat-icon class="m-left-20 edit-channel" (click)="editChannel(activeChannel?.channelID)">edit_outline</mat-icon>
     </div>
     <div class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
         <div class="nomsg" *ngIf="zeroMsg">

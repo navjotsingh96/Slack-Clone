@@ -25,8 +25,8 @@ export class SidebarComponent implements OnInit {
   DM: boolean = false;
   typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   constructor(
-    public dialog: MatDialog, 
-    private firestore: AngularFirestore, 
+    public dialog: MatDialog,
+    private firestore: AngularFirestore,
     public authService: AuthenticationService) { }
 
   ngOnInit(): void {
@@ -36,38 +36,50 @@ export class SidebarComponent implements OnInit {
      */
     this.firestore
       .collection('channels')
-      .valueChanges({ idField: 'customIdName' }) 
+      .valueChanges({ idField: 'customIdName' })
       .subscribe((changes: any) => {
         this.allChannels = changes;
         // console.log('All Channels: ', this.allChannels)
       })
 
 
-      /**
-       * Load data form firestore for direct message
-       */
-      this.firestore
+    /**
+     * Load data form firestore for direct message
+     */
+
+    this.loadUserFromDB()
+
+
+
+  }
+  loadUserFromDB() {
+    this.firestore
       .collection('directMessage')
       .valueChanges({ idField: 'dmID' })
       .subscribe((DM) => {
-        
-        
-        DM.forEach((msg: any) => {  // Loop all direct message channels
-      
-           msg.users.forEach((user: any) => { // Loop all users ind direct message channels
-            if (user.email ==  this.authService.auth.currentUser.email) {
-              // this.DM_channels = DM;
-              this.DM_channels.push(msg);
-              console.log('all dm channels for me:', this.DM_channels)
-            }
-          });
+        let userid = DM[0]['users']['userid']
+        for (let i = 0; i < userid.length; i++) {
+          const element = userid[i];
+          console.log(element);
           
-        });
+        }
+        console.log(DM[0]['users']['userid']);
+
+        /*      console.log('DK',DM[0]['users']);
+             if(DM['users'])
+             this.DM_channels = DM;
+             DM.forEach((msg: any) => {  // Loop all direct message channels
+           
+                msg.users.forEach((user: any) => { // Loop all users ind direct message channels
+                 if (user.email ==  this.authService.auth.currentUser.email) {
+                   // this.DM_channels = DM;
+                   this.DM_channels.push(msg);
+                   console.log('all dm channels for me:', this.DM_channels)
+                 }
+               });
+               
+             }); */
       })
-      
-     
-     
-      
   }
 
   openDialog() {
@@ -84,14 +96,14 @@ export class SidebarComponent implements OnInit {
    */
   // filteUser() {
   //   this.DM_channels.forEach((DM: any) => {  // Loop all direct message channels
-      
+
   //     DM.users.forEach((user: any) => { // Loop all users in direct message channels
   //       if (user.email ==  this.authService.auth.currentUser.email) {
   //         this.DM = true;
   //         console.log('all dm channels for me (filteUser):', this.DM_channels)
   //       }
   //     });
-      
+
   //   });
   // }
 

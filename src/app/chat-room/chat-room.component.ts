@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { UserDetailsComponent } from '../user-details/user-details.component';
+import { DialogEditChannelnameComponent } from '../dialog-edit-channelname/dialog-edit-channelname.component';
 
 
 @Component({
@@ -64,7 +65,6 @@ export class ChatRoomComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.userID)
     /**
      * Get currently ID from channel
      */
@@ -96,6 +96,7 @@ export class ChatRoomComponent implements OnInit {
         if (!changes.channelName) return
         this.activeChannel = changes;
       })
+
   }
 
   // to set User UID
@@ -117,7 +118,6 @@ export class ChatRoomComponent implements OnInit {
           }
           else this.zeroMsg = false
           if (!msg.channelID === this.channelID) {
-            console.log('id from ', msg.channelID);
             this.allMessages = [];
           } else
             this.allMessages = message.sort((mess1: any, mess2: any) => { // neu nachrichen werden am Ende gezeigt
@@ -140,8 +140,6 @@ export class ChatRoomComponent implements OnInit {
       .valueChanges({ idField: 'user' })
       .subscribe((changes) => {
         this.users = changes;
-        console.log(this.users);
-
       })
   }
 
@@ -222,12 +220,12 @@ export class ChatRoomComponent implements OnInit {
   }
 
   // to save edit messages
-  saveMessage(message) {
+/*   saveMessage(message) {
     this.firestore
       .collection(this.channelID)
       .doc(message)
       .update(this.chat$.toJSON())
-  }
+  } */
 
   // Open dialog on Edit
   openDialog(messageID) {
@@ -271,7 +269,6 @@ export class ChatRoomComponent implements OnInit {
             if (url) {
               this.fb = url;
             }
-            console.log(this.fb);
           });
         })
       )
@@ -294,9 +291,15 @@ export class ChatRoomComponent implements OnInit {
 
   // to user details if user click on chat user
   UserDetails(details) {
-    console.log(details);
     this.UserDetailsArray = this.findUSerbyId(details)
     const dialogRef = this.dialog.open(UserDetailsComponent)
     dialogRef.componentInstance.userDetailsArray = this.UserDetailsArray;
+  }
+  editChannel(id) {
+    const dialogRef = this.dialog.open(DialogEditChannelnameComponent)
+   dialogRef.componentInstance.currentChannelID = id; 
+  }
+  saveChannelName(){
+
   }
 }
