@@ -51,6 +51,8 @@ export class SidebarComponent implements OnInit {
 
     this.loadDirectChannelDB();
 
+    
+
   }
 
   loadUserFromDB() {
@@ -70,9 +72,9 @@ export class SidebarComponent implements OnInit {
       .subscribe((DM) => {
           DM.forEach(channels => {
             channels['users'].forEach(user => {
-              if (user.uid == this.authService.auth.currentUser.uid) {
-                console.log('ture');
-                this.DM_channels = DM;
+              if (user.userId == this.authService.auth.currentUser.uid) {
+                this.DM_channels.push(channels);
+                console.log(this.DM_channels);
               }
             });
           });
