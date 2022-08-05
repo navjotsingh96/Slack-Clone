@@ -22,6 +22,8 @@ export class SidebarComponent implements OnInit {
 
   DM_channels: any = [];
 
+  allUSers: any = [];
+  allowedUsers: any = []
   DM: boolean = false;
   typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   constructor(
@@ -42,44 +44,39 @@ export class SidebarComponent implements OnInit {
         // console.log('All Channels: ', this.allChannels)
       })
 
-
+    this.loadUserFromDB();
     /**
      * Load data form firestore for direct message
      */
 
-    this.loadUserFromDB()
-
-
+    this.loadDirectChannelDB();
 
   }
+
   loadUserFromDB() {
+    this.firestore
+      .collection('users')
+      .valueChanges({ idField: 'userId' })
+      .subscribe((changes: any) => {
+        this.allUSers = changes;
+      });
+  }
+
+  //To Load Channel and show only to correct User
+  loadDirectChannelDB() {
     this.firestore
       .collection('directMessage')
       .valueChanges({ idField: 'dmID' })
       .subscribe((DM) => {
-        let userid = DM[0]['users']['userid']
-        for (let i = 0; i < userid.length; i++) {
-          const element = userid[i];
-          console.log(element);
-          
-        }
-        console.log(DM[0]['users']['userid']);
-
-        /*      console.log('DK',DM[0]['users']);
-             if(DM['users'])
-             this.DM_channels = DM;
-             DM.forEach((msg: any) => {  // Loop all direct message channels
-           
-                msg.users.forEach((user: any) => { // Loop all users ind direct message channels
-                 if (user.email ==  this.authService.auth.currentUser.email) {
-                   // this.DM_channels = DM;
-                   this.DM_channels.push(msg);
-                   console.log('all dm channels for me:', this.DM_channels)
-                 }
-               });
-               
-             }); */
-      })
+          DM.forEach(channels => {
+            channels['users'].forEach(user => {
+              if (user.uid == this.authService.auth.currentUser.uid) {
+                console.log('ture');
+                this.DM_channels = DM;
+              }
+            });
+          });
+       })
   }
 
   openDialog() {
