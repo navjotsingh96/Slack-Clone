@@ -1,1 +1,20 @@
-<h1 *ngIf="user$ | async as user">Welcome to our Slack Clone, {{user.displayName}}!</h1>
+<div class="home-container" *ngIf="user$ | async as user">
+
+    <mat-card class="example-card">
+        <mat-card-title>Welcome to our Slack Clone</mat-card-title>
+        <mat-card-content>
+            <h1>{{user.displayName}} </h1>
+            <span class="names">This app is an example of teamwork and hard work with <a href="#">Bünymin,</a> <a href="#">Roland</a>  and <a href="navjot-singh.de"> Navjot.</a></span>
+            <span> We had many challenges, problems and bugs but we didn't give up. We worked hard on it and finished the Slack project.</span>
+            <span>  A project
+                is never finished, so we will work on it to make it more functional. <br>
+                 If you have any question for example: What of challenges we had? <br> How we programmed it? Anything. You can contact us. 
+            </span>
+
+            <span> If you find a bug, please let us know!</span>
+            <span> Have fun trying it out !
+            </span>
+
+        </mat-card-content>
+    </mat-card>
+</div>
