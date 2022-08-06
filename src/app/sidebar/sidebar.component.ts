@@ -106,7 +106,13 @@ export class SidebarComponent implements OnInit {
 
   //   });
   // }
-
+  logout(){
+    this.authService.logout().subscribe(() => {
+    //  this.router.navigate(['login']);
+      window.location.reload();
+      this.authService.loggedIn = false;
+    });
+  }
 }
 
 

@@ -4,8 +4,13 @@
     <div class="chat">
         <div class="chat-user">
             <div class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
+                <div class="user-image"><img [src]="user.photoURL" alt=""></div>
                 <span class="user-name-sidenav"> {{user.displayName}}</span>
                 <span> {{user.email}}</span>
+                <button class="log-out-btn" mat-menu-item (click)="logout()">
+                    Logout
+                </button>
+
             </div>
         </div>
     </div>
