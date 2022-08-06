@@ -41,10 +41,7 @@ export class DialogAddDmComponent implements OnInit {
         
       });
       console.log(this.selectedUsers);
-
-
       // this.currantUserUID = this.authService.auth.currentUser.uid
-      
   }
 
   /**
@@ -94,5 +91,4 @@ export class DialogAddDmComponent implements OnInit {
      
     });
   }
-  
 }

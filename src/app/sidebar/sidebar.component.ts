@@ -70,11 +70,13 @@ export class SidebarComponent implements OnInit {
       .subscribe((DM) => {
           DM.forEach(channels => {
             channels['users'].forEach(user => {
-              if (user.uid == this.authService.auth.currentUser.uid) {
+              if (user.uid === this.authService.auth.currentUser.uid) {
                 console.log('ture');
-                this.DM_channels = DM;
-              }
-            });
+                this.DM_channels = DM.sort((mess1: any, mess2: any) => { // neu nachrichen werden am Ende gezeigt
+                  return mess1.time - mess2.time;;
+                })};
+               
+          });
           });
        })
   }
