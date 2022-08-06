@@ -53,9 +53,9 @@
     <div class="channels-main">
 
         <mat-selection-list #directMSG [multiple]="false">
-            <mat-list-option class="channel-list" *ngFor="let channel of DM_channels" [routerLink]=" ['/chat/' + channel.dmID]" [value]="directMSG">
+            <mat-list-option class="channel-list" *ngFor="let Directchannel of DM_channels" [routerLink]=" ['/chat/' + Directchannel.dmID]" [value]="directMSG">
                 <a class="link-to-channel">
-                    # {{channel.name}}
+                    # {{Directchannel.name}}
                 </a>
             </mat-list-option>
         </mat-selection-list>
