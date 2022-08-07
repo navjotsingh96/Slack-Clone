@@ -13,32 +13,38 @@ import { ThreadComponent } from '../thread/thread.component';
 @Injectable({ providedIn: 'root' })
 
 export class DialogEditMessagesComponent implements OnInit {
-  value:any;
+  value: any;
   messageID: any;
   channelID: any;
-  time:any;
-  threadMessageID:any;
+  time: any;
+  threadMessageID: any;
+  currentChannelID: any;
   constructor(private firestore: AngularFirestore,
     private _snackBar: MatSnackBar,
-    private threds : ThreadComponent
+    private threds: ThreadComponent
   ) { }
 
   ngOnInit(): void {
     this.getMsg();
+    console.log(this.currentChannelID);
+    
 
   }
   // get Messages from Channel and value
-  getMsg(){
-    if(this.channelID){
-    this.firestore
-      .collection(this.channelID)
-      .doc(this.messageID)
-      .valueChanges()
-      .subscribe((message => {
-        this.value = message['message'];
-      }));
-  }
-  if(!this.channelID){
+  getMsg() {
+    if (this.channelID) {
+      console.log('channelID)', this.channelID);
+      this.firestore
+        .collection(this.channelID)
+        .doc(this.messageID)
+        .valueChanges()
+        .subscribe((message => {
+          this.value = message['message'];
+        }));
+    }
+    if (!this.channelID) {
+      console.log('channelID)', this.channelID);
+
       this.firestore
         .collection('threads')
         .doc(this.messageID)
@@ -48,50 +54,80 @@ export class DialogEditMessagesComponent implements OnInit {
         .subscribe((thread => {
           console.log('Threads', thread['message']);
           this.value = thread['message']
-        
-          }));
-        }
+
+        }));
+    }
+    if (this.currentChannelID && !this.channelID) {
+      console.log('currentChannelID)', this.currentChannelID);
+
+      this.firestore
+        .collection('channel')
+        .doc(this.currentChannelID)
+        .valueChanges({ idField: 'customIdName' })
+        .subscribe((Channel => {
+          this.value = Channel['channelName']
+          console.log(this.value);
+
+        }))
+    }
   }
 
-update(){
-  if(this.channelID){
-    this.updateMessage();
+  update() {
+    if (this.channelID) {
+      this.updateMessage();
+    }
+    if (!this.channelID) {
+      this.updateThread();
+    }
+    if (this.currentChannelID) {
+      this.updateChannelName()
+    }
   }
-  if(!this.channelID){
-    this.updateThread();
-  }
-}
   //update changes
   updateMessage() {
     this.firestore
       .collection(this.channelID)
       .doc(this.messageID)
-      .update({message: this.value}) // to update only Message string
+      .update({ message: this.value }) // to update only Message string
       .then((done => {
-       this.openSnackBar();
+        this.openSnackBar();
       }))
   }
   //update changes of threads
 
   updateThread() {
     this.firestore
-    .collection('threads')
-    .doc(this.messageID)
-    .collection(this.messageID)
-    .doc(this.threadMessageID)
-    .update({message: this.value})
-    .catch((error => {
-      console.log(error);
-    }))
-    .then((done => {
-      console.log('Done', done);
-      this.openSnackBar()
-    }))
-    }
+      .collection('threads')
+      .doc(this.messageID)
+      .collection(this.messageID)
+      .doc(this.threadMessageID)
+      .update({ message: this.value })
+      .catch((error => {
+        console.log(error);
+      }))
+      .then((done => {
+        console.log('Done', done);
+        this.openSnackBar()
+      }))
+  }
+
+  updateChannelName() {
+    this.firestore
+      .collection('channel')
+      .doc(this.currentChannelID)
+      .update({ channelName: this.value })
+      .catch((error => {
+        console.log(error);
+      }))
+      .then((done => {
+        console.log('Done', done);
+        this.openSnackBar()
+      }))
+  }
 
   openSnackBar() {
     this._snackBar.open('Message edit Sucessfully', '', {
       duration: 3000
     });
-}
+  }
 }

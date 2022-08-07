@@ -245,3 +245,24 @@ pre {
         opacity: 1;
     }
 }
+
+.chat-text {
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.log-out-btn {
+    color: white;
+    background-color: #4d66df96;
+    width: fit-content !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    transition: all 115ms ease-in-out;
+    &:hover {
+        background-color: #d4d8f0 !important;
+        color: #232946;
+    }
+}

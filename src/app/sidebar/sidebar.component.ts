@@ -22,11 +22,13 @@ export class SidebarComponent implements OnInit {
 
   DM_channels: any = [];
 
+  allUSers: any = [];
+  allowedUsers: any = []
   DM: boolean = false;
   typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   constructor(
-    public dialog: MatDialog, 
-    private firestore: AngularFirestore, 
+    public dialog: MatDialog,
+    private firestore: AngularFirestore,
     public authService: AuthenticationService) { }
 
   ngOnInit(): void {
@@ -36,38 +38,48 @@ export class SidebarComponent implements OnInit {
      */
     this.firestore
       .collection('channels')
-      .valueChanges({ idField: 'customIdName' }) 
+      .valueChanges({ idField: 'customIdName' })
       .subscribe((changes: any) => {
         this.allChannels = changes;
-        // console.log('All Channels: ', this.allChannels)
+        console.log('All Channels: ', this.allChannels)
       })
 
+    this.loadUserFromDB();
+    /**
+     * Load data form firestore for direct message
+     */
 
-      /**
-       * Load data form firestore for direct message
-       */
-      this.firestore
+    this.loadDirectChannelDB();
+
+    
+
+  }
+
+  loadUserFromDB() {
+    this.firestore
+      .collection('users')
+      .valueChanges({ idField: 'userId' })
+      .subscribe((changes: any) => {
+        this.allUSers = changes;
+      });
+  }
+
+  //To Load Channel and show only to correct User
+  loadDirectChannelDB() {
+    this.firestore
       .collection('directMessage')
       .valueChanges({ idField: 'dmID' })
       .subscribe((DM) => {
-        
-        
-        DM.forEach((msg: any) => {  // Loop all direct message channels
-      
-           msg.users.forEach((user: any) => { // Loop all users ind direct message channels
-            if (user.email ==  this.authService.auth.currentUser.email) {
-              // this.DM_channels = DM;
-              this.DM_channels.push(msg);
-              console.log('all dm channels for me:', this.DM_channels)
-            }
+          DM.forEach(channels => {
+            channels['users'].forEach(user => {
+              if (user.userId == this.authService.auth.currentUser.uid) {
+                this.DM_channels.push(channels);
+                console.log(channels['name']);
+                 } 
+              
+            });
           });
-          
-        });
-      })
-      
-     
-     
-      
+       })
   }
 
   openDialog() {
@@ -84,17 +96,23 @@ export class SidebarComponent implements OnInit {
    */
   // filteUser() {
   //   this.DM_channels.forEach((DM: any) => {  // Loop all direct message channels
-      
+
   //     DM.users.forEach((user: any) => { // Loop all users in direct message channels
   //       if (user.email ==  this.authService.auth.currentUser.email) {
   //         this.DM = true;
   //         console.log('all dm channels for me (filteUser):', this.DM_channels)
   //       }
   //     });
-      
+
   //   });
   // }
-
+  logout(){
+    this.authService.logout().subscribe(() => {
+    //  this.router.navigate(['login']);
+      window.location.reload();
+      this.authService.loggedIn = false;
+    });
+  }
 }
 
 

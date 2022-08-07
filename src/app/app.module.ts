@@ -40,6 +40,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { AngularFireModule } from '@angular/fire/compat';
 import { MatListModule } from '@angular/material/list';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { DialogEditChannelnameComponent } from './dialog-edit-channelname/dialog-edit-channelname.component';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +60,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     ProfileComponent,
     DialogEditMessagesComponent,
     DialogAddDmComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    DialogEditChannelnameComponent
 
   ],
   imports: [
@@ -89,7 +92,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     MatMenuModule,
     MatFormFieldModule,
     MatSnackBarModule,
-    MatListModule
+    MatListModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

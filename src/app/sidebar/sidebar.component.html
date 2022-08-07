@@ -4,8 +4,13 @@
     <div class="chat">
         <div class="chat-user">
             <div class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
+                <div class="user-image"><img [src]="user.photoURL" alt=""></div>
                 <span class="user-name-sidenav"> {{user.displayName}}</span>
                 <span> {{user.email}}</span>
+                <button class="log-out-btn" mat-menu-item (click)="logout()">
+                    Logout
+                </button>
+
             </div>
         </div>
     </div>
@@ -21,8 +26,8 @@
     <div class="channels-main">
 
         <mat-selection-list #channel [multiple]="false">
-            <mat-list-option class="channel-list" *ngFor="let channel of allChannels" [value]="channel">
-                <a class="link-to-channel" [routerLink]=" ['/chat/' + channel.customIdName] ">
+            <mat-list-option class="channel-list" *ngFor="let channel of allChannels" [routerLink]=" ['/chat/' + channel.customIdName]" [value]="channel">
+                <a class="link-to-channel">
                     # {{channel.channelName}}
                 </a>
             </mat-list-option>
@@ -30,24 +35,37 @@
     </div>
 </div>
 
-<div class="cereat-channels p-left-20">
+<div class="cereat-channels">
     <button (click)="openDialog()" class="add-btn" mat-fab color="primary">
         <mat-icon>add</mat-icon>
     </button>
-    <span class="m-left-20"> Add Channel</span>
+    <span (click)="openDialog()" class="m-left-20"> Add Channel</span>
 </div>
 
-<div class="direct-msg column">
+<div class="direct-msg column  m-left-20">
     <div class="dm">
         <h3>Direct Message</h3>
         <mat-icon (click)="OpenAddDmChannel()">add</mat-icon>
     </div>
 
-    <div class="user-sidenav" *ngFor="let channel of DM_channels" [routerLink]=" ['/chat/' + channel.dmID]">
+    <!--    <div class="user-sidenav" *ngFor="let channel of DM_channels" [routerLink]=" ['/chat/' + channel.dmID]">
         <img src="assets/profile-img/profile-1.png" alt="">
         <span class="m-left-20">{{ channel.name }}</span>
-    </div>
+        <a class="link-to-channel" [routerLink]=" ['/chat/' + channel.customIdName] ">
+            # {{channel.name}}
+        </a>
+    </div> -->
+    <div class="channels-main">
 
+        <mat-selection-list #directMSG [multiple]="false">
+            <mat-list-option class="channel-list" *ngFor="let Directchannel of DM_channels" [routerLink]=" ['/chat/' + Directchannel.dmID]" [value]="directMSG">
+                <a class="link-to-channel">
+                    # {{Directchannel.name}}
+                </a>
+            </mat-list-option>
+        </mat-selection-list>
+    </div>
 </div>
+
 
 <!-- </div> -->

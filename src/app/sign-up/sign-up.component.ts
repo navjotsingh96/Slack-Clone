@@ -70,7 +70,6 @@ export class SignUpComponent implements OnInit {
     if (!this.signUpForm.valid) return;
 
     const { name, email, password } = this.signUpForm.value;     // Here we get the values of the formuu
-    this.createUserinFirebase();
     this.authService.signUp(name, email, password).pipe(      // Here we sign up the user
       this.toast.observe({                               // Here we show a toast message
         success: 'User created successfully',
@@ -83,14 +82,4 @@ export class SignUpComponent implements OnInit {
       
     })
   }
-
-  createUserinFirebase() {
-    this.db
-      .collection('users')
-      .add(this.signUpForm.value)
-      .then((user) => {
-        console.log('User', user);
-      })
-  }
-
 }

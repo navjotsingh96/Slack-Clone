@@ -15,12 +15,24 @@
 /* From NAvi */
 
 .channel-name {
-    border-bottom: 2px solid grey;
-    margin-top: 30px;
+    position: relative;
+    display: flex;
+    background-color: #ffffff8c;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    box-shadow: 1px 1px 19px 0px #232946;
     h1 {
         margin-bottom: 20px;
         font: revert;
         color: #232946 !important;
+    }
+}
+
+.edit-channel {
+    cursor: pointer;
+    mat-icon {
+        width: 50px;
     }
 }
 
@@ -158,8 +170,9 @@ mat-icon {
 
 .show-chat {
     margin: 16px;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 70vh;
+    margin-top: 3px;
 }
 
 .message-container {

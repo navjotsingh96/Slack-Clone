@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { UserDetailsComponent } from '../user-details/user-details.component';
+import { DialogEditChannelnameComponent } from '../dialog-edit-channelname/dialog-edit-channelname.component';
 
 
 @Component({
@@ -28,12 +29,13 @@ export class ChatRoomComponent implements OnInit {
   activeChannel;
   channelID: any;
   messageID: any;
-
+  directChannels;
   chat$: Chat = new Chat;
   users;
   userID;
   allUser: any = [];
-
+  editOtion = false;
+  editOptionDirect = false;
 
   UserDetailsArray;
 
@@ -64,17 +66,19 @@ export class ChatRoomComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this.userID)
     /**
      * Get currently ID from channel
      */
     this.route.paramMap.subscribe((paramMap) => {
       this.channelID = paramMap.get('id');
       this.chat$.channelID = this.channelID;
-      this.getMessages();
       this.getChannels();
+      this.getMessages();
       this.allMessages = []; // when user click on another channel it array will be empty
       this.getAllUserFfromirebase();
+      this.activeChannel = [];
+      this.directChannels =[];
+      this.getDirectChannels();
     });
   }
   // set User in firbase in  collection with uid
@@ -95,7 +99,21 @@ export class ChatRoomComponent implements OnInit {
       .subscribe((changes: any) => {
         if (!changes.channelName) return
         this.activeChannel = changes;
+        console.log(this.activeChannel);
+        this.editOtion = true;
       })
+  }
+
+  getDirectChannels() {
+    this.firestore
+      .collection('directMessage')
+      .doc(this.channelID)
+      .valueChanges({ idField: 'dmID' })
+      .subscribe((name => {
+        if (!name['name']) return
+        this.directChannels = name;
+        console.log(this.directChannels);
+      }))
   }
 
   // to set User UID
@@ -117,7 +135,6 @@ export class ChatRoomComponent implements OnInit {
           }
           else this.zeroMsg = false
           if (!msg.channelID === this.channelID) {
-            console.log('id from ', msg.channelID);
             this.allMessages = [];
           } else
             this.allMessages = message.sort((mess1: any, mess2: any) => { // neu nachrichen werden am Ende gezeigt
@@ -140,8 +157,6 @@ export class ChatRoomComponent implements OnInit {
       .valueChanges({ idField: 'user' })
       .subscribe((changes) => {
         this.users = changes;
-        console.log(this.users);
-
       })
   }
 
@@ -222,12 +237,12 @@ export class ChatRoomComponent implements OnInit {
   }
 
   // to save edit messages
-  saveMessage(message) {
-    this.firestore
-      .collection(this.channelID)
-      .doc(message)
-      .update(this.chat$.toJSON())
-  }
+  /*   saveMessage(message) {
+      this.firestore
+        .collection(this.channelID)
+        .doc(message)
+        .update(this.chat$.toJSON())
+    } */
 
   // Open dialog on Edit
   openDialog(messageID) {
@@ -271,7 +286,6 @@ export class ChatRoomComponent implements OnInit {
             if (url) {
               this.fb = url;
             }
-            console.log(this.fb);
           });
         })
       )
@@ -294,9 +308,17 @@ export class ChatRoomComponent implements OnInit {
 
   // to user details if user click on chat user
   UserDetails(details) {
-    console.log(details);
     this.UserDetailsArray = this.findUSerbyId(details)
     const dialogRef = this.dialog.open(UserDetailsComponent)
     dialogRef.componentInstance.userDetailsArray = this.UserDetailsArray;
+  }
+  editChannel(id) {
+    const dialogRef = this.dialog.open(DialogEditChannelnameComponent)
+    dialogRef.componentInstance.currentChannelID = id;
+    console.log(id);
+
+  }
+  saveChannelName() {
+
   }
 }

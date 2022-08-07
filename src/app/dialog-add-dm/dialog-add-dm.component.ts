@@ -37,10 +37,11 @@ export class DialogAddDmComponent implements OnInit {
       .valueChanges({ idField: 'userId' })
       .subscribe((changes: any) => {
         this.users = changes;
+        console.log(this.users);
+        
       });
-
+      console.log(this.selectedUsers);
       // this.currantUserUID = this.authService.auth.currentUser.uid
-      
   }
 
   /**
@@ -57,9 +58,11 @@ export class DialogAddDmComponent implements OnInit {
    */
   currantUser() {
     this.users.forEach((user: any) => {
-      if (user.email ==  this.authService.auth.currentUser.email) {
+      if (user.uid ==  this.authService.auth.currentUser.uid) {
         this.selectedUsersArray.push(user);
       }
+      console.log(this.selectedUsers);
+      
     });
   }
 
@@ -88,5 +91,4 @@ export class DialogAddDmComponent implements OnInit {
      
     });
   }
-  
 }
