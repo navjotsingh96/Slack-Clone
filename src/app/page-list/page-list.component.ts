@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-list.component.scss']
 })
 export class PageListComponent implements OnInit {
-
+  sidebarOpen:boolean;
   constructor() { }
 
   ngOnInit(): void {
   }
 
+
+  closeSidebar(){
+    this.sidebarOpen = false;
+    console.log(this.sidebarOpen , 'closeSidebar');
+  }
 }
