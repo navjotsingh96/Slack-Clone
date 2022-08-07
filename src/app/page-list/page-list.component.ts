@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { deflateRaw } from 'zlib';
+import { HeaderComponent } from '../header/header.component';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-page-list',
@@ -7,14 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageListComponent implements OnInit {
   sidebarOpen:boolean;
-  constructor() { }
+
+
+  constructor() {
+
+
+   }
 
   ngOnInit(): void {
   }
 
-
   closeSidebar(){
-    this.sidebarOpen = false;
+   
     console.log(this.sidebarOpen , 'closeSidebar');
   }
+
 }

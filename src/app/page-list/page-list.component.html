@@ -1,33 +1,32 @@
-<app-header class="header">
+<app-header [inputSideNav]="sideNav" [responsvie]="drawer" class="header">
 </app-header>
 
-<mat-drawer-container class="side-nav-container" style="background-color: #d4d8f0;">
-
-    <mat-drawer #drawer class="side-nav" opened="true" mode="side" >
+<mat-drawer-container class="side-nav-container" style="background-color: #d4d8f0;" opened="true">
+    <mat-drawer #sideNav class="side-nav" opened="true" mode="side">
+        <mat-icon class="close-btn" (click)="drawer.toggle()">close</mat-icon>
         <app-sidebar>
-        </app-sidebar> 
-    </mat-drawer>
 
-
-
-    <mat-drawer #drawer class="sidenav-responsive" [ngClass]="sidebarOpen? 'd-none' : 'sidenav-responsive' "  opened="true" >
-        <div class="responsiv-button">
-            <button (click)="closeSidebar()"  mat-fab color="primary" >
-                <mat-icon>close</mat-icon>
-            </button>
-        </div>
-    
-        <app-sidebar>
         </app-sidebar>
-        
     </mat-drawer>
-    
-
-    <mat-drawer-content>
-         <router-outlet></router-outlet>
-    </mat-drawer-content>
+    <router-outlet></router-outlet>
 
 </mat-drawer-container>
+
+<mat-drawer-container>
+    <mat-drawer #drawer class="sidenav-responsive" [ngClass]="sidebarOpen? 'd-none' : 'sidenav-responsive' " opened="true">
+        <div class="responsiv-button">
+            <button (click)="closeSidebar()" mat-fab color="primary">
+                <mat-icon (click)="drawer.toggle()">close</mat-icon>
+            </button>
+        </div>
+        <app-sidebar>
+        </app-sidebar>
+
+    </mat-drawer>
+
+</mat-drawer-container>
+
+
 
 
 
