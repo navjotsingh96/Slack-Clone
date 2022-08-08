@@ -112,7 +112,7 @@ export class ChatRoomComponent implements OnInit {
       .subscribe((name => {
         if (!name['name']) return
         this.directChannels = name;
-        console.log(this.directChannels);
+        console.log('DK from Chat',this.directChannels);
       }))
   }
 

@@ -32,23 +32,17 @@ export class SidebarComponent implements OnInit {
     public dialog: MatDialog,
     private firestore: AngularFirestore,
     public authService: AuthenticationService,
-    private sideNavService : SideNavService) { }
+    private sideNavService: SideNavService) { }
 
   ngOnInit(): void {
-    this.sideNavService.sideNavToggleSubject.subscribe(()=> {
+    this.sideNavService.sideNavToggleSubject.subscribe(() => {
       this.sidenav.toggle();
     });
 
     /**
      * Load data form firestore for channels
      */
-    this.firestore
-      .collection('channels')
-      .valueChanges({ idField: 'customIdName' })
-      .subscribe((changes: any) => {
-        this.allChannels = changes;
-        console.log('All Channels: ', this.allChannels)
-      })
+    this.loadChannels()
 
     this.loadUserFromDB();
     /**
@@ -57,8 +51,18 @@ export class SidebarComponent implements OnInit {
 
     this.loadDirectChannelDB();
 
-    
 
+
+  }
+
+  loadChannels() {
+    this.firestore
+      .collection('channels')
+      .valueChanges({ idField: 'customIdName' })
+      .subscribe((changes: any) => {
+        this.allChannels = changes;
+        console.log('All Channels: ', this.allChannels)
+      })
   }
 
   loadUserFromDB() {
@@ -69,6 +73,7 @@ export class SidebarComponent implements OnInit {
         this.allUSers = changes;
       });
   }
+  allDirectChannles;
 
   //To Load Channel and show only to correct User
   loadDirectChannelDB() {
@@ -76,16 +81,20 @@ export class SidebarComponent implements OnInit {
       .collection('directMessage')
       .valueChanges({ idField: 'dmID' })
       .subscribe((DM) => {
-          DM.forEach(channels => {
-            channels['users'].forEach(user => {
-              if (user.userId == this.authService.auth.currentUser.uid) {
+        this.allDirectChannles = DM;
+        this.allDirectChannles.forEach(channels => {
+          channels.users.forEach(user => {
+            if (user.userId === this.authService.auth.currentUser.uid) {
+              this.allowedUsers.push(channels);
+              if (!this.allUSers.name) {
                 this.DM_channels.push(channels);
-                console.log(channels['name']);
-                 } 
-              
-            });
+              }
+              console.log('Direct Channel', this.DM_channels);
+            }
+
           });
-       })
+        });
+      })
   }
 
   openDialog() {
@@ -112,9 +121,9 @@ export class SidebarComponent implements OnInit {
 
   //   });
   // }
-  logout(){
+  logout() {
     this.authService.logout().subscribe(() => {
-    //  this.router.navigate(['login']);
+      //  this.router.navigate(['login']);
       window.location.reload();
       this.authService.loggedIn = false;
     });
