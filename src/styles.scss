@@ -266,3 +266,15 @@ pre {
         color: #232946;
     }
 }
+
+.router-outlet {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    margin-left: 300px;
+    padding-top: 65px;
+    background-color: #d4d8f0;
+}

@@ -1,8 +1,7 @@
 <header>
     <mat-toolbar class="box" color="primary">
         <span>Slack-Clone</span>
-        <mat-icon class="close-btn" (click)="inputSideNav.toggle()">close</mat-icon>
-        <mat-icon class="close-btn" (click)="responsvie.toggle()">close</mat-icon>
+        <mat-icon class="close-btn" (click)="closeMenu()">close</mat-icon>
 
         <ng-container *ngIf="authService.currentUser$ |async as user; else loginButton">
             <button mat-button [matMenuTriggerFor]="userMenu">

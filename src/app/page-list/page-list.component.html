@@ -1,18 +1,14 @@
-<app-header [inputSideNav]="sideNav" [responsvie]="drawer" class="header">
+<app-header [responsvie]="drawer" class="header">
 </app-header>
+<app-sidebar #drawer class="sidebar-container">
 
-<mat-drawer-container class="side-nav-container" style="background-color: #d4d8f0;" opened="true">
-    <mat-drawer #sideNav class="side-nav" opened="true" mode="side">
-        <mat-icon class="close-btn" (click)="drawer.toggle()">close</mat-icon>
-        <app-sidebar>
+</app-sidebar>
 
-        </app-sidebar>
-    </mat-drawer>
+
+<div class="router-outlet">
     <router-outlet></router-outlet>
-
-</mat-drawer-container>
-
-<mat-drawer-container>
+</div>
+<!-- <mat-drawer-container>
     <mat-drawer #drawer class="sidenav-responsive" [ngClass]="sidebarOpen? 'd-none' : 'sidenav-responsive' " opened="true">
         <div class="responsiv-button">
             <button (click)="closeSidebar()" mat-fab color="primary">
@@ -24,7 +20,7 @@
 
     </mat-drawer>
 
-</mat-drawer-container>
+</mat-drawer-container> -->
 
 
 

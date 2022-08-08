@@ -1,4 +1,4 @@
-import { Component, Injectable, Input, OnInit } from '@angular/core';
+import { Component, Injectable, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import { DialogAddChannelsComponent } from '../dialog-add-channels/dialog-add-channels.component';
@@ -8,6 +8,8 @@ import { Channel } from '../interface/channel';
 import { AuthenticationService } from '../services/authentication.service';
 import { AsyncPipe } from '@angular/common';
 import { DialogAddDmComponent } from '../dialog-add-dm/dialog-add-dm.component';
+import { MatDrawer } from '@angular/material/sidenav';
+import { SideNavService } from '../services/sidenav.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -25,13 +27,17 @@ export class SidebarComponent implements OnInit {
   allUSers: any = [];
   allowedUsers: any = []
   DM: boolean = false;
-  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
+  @ViewChild('drawer') public sidenav: MatDrawer;
   constructor(
     public dialog: MatDialog,
     private firestore: AngularFirestore,
-    public authService: AuthenticationService) { }
+    public authService: AuthenticationService,
+    private sideNavService : SideNavService) { }
 
   ngOnInit(): void {
+    this.sideNavService.sideNavToggleSubject.subscribe(()=> {
+      this.sidenav.toggle();
+    });
 
     /**
      * Load data form firestore for channels

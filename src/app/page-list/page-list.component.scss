@@ -20,10 +20,6 @@ mat-toolbar {
 }
 
 ///////////////////////////////////////// Side nav ////////////////////////////////////////
-mat-drawer {
-    padding-top: 64px;
-}
-
 .side-nav-container {
     height: 100%;
     padding-top: 64px;
@@ -35,6 +31,10 @@ mat-drawer {
 
 .close-btn {
     position: absolute;
+}
+
+.sidebar-container {
+    position: relative;
 }
 
 .side-nav {
