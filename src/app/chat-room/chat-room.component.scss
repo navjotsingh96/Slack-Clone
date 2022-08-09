@@ -11,7 +11,6 @@
     // left: 300px;
 }
 
-
 /* From NAvi */
 
 .channel-name {
@@ -111,9 +110,10 @@
 .send-btn {
     width: 164px;
     height: 70px;
+    margin-top: 5px;
+
     border-radius: 5px 5px 5px 5px;
     transition: opacity 1s ease-in-out;
-    margin-left: 20px;
     &:hover {
         mat-icon {
             transition: opacity 255ms ease-in-out;
@@ -192,7 +192,6 @@ mat-icon {
     }
 }
 
-
 /************************************************************/
 
 .chat {
@@ -227,4 +226,32 @@ mat-icon {
 
 .user-details-container {
     background-color: black;
+}
+
+.text-con {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+@media (max-width: 1000px) {
+
+
+    .send-btn{
+        height: 50px;
+        width: 100px;
+        padding: 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .bottom {
+        flex-direction: column;
+    }
+    .text-con {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 50%;
+    }
 }
