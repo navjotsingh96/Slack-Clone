@@ -272,3 +272,11 @@ pre {
     height: calc(100% - 65px);
     background-color: #d4d8f0;
 }
+
+
+@media(max-width : 1000px){
+    
+    mat-drawer-content{
+        overflow: hidden !important;	
+    }
+}

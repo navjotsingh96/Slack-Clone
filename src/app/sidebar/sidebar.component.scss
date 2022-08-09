@@ -196,3 +196,16 @@ mat-list-option {
         width: 100%;
     }
 }
+
+
+@media (max-width: 768px) {
+    .mat-drawer-content{
+        overflow: none;
+    }
+    .router-outlet{
+        padding-top: 56px;
+    }
+    .side-nav {
+        width: 100%;
+    }
+}
