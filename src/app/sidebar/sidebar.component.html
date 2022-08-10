@@ -18,7 +18,7 @@
             <div class="channels-main">
                 <mat-selection-list #channel [multiple]="false">
                     <mat-list-option class="channel-list" *ngFor="let channel of allChannels" [routerLink]=" ['/chat/' + channel.customIdName]" [value]="channel">
-                        <a class="link-to-channel">
+                        <a (click)="toogelSideNav()" class="link-to-channel">
                             # {{channel.channelName}}
                         </a>
                     </mat-list-option>
