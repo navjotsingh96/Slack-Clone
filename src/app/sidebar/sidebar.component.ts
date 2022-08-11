@@ -1,4 +1,4 @@
-import { Component, Injectable, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, Injectable, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import { DialogAddChannelsComponent } from '../dialog-add-channels/dialog-add-channels.component';
@@ -26,8 +26,18 @@ export class SidebarComponent implements OnInit {
 
   allUSers: any = [];
   allowedUsers: any = []
+  public innerWidth: any;
   DM: boolean = false;
   @ViewChild('drawer') public sidenav: MatDrawer;
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    /* if(!this.innerWidth){
+      this.innerWidth = window.innerWidth;
+    } else */
+    this.innerWidth = event.path[0].innerWidth;
+    console.log(event.path[0].innerWidth);
+    
+  }
   constructor(
     public dialog: MatDialog,
     private firestore: AngularFirestore,
@@ -50,9 +60,8 @@ export class SidebarComponent implements OnInit {
      */
 
     this.loadDirectChannelDB();
-
-
-
+    this.onResize(event)
+    console.log(this.innerWidth);
   }
 
   loadChannels() {
@@ -103,6 +112,16 @@ export class SidebarComponent implements OnInit {
 
   OpenAddDmChannel() {
     this.dialog.open(DialogAddDmComponent);
+  }
+  toogelSideNav() {
+    this.innerWidth = window.innerWidth;
+    if (this.innerWidth <= 766) {
+      this.sidenav.toggle();
+    console.log('clicked');
+    }
+    console.log(this.innerWidth);
+    
+
   }
 
 
