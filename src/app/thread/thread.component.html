@@ -45,7 +45,7 @@
 <div class="bottom p-absolute">
 
     <div class="editor-container">
-        <editor apiKey="bgeto93fjxds10methgpkyy8y7cqfcbgltl91ww9tnc7h3yt" [init]="
+        <editor apiKey="bgeto93fjxds10methgpkyy8y7cqfcbgltl91ww9tnc7h3yt" class="editor-thread"[init]="
     { toolbar: 'undo redo | styles pre | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
     height: 150,
     branding: false,
@@ -53,19 +53,23 @@
     statusbar: true,
     elementpath: false,
     browser_spellcheck: true
-   }" [(ngModel)]="chat$.message" (keyup.enter)="submit()">
-        </editor>
-    </div>
+}" [(ngModel)]="chat$.message" (keyup.enter)="submit()">
+</editor>
+</div>
+<div class="buttons">
     <div class="file-upload">
         <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
         <input hidden #fileInput (change)="uploadFile($event)" type="file" id="file" name="image" accept=".png, .jpg">
     </div>
     <div class="msg-btn">
         <button class="send-btn" mat-fab color="primary" (click)="submit(); chat$.message='';">
-        <mat-icon>send</mat-icon>
-    </button>
+            <mat-icon>send</mat-icon>
+        </button>
+        
     </div>
-    <!-- <div class="upload-img">
+</div>
+<button click()="backPage"><mat-icon>back</mat-icon></button>
+<!-- <div class="upload-img">
         <input type="file" (change)="uploadFile($event)" />
     <div>{{ uploadPercent | async }}</div>
     <a [href]="downloadURL | async">{{ downloadURL | async }}</a>

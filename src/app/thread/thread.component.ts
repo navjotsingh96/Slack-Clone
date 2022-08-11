@@ -12,6 +12,7 @@ import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { User } from '../interface/user.class';
 import { UserDetailsComponent } from '../user-details/user-details.component';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-thread',
   templateUrl: './thread.component.html',
@@ -257,5 +258,7 @@ export class ThreadComponent implements OnInit {
     const dialogRef = this.dialog.open(UserDetailsComponent)
     dialogRef.componentInstance.userDetailsArray = this.UserDetailsArray;
   }
+
 }
+
 
