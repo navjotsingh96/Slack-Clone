@@ -233,6 +233,19 @@ mat-icon {
     flex-direction: column;
     margin-left: 15px;
 }
+
+
+@media(max-height:1100px){
+    .show-chat{
+        height: 58vh;
+    }
+  
+    .msg-box{
+        margin: 5px 5px 5px 5px;
+    }
+}
+
+
 @media (max-width: 1000px) {
     .channel-name {
         h1 {
