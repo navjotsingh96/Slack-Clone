@@ -95,7 +95,7 @@ export class ThreadComponent implements OnInit {
 
   // Find user with UID
   findUSerbyId(UID) {    
-    return this.users.find((userCorrect => (userCorrect.uid == UID)))
+    return this.users?.find((userCorrect => (userCorrect.uid == UID)))
 
   }
 
@@ -257,6 +257,11 @@ export class ThreadComponent implements OnInit {
     this.UserDetailsArray = this.findUSerbyId(details)
     const dialogRef = this.dialog.open(UserDetailsComponent)
     dialogRef.componentInstance.userDetailsArray = this.UserDetailsArray;
+  }
+  backButton(){
+    console.log('Back button');
+    console.log(this.threadHeading);
+    
   }
 
 }

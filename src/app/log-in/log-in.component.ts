@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HotToastService } from '@ngneat/hot-toast';
 import { User } from 'src/app/interface/user.class';
-import { ChatRoomComponent } from 'src/app/chat-room/chat-room.component';
 
 @Component({
   selector: 'app-log-in',
@@ -26,7 +25,6 @@ export class LoginComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router,
     private toast: HotToastService,
-    private chat: ChatRoomComponent,
 
   ) { }
 
