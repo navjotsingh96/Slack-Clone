@@ -1,6 +1,6 @@
 <div class="bg">
     <app-page-list *ngIf="authService.currentUser$ | async as user"></app-page-list>
 
-    <!--   <router-outlet *ngIf="!authService.loggedIn"></router-outlet> -->
+      <router-outlet *ngIf="!authService.loggedIn"></router-outlet>
 </div>
 <!-- <router-outlet name="page-list"></router-outlet> -->
