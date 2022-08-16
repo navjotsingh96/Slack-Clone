@@ -27,17 +27,15 @@ export class SidebarComponent implements OnInit {
   allUSers: any = [];
   allowedUsers: any = []
   public innerWidth: any;
+  allDirectChannles;
+
   DM: boolean = false;
   @ViewChild('drawer') public sidenav: MatDrawer;
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    /* if(!this.innerWidth){
-      this.innerWidth = window.innerWidth;
-    } else */
-    this.innerWidth = event.path[0].innerWidth;
-    console.log(event.path[0].innerWidth);
-    
+    this.innerWidth = event?.path[0].innerWidth;
   }
+
   constructor(
     public dialog: MatDialog,
     private firestore: AngularFirestore,
@@ -46,24 +44,16 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.sideNavService.sideNavToggleSubject.subscribe(() => {
-      this.sidenav.toggle();
+      this.sidenav?.toggle();
     });
-
-    /**
-     * Load data form firestore for channels
-     */
     this.loadChannels()
-
     this.loadUserFromDB();
-    /**
-     * Load data form firestore for direct message
-     */
-
     this.loadDirectChannelDB();
+    //check screen size
     this.onResize(event)
-    console.log(this.innerWidth);
   }
 
+  //Load data form firestore for channels
   loadChannels() {
     this.firestore
       .collection('channels')
@@ -74,6 +64,7 @@ export class SidebarComponent implements OnInit {
       })
   }
 
+  //Load User data form firestore
   loadUserFromDB() {
     this.firestore
       .collection('users')
@@ -82,7 +73,6 @@ export class SidebarComponent implements OnInit {
         this.allUSers = changes;
       });
   }
-  allDirectChannles;
 
   //To Load Channel and show only to correct User
   loadDirectChannelDB() {
@@ -100,7 +90,6 @@ export class SidebarComponent implements OnInit {
               }
               console.log('Direct Channel', this.DM_channels);
             }
-
           });
         });
       })
@@ -113,15 +102,13 @@ export class SidebarComponent implements OnInit {
   OpenAddDmChannel() {
     this.dialog.open(DialogAddDmComponent);
   }
+
+  //to show or hide Sidenav on Responsive 
   toogelSideNav() {
     this.innerWidth = window.innerWidth;
     if (this.innerWidth <= 766) {
       this.sidenav.toggle();
-    console.log('clicked');
     }
-    console.log(this.innerWidth);
-    
-
   }
 
 
@@ -140,6 +127,7 @@ export class SidebarComponent implements OnInit {
 
   //   });
   // }
+
   logout() {
     this.authService.logout().subscribe(() => {
       //  this.router.navigate(['login']);

@@ -25,7 +25,7 @@
                     <div *ngIf="msg.image" class="image-container">
                         <img class="msg-image" [src]="msg?.image">
                         <div class="image-overlay">
-                            <button (click)="deleteImage(msg.image, msg.customIdName)">Delete</button>
+                            <button (click)="deleteImage(msg?.image, msg.customIdName)">Delete</button>
 
                         </div>
 
@@ -38,9 +38,8 @@
                     </mat-menu>
 
                     <span class="thread"> 
-                        <a [replaceUrl]="true"  [routerLink]=" ['/chat/'+ msg.channelID + '/thread/' + msg.customIdName]">Show Therad </a></span>
+                        <a [replaceUrl]="true" [routerLink]="['/chat/'+ msg.channelID + '/thread/' + msg.customIdName]">Show Therad </a></span>
                     <mat-icon *ngIf="user.uid == msg.user" class="right-down-corner" (click)="deleteMesage(msg.customIdName, msg.image)">delete_outline</mat-icon>
-
                 </div>
             </div>
         </div>

@@ -146,7 +146,7 @@ export class ChatRoomComponent implements OnInit {
 
 
   findUSerbyId(UID) {
-    return this.users.find((userCorrect => (userCorrect.uid == UID)))
+    return this.users?.find((userCorrect => (userCorrect.uid == UID)))
 
   }
 
