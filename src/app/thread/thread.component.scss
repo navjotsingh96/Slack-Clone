@@ -18,7 +18,8 @@
 .border-bottom {
     border-bottom: 2px solid;
 }
-.buttons{
+
+.buttons {
     display: flex;
     flex-direction: column-reverse;
     justify-content: space-between;
@@ -26,14 +27,25 @@
     /* gap: 20px; */
     margin-left: 13px;
 }
+
 .msg-image-threads {
     width: 50% !important;
 }
 
-@media(max-width: 760px){
-    .editor-thread{
+.thread-heading {
+    button {
+        background-color: #232946 !important;
+        &:hover {
+            background-color: #3f51b5 !important;
+        }
     }
-    .editor-container{
+}
+
+mat-mini-fab {}
+
+@media(max-width: 760px) {
+    .editor-thread {}
+    .editor-container {
         width: fit-content;
         width: 60%;
     }
