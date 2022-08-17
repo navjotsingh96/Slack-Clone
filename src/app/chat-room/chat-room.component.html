@@ -25,7 +25,9 @@
                     <div *ngIf="msg.image" class="image-container">
                         <img class="msg-image" [src]="msg?.image">
                         <div class="image-overlay">
-                            <button (click)="deleteImage(msg?.image, msg.customIdName)">Delete</button>
+                            <button mat-icon-button (click)="deleteImage(msg?.image, msg.customIdName)">
+                                <mat-icon>delete_outline</mat-icon>
+                              </button>
 
                         </div>
 

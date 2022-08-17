@@ -105,9 +105,11 @@ body {
 }
 
 .msg-image {
-    height: 90% !important;
-    width: 90% !important;
+    height: auto;
+    width: auto;
     object-fit: contain;
+    max-width: 90%;
+    max-height: 90%;
 }
 
 .file-upload {
@@ -273,10 +275,8 @@ pre {
     background-color: #d4d8f0;
 }
 
-
-@media(max-width : 1000px){
-    
-    mat-drawer-content{
-        overflow: hidden !important;	
+@media(max-width: 1000px) {
+    mat-drawer-content {
+        overflow: hidden !important;
     }
 }
