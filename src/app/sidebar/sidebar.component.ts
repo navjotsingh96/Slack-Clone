@@ -70,11 +70,12 @@ export class SidebarComponent implements OnInit {
       .collection('directMessage')
       .valueChanges({ idField: 'dmID' })
       .subscribe((DM) => {
+        this.DM_channels = [];
           DM.forEach(channels => {
             channels['users'].forEach(user => {
               if (user.userId == this.authService.auth.currentUser.uid) {
                 this.DM_channels.push(channels);
-                console.log(this.DM_channels);
+                console.log('DM channels', this.DM_channels);
               }
             });
           });
