@@ -2,3 +2,13 @@
     height: 100vh;
     // height: 100%;
 }
+
+@media(max-width: 1000px) {
+    .bg {
+        height: 100vh;
+        // height: 100%;
+    }
+    .mat-drawer-content{
+        overflow: none;
+    }
+}

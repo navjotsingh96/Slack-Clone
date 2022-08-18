@@ -105,9 +105,11 @@ body {
 }
 
 .msg-image {
-    height: 90% !important;
-    width: 90% !important;
+    height: auto;
+    width: auto;
     object-fit: contain;
+    max-width: 90%;
+    max-height: 90%;
 }
 
 .file-upload {
@@ -243,5 +245,38 @@ pre {
     }
     &:hover {
         opacity: 1;
+    }
+}
+
+.chat-text {
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.log-out-btn {
+    color: white;
+    background-color: #4d66df96;
+    width: fit-content !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    transition: all 115ms ease-in-out;
+    &:hover {
+        background-color: #d4d8f0 !important;
+        color: #232946;
+    }
+}
+
+.router-outlet {
+    padding-top: 65px;
+    height: calc(100% - 65px);
+    background-color: #d4d8f0;
+}
+
+@media(max-width: 1000px) {
+    mat-drawer-content {
+        overflow: hidden !important;
     }
 }

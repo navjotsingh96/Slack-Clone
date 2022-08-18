@@ -1,6 +1,11 @@
 <header>
     <mat-toolbar class="box" color="primary">
-        <span>Slack-Clone</span>
+        <div class="left-side">
+
+            <mat-icon class="close-btn" (click)="closeMenu()">menu</mat-icon>
+
+            <span>Slack-Clone</span>
+        </div>
         <ng-container *ngIf="authService.currentUser$ |async as user; else loginButton">
             <button mat-button [matMenuTriggerFor]="userMenu">
                 <div class="user">
@@ -20,19 +25,19 @@
             </button>
         </ng-template>
 
-    
-    <mat-menu #userMenu="matMenu">
-        <button mat-menu-item routerLink="home">
+
+        <mat-menu #userMenu="matMenu">
+            <button mat-menu-item routerLink="home">
             Home
         </button>
-        <button mat-menu-item routerLink="profile">
+            <button mat-menu-item routerLink="profile">
             Profile
         </button>
-        <button mat-menu-item (click)="logout()">
+            <button mat-menu-item (click)="logout()">
             Logout
         </button>
-       
-    </mat-menu>
-</mat-toolbar>
+
+        </mat-menu>
+    </mat-toolbar>
 
 </header>

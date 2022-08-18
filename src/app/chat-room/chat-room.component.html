@@ -1,7 +1,9 @@
 <div class="chat-container">
     <div class="channel-name">
-        <h1 class="m-left-20">{{activeChannel?.channelName}}</h1>
-        <mat-icon class="m-left-20 edit-channel" (click)="editChannel(activeChannel?.channelID)">edit_outline</mat-icon>
+        <h1 *ngIf="!directChannels ||activeChannel" class="m-left-20">{{activeChannel?.channelName}}</h1>
+        <h1 *ngIf="directChannels || !activeChannel" class="m-left-20">{{directChannels?.name}}</h1>
+        <mat-icon *ngIf="activeChannel" class="m-left-20 edit-channel" (click)="editChannel(activeChannel?.channelID)">edit_outline</mat-icon>
+        <mat-icon *ngIf="!activeChannel" class="m-left-20 edit-channel" (click)="editChannel(directChannels?.dmID)">edit_outline</mat-icon>
     </div>
     <div class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
         <div class="nomsg" *ngIf="zeroMsg">
@@ -23,7 +25,9 @@
                     <div *ngIf="msg.image" class="image-container">
                         <img class="msg-image" [src]="msg?.image">
                         <div class="image-overlay">
-                            <button (click)="deleteImage(msg.image, msg.customIdName)">Delete</button>
+                            <button mat-icon-button (click)="deleteImage(msg?.image, msg.customIdName)">
+                                <mat-icon>delete_outline</mat-icon>
+                              </button>
 
                         </div>
 
@@ -36,9 +40,8 @@
                     </mat-menu>
 
                     <span class="thread"> 
-                        <a [replaceUrl]="true"  [routerLink]=" ['/chat/'+ msg.channelID + '/thread/' + msg.customIdName]">Show Therad </a></span>
+                        <a [replaceUrl]="true" [routerLink]="['/chat/'+ msg.channelID + '/thread/' + msg.customIdName]">Show Therad </a></span>
                     <mat-icon *ngIf="user.uid == msg.user" class="right-down-corner" (click)="deleteMesage(msg.customIdName, msg.image)">delete_outline</mat-icon>
-
                 </div>
             </div>
         </div>
@@ -55,7 +58,7 @@
 
     <div class="bottom p-absolute">
         <div class="editor-container">
-            <editor apiKey="bgeto93fjxds10methgpkyy8y7cqfcbgltl91ww9tnc7h3yt" [init]="
+            <editor class="editor" apiKey="bgeto93fjxds10methgpkyy8y7cqfcbgltl91ww9tnc7h3yt" [init]="
     { toolbar: 'undo redo | styles pre | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
     height: 150,
     branding: false,
@@ -66,14 +69,18 @@
    }" [(ngModel)]="chat$.message" (keyup.enter)="submit()" placeholder="Message...">
             </editor>
         </div>
-        <div class="file-upload">
-            <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-            <input hidden #fileInput (change)="uploadFile($event)" type="file" id="file" name="image" accept=".png, .jpg">
-        </div>
-        <div class="msg-btn">
-            <button (click)="submit()" class="send-btn" mat-fab color="primary">
-        <mat-icon>send</mat-icon>
-    </button>
+
+        <div class="text-con">
+            <div class="file-upload">
+                <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+                <input hidden #fileInput (change)="uploadFile($event)" type="file" id="file" name="image" accept=".png, .jpg">
+            </div>
+            <div class="msg-btn">
+                <button (click)="submit()" class="send-btn" mat-fab color="primary">
+            <mat-icon>send</mat-icon>
+        </button>
+            </div>
+
         </div>
     </div>
     <div>

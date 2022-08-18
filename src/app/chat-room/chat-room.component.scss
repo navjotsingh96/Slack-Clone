@@ -11,14 +11,16 @@
     // left: 300px;
 }
 
-
 /* From NAvi */
 
 .channel-name {
-    border-bottom: 2px solid grey;
-    margin-top: 30px;
     position: relative;
     display: flex;
+    background-color: #ffffff8c;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 20px;
+    box-shadow: 1px 1px 19px 0px #232946;
     h1 {
         margin-bottom: 20px;
         font: revert;
@@ -101,16 +103,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    bottom: 40px !important;
+    bottom: 9px !important;
     top: unset !important;
 }
 
 .send-btn {
     width: 164px;
     height: 70px;
+    margin-top: 5px;
+
     border-radius: 5px 5px 5px 5px;
     transition: opacity 1s ease-in-out;
-    margin-left: 20px;
     &:hover {
         mat-icon {
             transition: opacity 255ms ease-in-out;
@@ -167,8 +170,9 @@ mat-icon {
 
 .show-chat {
     margin: 16px;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 70vh;
+    margin-top: 3px;
 }
 
 .message-container {
@@ -187,7 +191,6 @@ mat-icon {
         }
     }
 }
-
 
 /************************************************************/
 
@@ -223,4 +226,86 @@ mat-icon {
 
 .user-details-container {
     background-color: black;
+}
+
+.text-con {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+
+
+@media(max-height:1100px){
+    .show-chat{
+        height: 58vh;
+    }
+  
+    .msg-box{
+        margin: 5px 5px 5px 5px;
+    }
+}
+
+
+@media (max-width: 1000px) {
+    .channel-name {
+        h1 {
+            font-size: 18px;
+        }
+    }
+    .send-btn {
+        height: 50px;
+        width: 100px;
+        padding: 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .bottom {
+        flex-direction: column;
+    }
+    .text-con {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 50%;
+    }
+
+    .thread {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 700px) {
+    .text-con{
+        margin-top: 34px;
+    }
+    .editor-container{
+        width: 100%;
+        display :flex;
+        justify-content: center;
+        align-items: center;
+ 
+    }
+    .editor{
+        width:95%;
+        height: 40%;
+    }
+   
+
+
+}
+
+@media (max-height: 700px) {
+    .bottom{
+        width: 100%;
+        height: 182px;
+    }
+    .show-chat {
+        height: 50vh;
+    }
+    .channel-name{
+        padding-top: 15px;
+        padding-bottom: 1px;
+     }
 }

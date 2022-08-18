@@ -2,7 +2,11 @@
     height: 100vh;
 }
 
-.header{
+.sidenav-responsive {
+    display: none;
+}
+
+.header {
     position: fixed;
     top: 0px;
     left: 0px;
@@ -16,18 +20,25 @@ mat-toolbar {
 }
 
 ///////////////////////////////////////// Side nav ////////////////////////////////////////
-
-mat-drawer{
-padding-top: 64px;
-}
-
-
 .side-nav-container {
     height: 100%;
     padding-top: 64px;
 }
 
+.d-none {
+    display: none;
+}
+
+.close-btn {
+    position: absolute;
+}
+
+.sidebar-container {
+    position: relative;
+}
+
 .side-nav {
+    display: flex;
     width: 300px;
     background-color: #232946 !important;
     padding-top: 20px;
@@ -44,5 +55,23 @@ padding-top: 64px;
     p {
         color: #b8c1ec;
         width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidenav-responsive {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        background-color: #232946;
+        color: white;
+    }
+    .responsiv-button {
+        display: inline;
+        width: 30px;
+        position: absolute;
+        top: 60px;
+        z-index: 1;
+        right: 38px;
     }
 }

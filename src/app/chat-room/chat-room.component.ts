@@ -29,12 +29,13 @@ export class ChatRoomComponent implements OnInit {
   activeChannel;
   channelID: any;
   messageID: any;
-
+  directChannels;
   chat$: Chat = new Chat;
   users;
   userID;
   allUser: any = [];
-
+  editOtion = false;
+  editOptionDirect = false;
 
   UserDetailsArray;
 
@@ -71,10 +72,13 @@ export class ChatRoomComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap) => {
       this.channelID = paramMap.get('id');
       this.chat$.channelID = this.channelID;
-      this.getMessages();
       this.getChannels();
+      this.getMessages();
       this.allMessages = []; // when user click on another channel it array will be empty
       this.getAllUserFfromirebase();
+      this.activeChannel = [];
+      this.directChannels =[];
+      this.getDirectChannels();
     });
   }
   // set User in firbase in  collection with uid
@@ -95,8 +99,21 @@ export class ChatRoomComponent implements OnInit {
       .subscribe((changes: any) => {
         if (!changes.channelName) return
         this.activeChannel = changes;
+        console.log(this.activeChannel);
+        this.editOtion = true;
       })
+  }
 
+  getDirectChannels() {
+    this.firestore
+      .collection('directMessage')
+      .doc(this.channelID)
+      .valueChanges({ idField: 'dmID' })
+      .subscribe((name => {
+        if (!name['name']) return
+        this.directChannels = name;
+        console.log('DK from Chat',this.directChannels);
+      }))
   }
 
   // to set User UID
@@ -129,7 +146,7 @@ export class ChatRoomComponent implements OnInit {
 
 
   findUSerbyId(UID) {
-    return this.users.find((userCorrect => (userCorrect.uid == UID)))
+    return this.users?.find((userCorrect => (userCorrect.uid == UID)))
 
   }
 
@@ -220,12 +237,12 @@ export class ChatRoomComponent implements OnInit {
   }
 
   // to save edit messages
-/*   saveMessage(message) {
-    this.firestore
-      .collection(this.channelID)
-      .doc(message)
-      .update(this.chat$.toJSON())
-  } */
+  /*   saveMessage(message) {
+      this.firestore
+        .collection(this.channelID)
+        .doc(message)
+        .update(this.chat$.toJSON())
+    } */
 
   // Open dialog on Edit
   openDialog(messageID) {
@@ -297,9 +314,11 @@ export class ChatRoomComponent implements OnInit {
   }
   editChannel(id) {
     const dialogRef = this.dialog.open(DialogEditChannelnameComponent)
-   dialogRef.componentInstance.currentChannelID = id; 
+    dialogRef.componentInstance.currentChannelID = id;
+    console.log(id);
+
   }
-  saveChannelName(){
+  saveChannelName() {
 
   }
 }
