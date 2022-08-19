@@ -39,6 +39,8 @@ export class ChatRoomComponent implements OnInit {
 
   UserDetailsArray;
 
+  fileName: string;
+
   selectedFile: File = null;
   fb;
   downloadURL: Observable<string>;
@@ -76,8 +78,8 @@ export class ChatRoomComponent implements OnInit {
       this.getMessages();
       this.allMessages = []; // when user click on another channel it array will be empty
       this.getAllUserFfromirebase();
-      this.activeChannel = [];
-      this.directChannels =[];
+      this.activeChannel = [];
+      this.directChannels = [];
       this.getDirectChannels();
     });
   }
@@ -112,7 +114,7 @@ export class ChatRoomComponent implements OnInit {
       .subscribe((name => {
         if (!name['name']) return
         this.directChannels = name;
-        console.log('DK from Chat',this.directChannels);
+        console.log('DK from Chat', this.directChannels);
       }))
   }
 
@@ -163,10 +165,12 @@ export class ChatRoomComponent implements OnInit {
   //  save messages and images to firestroe
   submit() {
     if (!this.chat$.message && !this.fb) {
-      this.enterMessageSnackBar()
+      return this.enterMessageSnackBar()
     }
     if (this.fb && !this.chat$.message) {
-      this.sumbitImageWithMessage()
+      this.sumbitImageWithMessage();
+      window.location.reload();
+
     }
     if (!this.fb) {
       this.submitMessage();
@@ -176,6 +180,7 @@ export class ChatRoomComponent implements OnInit {
     }
     this.chat$.message = '';
     this.chat$.image = '';
+    this.fileName = '';
   }
 
   //Upload image and show
@@ -277,6 +282,7 @@ export class ChatRoomComponent implements OnInit {
     const filePath = `uploadedImages/${file.name}`;
     const fileRef = this.storage.ref(filePath);
     const task = this.storage.upload(filePath, file);
+    this.fileName = file.name;
     task
       .snapshotChanges()
       .pipe(
@@ -292,11 +298,15 @@ export class ChatRoomComponent implements OnInit {
       .subscribe(url => {
         if (url) {
           console.log(url);
+          this.emptyTask(task)
+
         }
       });
   }
 
-
+  emptyTask(task) {
+    task = '';
+  }
   // if user delete only image 
   deleteImage(downloadURL, id) {
     this.storage.storage.refFromURL(downloadURL).delete()
@@ -314,8 +324,9 @@ export class ChatRoomComponent implements OnInit {
   }
   editChannel(id) {
     const dialogRef = this.dialog.open(DialogEditChannelnameComponent)
-    dialogRef.componentInstance.currentChannelID = id;
+    dialogRef.componentInstance.currentChannelID = this.channelID;
     console.log(id);
+    console.log(this.channelID);
 
   }
   saveChannelName() {

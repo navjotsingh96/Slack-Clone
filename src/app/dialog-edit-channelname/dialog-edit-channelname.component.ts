@@ -14,29 +14,62 @@ export class DialogEditChannelnameComponent implements OnInit {
     private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.getChannles();
+
+
+  }
+  getChannles() {
     this.firestore
       .collection('channels')
       .doc(this.currentChannelID)
       .valueChanges()
       .subscribe((channelname => {
-        this.value = channelname['channelName'];
-        console.log(channelname);
-        console.log(this.value);
+        if (channelname) {
+          this.value = channelname['channelName'];
+          console.log('true');
+        }
+        if (!channelname) {
+          console.log('error');
+          this.getDirectChannels()
+        }
+      }))
+  }
+
+  getDirectChannels() {
+    this.firestore
+      .collection('directMessage')
+      .doc(this.currentChannelID)
+      .valueChanges()
+      .subscribe((channel => {
+        console.log(channel);
+        this.value = channel['name']
 
       }))
   }
+
 
   update() {
     this.firestore
       .collection('channels')
       .doc(this.currentChannelID)
-      .update({channelName :this.value})
+      .update({ channelName: this.value })
       .catch((error => {
         console.log(error);
+        this.updateDirectChannel();
       }))
       .then((done => {
         console.log('done', done);
         this.openSnackBar();
+      }))
+  }
+
+  updateDirectChannel() {
+    this.firestore
+      .collection('directMessage')
+      .doc(this.currentChannelID)
+      .update({ name: this.value })
+      .catch((error => {
+        console.log(error);
       }))
   }
   openSnackBar() {
