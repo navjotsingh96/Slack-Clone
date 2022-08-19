@@ -197,27 +197,26 @@ mat-list-option {
     }
 }
 
-
 @media (max-width: 768px) {
-    .mat-drawer-content{
+    .mat-drawer-content {
         overflow: none;
     }
-    .router-outlet{
+    .router-outlet {
         padding-top: 56px;
     }
     .side-nav {
         width: 100%;
     }
-    .log-out-btn{
+    .log-out-btn {
         display: none;
     }
-    .chat{
+    .chat {
         display: flex;
         justify-content: center;
         align-items: center;
         text-align: center;
     }
-    h2{
+    h2 {
         text-align: center;
     }
 }

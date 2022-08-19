@@ -7,6 +7,7 @@ import { LoginComponent } from './log-in/log-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { canActivate, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { ProfileComponent } from './profile/profile.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectTooHome = () => redirectLoggedInTo(['page-list']);
@@ -16,23 +17,39 @@ const routes: Routes = [
 
   { path: 'home', component: HomeComponent, ...canActivate(redirectToLogin) },
 
-  { path: 'profile', component: ProfileComponent, ...canActivate(redirectToLogin) },  
+  { path: 'profile', component: ProfileComponent, ...canActivate(redirectToLogin) },
 
-  { path: 'chat', component: ChatRoomComponent, ...canActivate(redirectToLogin) },
+  {
+    path: 'chat', component: ChatRoomComponent,
+    data: { state: 'one' },
+    ...canActivate(redirectToLogin)
+  },
 
-  { path: 'chat/:id', component: ChatRoomComponent, ...canActivate(redirectToLogin) },
+  {
+    path: 'chat/:id', component: ChatRoomComponent,
+    data: { state: 'two' },
+    ...canActivate(redirectToLogin)
+  },
 
-  { path: 'chat/:id/thread/:id', component: ThreadComponent, ...canActivate(redirectToLogin) },
+  {
+    path: 'chat/:id/thread/:id', component: ThreadComponent,
+    data: { state: 'three' },
+    ...canActivate(redirectToLogin)
+  },
 
-  { path: 'theard', component: ThreadComponent, ...canActivate(redirectToLogin) },
+  {
+    path: 'theard', component: ThreadComponent,
+    data: { state: 'four' },
+    ...canActivate(redirectToLogin)
+  },
 
   { path: 'login', component: LoginComponent, ...canActivate(redirectTooHome) },
 
   { path: 'sign-up', component: SignUpComponent, },
 
- 
 
-  
+
+
 
 
   // { path: '', redirectTo: 'page-list', pathMatch: 'full'},
@@ -83,7 +100,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes),
+    BrowserAnimationsModule
+  ],
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }
