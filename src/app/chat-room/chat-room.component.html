@@ -22,7 +22,7 @@
 
                 <div class="chat-messages">
                     <span [innerHTML]="msg?.message"></span>
-                    <div *ngIf="msg.image" class="image-container">
+                    <div *ngIf="msg.image" (click)="previewImage(msg?.image)" class="image-container">
                         <img class="msg-image" [src]="msg?.image">
                         <div class="image-overlay">
                             <button mat-icon-button (click)="deleteImage(msg?.image, msg.customIdName)">
@@ -43,7 +43,9 @@
                         <a [replaceUrl]="true" [routerLink]="['/chat/'+ msg.channelID + '/thread/' + msg.customIdName]">Show Therad </a></span>
                     <mat-icon *ngIf="user.uid == msg.user" class="right-down-corner" (click)="deleteMesage(msg.customIdName, msg.image)">delete_outline</mat-icon>
                 </div>
+
             </div>
+
         </div>
     </div>
 
@@ -90,4 +92,11 @@
         <input id="user-name" type="text" value="{{user.displayName}}">
     </div>
 
+</div>
+<div *ngIf="preview" class="preview">
+    <button mat-icon-button (click)="preview = false">
+        <mat-icon>close</mat-icon>
+
+      </button>
+    <img [src]="fullscrennImage">
 </div>

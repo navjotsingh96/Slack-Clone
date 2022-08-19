@@ -37,6 +37,8 @@ export class ChatRoomComponent implements OnInit {
   editOtion = false;
   editOptionDirect = false;
 
+  preview:boolean =false;
+  fullscrennImage;
   UserDetailsArray;
 
   fileName: string;
@@ -328,6 +330,12 @@ export class ChatRoomComponent implements OnInit {
     console.log(id);
     console.log(this.channelID);
 
+  }
+  previewImage(image){
+    this.preview = true;
+    this.fullscrennImage = image
+    console.log(this.preview, image);
+    
   }
   saveChannelName() {
 
