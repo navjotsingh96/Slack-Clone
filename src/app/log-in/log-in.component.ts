@@ -62,6 +62,10 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['home']);
     });
   }
+
+  guestSignIn(){
+    this.authService.guestLogin();
+  }
   
 }
 
