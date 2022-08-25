@@ -74,8 +74,8 @@
 
         <div class="text-con">
             <div class="file-upload">
-                <button type="button" mat-raised-button (click)="fileInput.click()">{{ fileName ||'Choose File'}}</button>
-                <input hidden #fileInput (change)="uploadFile($event)" type="file" id="file" name="image" accept=".png, .jpg">
+                <button class="upload-button" type="button" mat-raised-button (click)="fileInput.click()">{{ fileName ||'Choose File'}}</button>
+                <input class="upload-input" hidden #fileInput (change)="uploadFile($event)" type="file" id="file" name="image" accept=".png, .jpg">
             </div>
             <div class="msg-btn">
                 <button (click)="submit()" class="send-btn" mat-fab color="primary">
