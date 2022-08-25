@@ -1,4 +1,23 @@
+<header>
+    <mat-toolbar class="box" color="primary">
+        <div class="left-side">
+
+            <span>Slack-Clone</span>
+        </div>
+
+
+        <ng-template>
+            <button mat-button routerLink="login">Login
+                <mat-icon>login</mat-icon>
+            </button>
+        </ng-template>
+    </mat-toolbar>
+
+</header>
+
+
 <div class="block">
+
     <div class="form-container">
 
         <h1>Welcome to our Slack-Clone</h1>
@@ -13,10 +32,10 @@
                 <input matInput placeholder="Password" formControlName="password" type="password">
                 <mat-error *ngIf="password?.errors?.['required']"></mat-error>
             </mat-form-field>
-            <div class="center margin-top">
+            <div class="center margin-top coloum">
 
-                <button mat-raised-button color="primary" type="submit">Login</button>
-                <button mat-raised-button (click)="enterGuestName()">Try as Guest</button>
+                <button class="login" mat-raised-button color="primary" type="submit">Login</button>
+                <button class="guest" mat-raised-button (click)="enterGuestName()">Try as Guest</button>
 
             </div>
             <div>

@@ -1,9 +1,9 @@
-
-.block{
+.block {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
+    max-height: calc(100% - 65px);
 }
 
 .content {
@@ -27,13 +27,32 @@
 .center {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-.margin-top{
+.coloum {
+    flex-direction: column;
+}
+
+.login {
+    width: 80%;
+    height: 45px;
+    margin-bottom: 15px;
+}
+
+.guest {
+    background-color: #fe3939 !important;
+    color: white !important;
+    &:hover {
+        background-color: #ff1f1f !important;
+    }
+}
+
+.margin-top {
     margin-top: 20px;
 }
 
-.block{
+.block {
     display: flex;
     justify-content: center;
 }

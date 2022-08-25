@@ -43,4 +43,15 @@ export class HeaderComponent implements OnInit {
     
     console.log('change profile img');
   }
+  deleteAccount(){
+    this.authService.deleteUser();
+    setTimeout(() => {
+      window.location.reload();
+      this.authService.loggedIn = false;
+  
+      this.router.navigate(['login']);
+  
+    }, 3000);
+
+  }
 }
