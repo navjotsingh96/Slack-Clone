@@ -9,7 +9,7 @@
         <ng-container *ngIf="authService.currentUser$ |async as user; else loginButton">
             <button mat-button [matMenuTriggerFor]="userMenu">
                 <div class="user">
-                    <img class="user-img" [src]="user?.photoURL">
+                    <img class="user-img" [src]="user?.photoURL ?? 'assets/profile-img/profile-3.png'">
                     {{user.displayName}}
 
                 </div>
