@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HotToastService } from '@ngneat/hot-toast';
 import { User } from 'src/app/interface/user.class';
+import { GuestNameComponent } from '../guest-name/guest-name.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-log-in',
@@ -25,6 +27,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router,
     private toast: HotToastService,
+    public dialog: MatDialog
 
   ) { }
 
@@ -62,7 +65,9 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['home']);
     });
   }
-
+  enterGuestName(){
+    this.dialog.open(GuestNameComponent);
+  }
   guestSignIn(){
     this.authService.guestLogin();
   }

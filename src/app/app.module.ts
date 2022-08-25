@@ -42,6 +42,7 @@ import { MatListModule } from '@angular/material/list';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { DialogEditChannelnameComponent } from './dialog-edit-channelname/dialog-edit-channelname.component';
 import { MatCardModule } from '@angular/material/card';
+import { GuestNameComponent } from './guest-name/guest-name.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +62,8 @@ import { MatCardModule } from '@angular/material/card';
     DialogEditMessagesComponent,
     DialogAddDmComponent,
     UserDetailsComponent,
-    DialogEditChannelnameComponent
+    DialogEditChannelnameComponent,
+    GuestNameComponent
 
   ],
   imports: [

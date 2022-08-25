@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, UserProfile } from 'firebase/auth';
 import { concatMap, from, of, switchMap, Observable } from 'rxjs';
+import { Guest } from '../interface/guest';
 import { User } from '../interface/user.class';
 
 @Injectable({
@@ -20,7 +21,9 @@ export class AuthenticationService {
 
   currentUser$ = authState(this.auth)            // Here we get the current user
   user: User;
-
+  guset : Guest;
+  GuestName:string;
+  deleteUser;
   constructor(public auth: Auth, private firestore: AngularFirestore,
     public fireAuth: AngularFireAuth,
     public route: Router) {
@@ -31,8 +34,10 @@ export class AuthenticationService {
 
   }
 
-  login(username: string, password: string) {              // Here we login a user
-    return from(signInWithEmailAndPassword(this.auth, username, password))
+  login(username: string, password: string) {  
+   this.deleteUser = from(signInWithEmailAndPassword(this.auth, username, password))  ;
+     return from(signInWithEmailAndPassword(this.auth, username, password))          // Here we login a user
+    
   }
 
   signUp(name: string, email: string, password: string) {
@@ -49,16 +54,23 @@ export class AuthenticationService {
   }
 
   guestLogin() {
+   
     this.fireAuth.signInAnonymously().then((async () => {
       const user = this.auth.currentUser
-      await from(updateProfile(user, { displayName: 'Guest' }));
+      await from(updateProfile(user, { displayName: `${this.GuestName}` }));
       this.route.navigate(['home'])
     }))
 
   }
 
-  logout() {                                           // Here we logout a user
-    return from(this.auth.signOut());
+ logout() {       
+    if(this.auth.currentUser.isAnonymous){
+      const User = this.auth.currentUser;
+     User.delete();
+     from(this.auth.signOut())
+    } else {                                   // Here we logout a user
+    from(this.auth.signOut());
+    }
   }
 
 
