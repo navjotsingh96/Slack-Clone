@@ -46,7 +46,7 @@ export class ThreadComponent implements OnInit {
     this.authService.currentUser$.subscribe(user => {
       if (user) {
         this.user = new User(user);
-        console.log(this.user);
+
       }
     });
   }
@@ -154,7 +154,6 @@ export class ThreadComponent implements OnInit {
       .collection(this.messageID)
       .add(this.chat$.toJSON())
       .then((added => {
-        console.log('Added', added);
         this.scrollObjectDown(this.threadContainer)
       }))
   }
@@ -219,7 +218,6 @@ export class ThreadComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogEditMessagesComponent)
     dialogRef.componentInstance.threadMessageID = messageID;
     dialogRef.componentInstance.messageID = this.messageID;
-    console.log('from thrread', messageID);
   }
 
   // scroll down if new message were sent
@@ -242,7 +240,7 @@ export class ThreadComponent implements OnInit {
             if (url) {
               this.fb = url;
             }
-            console.log(this.fb);
+
           });
         })
       )
@@ -253,15 +251,9 @@ export class ThreadComponent implements OnInit {
       });
   }
   UserDetails(details) {
-    console.log(details);
     this.UserDetailsArray = this.findUSerbyId(details)
     const dialogRef = this.dialog.open(UserDetailsComponent)
     dialogRef.componentInstance.userDetailsArray = this.UserDetailsArray;
-  }
-  backButton(){
-    console.log('Back button');
-    console.log(this.threadHeading);
-    
   }
 
 }

@@ -3,12 +3,16 @@
     // height: 100%;
 }
 
+.header-login {
+    position: fixed !important;
+}
+
 @media(max-width: 1000px) {
     .bg {
         height: 100vh;
         // height: 100%;
     }
-    .mat-drawer-content{
+    .mat-drawer-content {
         overflow: none;
     }
 }

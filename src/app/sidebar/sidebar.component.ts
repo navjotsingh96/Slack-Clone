@@ -60,7 +60,6 @@ export class SidebarComponent implements OnInit {
       .valueChanges({ idField: 'customIdName' })
       .subscribe((changes: any) => {
         this.allChannels = changes;
-        console.log('All Channels: ', this.allChannels)
       })
   }
 
@@ -85,7 +84,6 @@ export class SidebarComponent implements OnInit {
             channels['users'].forEach(user => {
               if (user.userId == this.authService.auth.currentUser.uid) {
                 this.DM_channels.push(channels);
-                console.log(this.DM_channels);
               }
             });
           });

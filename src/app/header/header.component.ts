@@ -25,9 +25,9 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log();
     
   }
+
   logout(){
     this.authService.logout()
      this.router.navigate(['login']);
@@ -41,8 +41,9 @@ export class HeaderComponent implements OnInit {
   
   changeProfileImg(){
     
-    console.log('change profile img');
   }
+
+  // delete account form Firebase 
   deleteAccount(){
     this.authService.deleteUser();
     setTimeout(() => {

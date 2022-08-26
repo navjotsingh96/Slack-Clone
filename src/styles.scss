@@ -22,6 +22,11 @@ body {
     margin-left: 20px !important;
 }
 
+.header-login-link {
+    cursor: pointer;
+    margin-left: calc(50px - 16px);
+}
+
 .m-right-20 {
     // mr-20 maybe ?
     margin-right: 20px;

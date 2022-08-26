@@ -76,7 +76,6 @@ export class AuthenticationService {
       setTimeout(() => {
         from(this.auth.signOut())
       }, 3000);
-      console.log(done);
       this.snackBar.open('Account deleted. You will be automatticaly loged out', '', {
         duration: 3000
       });

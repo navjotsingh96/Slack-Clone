@@ -25,15 +25,12 @@ export class DialogEditMessagesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getMsg();
-    console.log(this.currentChannelID);
-    
-
+    this.getMsg();    
   }
+
   // get Messages from Channel and value
   getMsg() {
     if (this.channelID) {
-      console.log('channelID)', this.channelID);
       this.firestore
         .collection(this.channelID)
         .doc(this.messageID)
@@ -43,7 +40,6 @@ export class DialogEditMessagesComponent implements OnInit {
         }));
     }
     if (!this.channelID) {
-      console.log('channelID)', this.channelID);
 
       this.firestore
         .collection('threads')
@@ -52,22 +48,17 @@ export class DialogEditMessagesComponent implements OnInit {
         .doc(this.threadMessageID)
         .valueChanges({ idField: 'customIdName' })
         .subscribe((thread => {
-          console.log('Threads', thread['message']);
           this.value = thread['message']
 
         }));
     }
     if (this.currentChannelID && !this.channelID) {
-      console.log('currentChannelID)', this.currentChannelID);
-
       this.firestore
         .collection('channel')
         .doc(this.currentChannelID)
         .valueChanges({ idField: 'customIdName' })
         .subscribe((Channel => {
           this.value = Channel['channelName']
-          console.log(this.value);
-
         }))
     }
   }
@@ -93,8 +84,8 @@ export class DialogEditMessagesComponent implements OnInit {
         this.openSnackBar();
       }))
   }
-  //update changes of threads
 
+  //update changes of threads
   updateThread() {
     this.firestore
       .collection('threads')
@@ -106,11 +97,11 @@ export class DialogEditMessagesComponent implements OnInit {
         console.log(error);
       }))
       .then((done => {
-        console.log('Done', done);
         this.openSnackBar()
       }))
   }
 
+  //update Channel name in DB
   updateChannelName() {
     this.firestore
       .collection('channel')
@@ -120,7 +111,6 @@ export class DialogEditMessagesComponent implements OnInit {
         console.log(error);
       }))
       .then((done => {
-        console.log('Done', done);
         this.openSnackBar()
       }))
   }

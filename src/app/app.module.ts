@@ -43,6 +43,9 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { DialogEditChannelnameComponent } from './dialog-edit-channelname/dialog-edit-channelname.component';
 import { MatCardModule } from '@angular/material/card';
 import { GuestNameComponent } from './guest-name/guest-name.component';
+import { FooterComponent } from './footer/footer.component';
+import { ImprintComponent } from './imprint/imprint.component';
+import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +66,10 @@ import { GuestNameComponent } from './guest-name/guest-name.component';
     DialogAddDmComponent,
     UserDetailsComponent,
     DialogEditChannelnameComponent,
-    GuestNameComponent
+    GuestNameComponent,
+    FooterComponent,
+    ImprintComponent,
+    LegalNoticeComponent
 
   ],
   imports: [

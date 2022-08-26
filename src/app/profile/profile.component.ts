@@ -24,7 +24,6 @@ export class ProfileComponent implements OnInit {
     this.authService.currentUser$.subscribe(user => {
       if (user) {
         this.user = new User(user);
-        console.log(this.user);
       }
     });
   }
@@ -41,7 +40,6 @@ export class ProfileComponent implements OnInit {
         error: 'Upload Failed'
       }),
       map((photoURL) => {
-        console.log(photoURL);
         this.authService.updateProfileData({photoURL});
       })
       ).subscribe();

@@ -17,13 +17,6 @@ export class MessageComponent implements OnInit {
     private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
-    // this.firestore
-    //   .collection(this.Messages.chatID)
-    //   .valueChanges()
-    //   .subscribe((msg) => {
-    //     console.log('msg', msg);
-    //     this.messagefromFire = msg;
-    //   })
 
   }
 

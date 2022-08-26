@@ -26,10 +26,8 @@ export class DialogEditChannelnameComponent implements OnInit {
       .subscribe((channelname => {
         if (channelname) {
           this.value = channelname['channelName'];
-          console.log('true');
         }
         if (!channelname) {
-          console.log('error');
           this.getDirectChannels()
         }
       }))
@@ -41,7 +39,6 @@ export class DialogEditChannelnameComponent implements OnInit {
       .doc(this.currentChannelID)
       .valueChanges()
       .subscribe((channel => {
-        console.log(channel);
         this.value = channel['name']
 
       }))
@@ -54,11 +51,9 @@ export class DialogEditChannelnameComponent implements OnInit {
       .doc(this.currentChannelID)
       .update({ channelName: this.value })
       .catch((error => {
-        console.log(error);
         this.updateDirectChannel();
       }))
       .then((done => {
-        console.log('done', done);
         this.openSnackBar();
       }))
   }

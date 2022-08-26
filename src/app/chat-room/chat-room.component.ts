@@ -62,7 +62,6 @@ export class ChatRoomComponent implements OnInit {
     this.authService.currentUser$.subscribe(user => {
       if (user) {
         this.user = new User(user);
-        console.log(this.user);
         this.setUserinFirebase()
       }
     });
@@ -103,7 +102,6 @@ export class ChatRoomComponent implements OnInit {
       .subscribe((changes: any) => {
         if (!changes.channelName) return
         this.activeChannel = changes;
-        console.log(this.activeChannel);
         this.editOtion = true;
       })
   }
@@ -116,7 +114,6 @@ export class ChatRoomComponent implements OnInit {
       .subscribe((name => {
         if (!name['name']) return
         this.directChannels = name;
-        console.log('DK from Chat', this.directChannels);
       }))
   }
 
@@ -299,9 +296,7 @@ export class ChatRoomComponent implements OnInit {
       )
       .subscribe(url => {
         if (url) {
-          console.log(url);
           this.emptyTask(task)
-
         }
       });
   }
@@ -327,17 +322,12 @@ export class ChatRoomComponent implements OnInit {
   editChannel(id) {
     const dialogRef = this.dialog.open(DialogEditChannelnameComponent)
     dialogRef.componentInstance.currentChannelID = this.channelID;
-    console.log(id);
-    console.log(this.channelID);
-
   }
+
+  // To preview image in fullscreen
   previewImage(image){
     this.preview = true;
     this.fullscrennImage = image
-    console.log(this.preview, image);
-    
   }
-  saveChannelName() {
 
-  }
 }

@@ -8,6 +8,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { canActivate, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { ProfileComponent } from './profile/profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ImprintComponent } from './imprint/imprint.component';
+import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 
 const redirectToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectTooHome = () => redirectLoggedInTo(['page-list']);
@@ -18,6 +20,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, ...canActivate(redirectToLogin) },
 
   { path: 'profile', component: ProfileComponent, ...canActivate(redirectToLogin) },
+
+  { path: 'imprint', component: ImprintComponent },
+  { path: 'legal-notice', component: LegalNoticeComponent },
 
   {
     path: 'chat', component: ChatRoomComponent,

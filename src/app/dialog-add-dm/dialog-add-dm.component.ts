@@ -37,10 +37,8 @@ export class DialogAddDmComponent implements OnInit {
       .valueChanges({ idField: 'userId' })
       .subscribe((changes: any) => {
         this.users = changes;
-        console.log(this.users);
         
       });
-      console.log(this.selectedUsers);
       // this.currantUserUID = this.authService.auth.currentUser.uid
   }
 
@@ -61,7 +59,6 @@ export class DialogAddDmComponent implements OnInit {
       if (user.uid ==  this.authService.auth.currentUser.uid) {
         this.selectedUsersArray.push(user);
       }
-      console.log(this.selectedUsers);
       
     });
   }
@@ -84,7 +81,6 @@ export class DialogAddDmComponent implements OnInit {
     .collection('directMessage')
     .add(this.directMessage)
     .then( (DM: any) => {
-      console.log(DM)
       // window.location.reload();
       this.dialogRef.close();
       this.router.navigateByUrl('/chat/' + DM.id);

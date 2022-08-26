@@ -20,9 +20,4 @@ export class PageListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  closeSidebar(){
-   
-    console.log(this.sidebarOpen , 'closeSidebar');
-  }
-
 }

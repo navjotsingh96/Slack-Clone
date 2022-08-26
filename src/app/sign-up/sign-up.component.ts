@@ -70,11 +70,11 @@ export class SignUpComponent implements OnInit {
     if (!this.signUpForm.valid) return;
 
     const { name, email, password } = this.signUpForm.value;     // Here we get the values of the formuu
-    this.authService.signUp(name, email, password).pipe(      // Here we sign up the user
-      this.toast.observe({                               // Here we show a toast message
+    this.authService.signUp(name, email, password).pipe(      // Here we sign up the user 
+    this.toast.observe({                               // Here we show a toast message
         success: 'User created successfully',
         loading: 'Creating user...',
-        error: 'Error creating user'
+        error: ({message}) => `${message}`
       })
     ).subscribe(() => {      
     // Here we navigate to the login page if successful
