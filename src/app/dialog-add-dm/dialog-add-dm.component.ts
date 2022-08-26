@@ -3,8 +3,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { DirectMassage } from '../interface/directMessage'; 
-import { AuthenticationService } from '../services/authentication.service'; 
+import { DirectMassage } from '../interface/directMessage';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-dialog-add-dm',
@@ -15,8 +15,8 @@ export class DialogAddDmComponent implements OnInit {
 
   users: any = [];
   // currantUserUID: any;
-
-  selectedUsers = new FormControl(); 
+  accountUsers:any = [];
+  selectedUsers = new FormControl();
   selectedUsersArray = []
   directMessage: DirectMassage;
 
@@ -26,40 +26,53 @@ export class DialogAddDmComponent implements OnInit {
       users: [],
       key: '',
     }
-   }
+  }
 
   /**
    * Load all Users form Firebase
    */
   ngOnInit(): void {
+
     this.firestore
       .collection('users')
       .valueChanges({ idField: 'userId' })
       .subscribe((changes: any) => {
         this.users = changes;
-        
+      this.filterUser()
+
       });
-      // this.currantUserUID = this.authService.auth.currentUser.uid
+    // this.currantUserUID = this.authService.auth.currentUser.uid
   }
 
   /**
    * All users form firebase without currant user
    */
   usersWithoutCurrantUser() {
+
     return this.users.filter(
       (user: any) => !(user.email == this.authService.auth.currentUser.email)
     );
   }
 
+// Guest users will be not showen on Direct channel messages
+  filterUser(){
+  return this.users.filter(
+      (user: any) => {
+        if(user.email || user.eamil){
+          this.accountUsers.push(user);
+        }
+      } 
+    );
+  }
   /**
    * Add currant user to direct message
    */
   currantUser() {
     this.users.forEach((user: any) => {
-      if (user.uid ==  this.authService.auth.currentUser.uid) {
+      if (user.uid == this.authService.auth.currentUser.uid) {
         this.selectedUsersArray.push(user);
       }
-      
+
     });
   }
 
@@ -70,21 +83,21 @@ export class DialogAddDmComponent implements OnInit {
   createDMChannel() {
     this.selectedUsersArray = []  // if there is anything in array, empty it
 
-      this.selectedUsers.value.forEach((user: any) => {
-        this.selectedUsersArray.push(user);
-      });
+    this.selectedUsers.value.forEach((user: any) => {
+      this.selectedUsersArray.push(user);
+    });
 
-      this.currantUser(); // Add currant user to direct message
-      this.directMessage.users = this.selectedUsersArray; // Add all users to direct message
+    this.currantUser(); // Add currant user to direct message
+    this.directMessage.users = this.selectedUsersArray; // Add all users to direct message
 
     this.firestore
-    .collection('directMessage')
-    .add(this.directMessage)
-    .then( (DM: any) => {
-      // window.location.reload();
-      this.dialogRef.close();
-      this.router.navigateByUrl('/chat/' + DM.id);
-     
-    });
+      .collection('directMessage')
+      .add(this.directMessage)
+      .then((DM: any) => {
+        // window.location.reload();
+        this.dialogRef.close();
+        this.router.navigateByUrl('/chat/' + DM.id);
+
+      });
   }
 }
