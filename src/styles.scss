@@ -311,6 +311,12 @@ pre {
     }
 }
 
+.tox .tox-toolbar--scrolling {
+    height: 37px;
+    overflow: auto;
+    flex-wrap: wrap !important;
+}
+
 @media(max-width: 1000px) {
     mat-drawer-content {
         overflow: hidden !important;

@@ -11,6 +11,7 @@
     // left: 300px;
 }
 
+
 /* From NAvi */
 
 .channel-name {
@@ -111,7 +112,6 @@
     width: 164px;
     height: 70px;
     margin-top: 5px;
-
     border-radius: 5px 5px 5px 5px;
     transition: opacity 1s ease-in-out;
     &:hover {
@@ -192,6 +192,7 @@ mat-icon {
     }
 }
 
+
 /************************************************************/
 
 .chat {
@@ -238,7 +239,6 @@ mat-icon {
     .show-chat {
         height: 58vh;
     }
-
     .msg-box {
         margin: 5px 5px 5px 5px;
     }
@@ -268,7 +268,6 @@ mat-icon {
         align-items: center;
         width: 50%;
     }
-
     .thread {
         font-size: 10px;
     }
@@ -279,7 +278,7 @@ mat-icon {
         margin-top: 5px;
     }
     .thread {
-        a{
+        a {
             position: absolute;
             right: 5px;
             top: 5px;
@@ -294,7 +293,7 @@ mat-icon {
         width: 95%;
         height: 40%;
     }
-    .send-btn{
+    .send-btn {
         width: 50px;
         height: 50px;
         border-radius: 100%;
@@ -304,13 +303,15 @@ mat-icon {
         height: 50px;
         border-radius: 100%;
     }
-    .upload-button{
+    .upload-button {
         content: "";
-
     }
-
-    mat-button-wrapper{
+    mat-button-wrapper {
         content: "";
+    }
+    .show-chat {
+        margin-left: -16px !important;
+        margin: 0;
     }
 }
 
