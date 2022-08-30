@@ -46,6 +46,7 @@ import { GuestNameComponent } from './guest-name/guest-name.component';
 import { FooterComponent } from './footer/footer.component';
 import { ImprintComponent } from './imprint/imprint.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,7 +102,8 @@ import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
     MatFormFieldModule,
     MatSnackBarModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,9 +5,10 @@
 }
 
 .thread-container {
-    height: 35vh;
+    height: auto;
     overflow: auto;
     overflow-x: hidden;
+    max-height: 60vh;
 }
 
 .upload-img {

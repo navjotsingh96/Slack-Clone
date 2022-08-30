@@ -20,7 +20,7 @@
         </div>
     </div>
 </div>
-<div class="msg-box m-left-20 m-right-20 thread-container" #ThreadContainer>
+<div *ngIf="threadmsg?.length" class="msg-box m-left-20 m-right-20 thread-container" #ThreadContainer>
 
     <div class="msg-box m-left-20 border-bottom" *ngFor="let thread of threadmsg">
         <div class="user-img" (click)="UserDetails(thread?.user)">

@@ -24,7 +24,7 @@ body {
 
 .header-login-link {
     cursor: pointer;
-    margin-left: calc(50px - 16px);
+    margin-left: 18px;
 }
 
 .m-right-20 {
@@ -34,6 +34,10 @@ body {
 
 .mat-dialog-container {
     padding: 0 !important;
+}
+
+mat-drawer-content {
+    overflow-x: hidden !important;
 }
 
 .p-left-20 {
@@ -47,6 +51,19 @@ body {
 
 .m-left-350 {
     margin-left: 350px;
+}
+
+.left-side {
+    display: flex;
+    align-items: center;
+    padding-left: 45px;
+    img {
+        width: 14%;
+        background: white;
+        padding: 5px;
+        border-radius: 10px;
+        box-shadow: 0 0px 6px 0px;
+    }
 }
 
 .p-absolute {
@@ -319,6 +336,6 @@ pre {
 
 @media(max-width: 1000px) {
     mat-drawer-content {
-        overflow: hidden !important;
+        overflow-x: hidden !important;
     }
 }

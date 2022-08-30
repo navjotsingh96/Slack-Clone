@@ -31,6 +31,8 @@
 
 .edit-channel {
     cursor: pointer;
+    position: absolute;
+    right: 10px;
     mat-icon {
         width: 50px;
     }
@@ -270,19 +272,18 @@ mat-icon {
     }
     .thread {
         font-size: 10px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+    .show-chat {
+        height: 67vh;
     }
 }
 
 @media (max-width: 700px) {
     .text-con {
         margin-top: 5px;
-    }
-    .thread {
-        a {
-            position: absolute;
-            right: 5px;
-            top: 5px;
-        }
     }
     .editor-container {
         width: 100%;
