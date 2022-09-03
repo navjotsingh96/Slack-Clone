@@ -28,12 +28,17 @@
 
         <mat-menu #userMenu="matMenu">
             <button mat-menu-item routerLink="home">
+               <mat-icon>home</mat-icon>
             Home
         </button>
             <button mat-menu-item routerLink="profile">
+               <mat-icon>person</mat-icon>
+
             Profile
         </button>
             <button mat-menu-item (click)="logout()">
+               <mat-icon>logout</mat-icon>
+
             Logout
         </button>
             <!--   <button mat-menu-item routerLink="imprint">
@@ -43,6 +48,8 @@
             Legal Notice
         </button> -->
             <button class="danger" mat-menu-item (click)="deleteAccount()">
+               <mat-icon>delete</mat-icon>
+
             Delete account
         </button>
         </mat-menu>
