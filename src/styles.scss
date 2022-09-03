@@ -173,9 +173,7 @@ mat-drawer-content {
 }
 
 .right-down-corner {
-    position: absolute;
-    bottom: 10px;
-    right: 5px;
+    position: relative;
     transition: all 225ms ease-in-out;
     &:hover {
         cursor: pointer;
@@ -362,9 +360,9 @@ pre {
 }
 
 @media (max-height: 1100px) {
-    .show-chat {
+    /*  .show-chat {
         height: 58vh;
-    }
+    } */
     .msg-box {
         margin: 10px 10px 10px 10px;
     }
@@ -402,9 +400,9 @@ pre {
         right: 5px;
         top: 5px;
     } */
-    .show-chat {
+    /*    .show-chat {
         height: 67vh;
-    }
+    } */
 }
 
 @media (max-width: 700px) {
@@ -448,9 +446,9 @@ pre {
         height: 182px;
         flex-direction: column-reverse;
     }
-    .show-chat {
+    /*   .show-chat {
         height: 50vh;
-    }
+    } */
     .channel-name {
         padding-top: 15px;
         padding-bottom: 1px;

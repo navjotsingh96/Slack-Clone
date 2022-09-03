@@ -48,17 +48,6 @@
     }
 }
 
-.right-down-corner {
-    position: absolute;
-    bottom: 10px;
-    right: 5px;
-    transition: all 225ms ease-in-out;
-    &:hover {
-        cursor: pointer;
-        transform: translateY(-5px);
-    }
-}
-
 .chat-user {
     display: flex;
     img {
@@ -87,7 +76,6 @@
 
 .thread {
     margin-top: 10px;
-    margin-left: 10px;
     transition: all 255ms ease-in-out;
     width: fit-content;
     &:hover {
