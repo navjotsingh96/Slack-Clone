@@ -29,12 +29,11 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
-    this.authService.loggedIn = false;
+    this.authService.logout()
     window.location.reload();
-    this.router.navigate(['login']);
-
   }
+
+
   closeMenu() {
     this.draw.toggle();
   }
