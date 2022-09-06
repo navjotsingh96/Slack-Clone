@@ -36,17 +36,12 @@
 
             Profile
         </button>
-            <button mat-menu-item (click)="logout()">
+            <button mat-menu-item routerLink="login" (click)="logout()">
                <mat-icon>logout</mat-icon>
 
             Logout
         </button>
-            <!--   <button mat-menu-item routerLink="imprint">
-            Imprint
-        </button>
-            <button mat-menu-item routerLink="legal-notice">
-            Legal Notice
-        </button> -->
+
             <button class="danger" mat-menu-item (click)="deleteAccount()">
                <mat-icon>delete</mat-icon>
 

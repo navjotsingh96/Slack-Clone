@@ -42,7 +42,8 @@ export class SidebarComponent implements OnInit {
     public dialog: MatDialog,
     private firestore: AngularFirestore,
     public authService: AuthenticationService,
-    private sideNavService: SideNavService) { }
+    private sideNavService: SideNavService,
+    public router: Router) { }
 
   ngOnInit(): void {
     this.sideNavService.sideNavToggleSubject.subscribe(() => {
@@ -53,7 +54,6 @@ export class SidebarComponent implements OnInit {
     this.loadDirectChannelDB();
     //check screen size
     this.onResize(event)
-    this.getUserNameFromDm()
   }
 
   //Load data form firestore for channels
@@ -138,10 +138,11 @@ export class SidebarComponent implements OnInit {
 
   logout():void {
     this.authService.logout();
-    
-      //  this.router.navigate(['login']);
+     this.router.navigate(['login']);
       window.location.reload();
       this.authService.loggedIn = false;
+      console.log('clicked');
+      
    ;
   }
 }

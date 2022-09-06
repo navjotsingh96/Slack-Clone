@@ -29,22 +29,26 @@
             <span (click)="openDialog()" class="m-left-20"> Add Channel</span>
         </div>
 
-        <div class="direct-msg column  m-left-20">
-            <div class="dm">
-                <h3>Direct Message</h3>
-                <mat-icon (click)="OpenAddDmChannel()">add</mat-icon>
+        <div class="direct-msg">
+
+            <div class="cereat-channels coloum">
+                <button (click)="OpenAddDmChannel()" class="add-btn" mat-fab color="primary">
+                <mat-icon>add</mat-icon>
+            </button>
+                <span (click)="openDialog()" class="m-left-20">Direct Message</span>
             </div>
-            <div class="channels-main">
+            <div class="channels-main m-left-20">
 
                 <mat-selection-list #directMSG [multiple]="false">
                     <mat-list-option (click)="toogelSideNav()" class="channel-list" *ngFor="let Directchannel of DM_channels" [routerLink]="['/chat/' + Directchannel.dmID]" [value]="directMSG">
                         <a class="link-to-channel">
-                            <!-- # {{username}}	 -->
+                            {{Directchannel.name.split(",",1)}}	
                         </a>
                     </mat-list-option>
                 </mat-selection-list>
             </div>
         </div>
+
     </mat-drawer>
     <div class="router-outlet">
         <router-outlet></router-outlet>

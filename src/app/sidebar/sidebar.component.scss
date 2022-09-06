@@ -24,7 +24,6 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
 }
 
 mat-drawer-container {
@@ -86,6 +85,7 @@ mat-dialog-container {
 
 .direct-msg {
     max-width: 100%;
+    background-color: #2d3c84;
     .user-sidenav {
         display: flex;
         align-items: center;
@@ -198,9 +198,12 @@ mat-list-option {
     }
 }
 
-<<<<<<< HEAD
-@media (max-width: 800px) {
-=======
+.coloum {
+    border-bottom: 0px transparent !important;
+}
+
+@media (max-width: 800px) {}
+
 @media (max-width: 790px) {
     .side-nav {
         width: 100%;
@@ -208,7 +211,6 @@ mat-list-option {
 }
 
 @media (max-width: 768px) {
->>>>>>> dc8e22fb46ebeb23cb47141fe3392743176df592
     .mat-drawer-content {
         overflow: none;
     }
