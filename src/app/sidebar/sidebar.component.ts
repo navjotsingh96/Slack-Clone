@@ -10,6 +10,8 @@ import { AsyncPipe } from '@angular/common';
 import { DialogAddDmComponent } from '../dialog-add-dm/dialog-add-dm.component';
 import { MatDrawer } from '@angular/material/sidenav';
 import { SideNavService } from '../services/sidenav.service';
+import { debug } from 'console';
+import { ChatRoomComponent } from '../chat-room/chat-room.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -51,6 +53,7 @@ export class SidebarComponent implements OnInit {
     this.loadDirectChannelDB();
     //check screen size
     this.onResize(event)
+    this.getUserNameFromDm()
   }
 
   //Load data form firestore for channels
@@ -97,7 +100,6 @@ export class SidebarComponent implements OnInit {
   OpenAddDmChannel() {
     this.dialog.open(DialogAddDmComponent);
   }
-
   //to show or hide Sidenav on Responsive 
   toogelSideNav() {
     this.innerWidth = window.innerWidth;
@@ -122,6 +124,17 @@ export class SidebarComponent implements OnInit {
 
   //   });
   // }
+
+
+  getUserNameFromDm(){
+     this.dialog.open(ChatRoomComponent)
+  }
+
+
+
+
+
+
 
   logout():void {
     this.authService.logout();

@@ -65,9 +65,9 @@ export class DialogAddDmComponent implements OnInit {
     );
   }
   /**
-   * Add currant user to direct message
+   * Add current user to direct message
    */
-  currantUser() {
+  currentUser() {
     this.users.forEach((user: any) => {
       if (user.uid == this.authService.auth.currentUser.uid) {
         this.selectedUsersArray.push(user);
@@ -80,6 +80,7 @@ export class DialogAddDmComponent implements OnInit {
   /**
    * create channel for all selected users and for currant user
    */
+  
   createDMChannel() {
     this.selectedUsersArray = []  // if there is anything in array, empty it
 
@@ -87,9 +88,10 @@ export class DialogAddDmComponent implements OnInit {
       this.selectedUsersArray.push(user);
     });
 
-    this.currantUser(); // Add currant user to direct message
+    this.currentUser(); // Add currant user to direct message
     this.directMessage.users = this.selectedUsersArray; // Add all users to direct message
-
+    this.directMessage.name = this.selectedUsersArray.map((user: any) => user.name).join(', '); // Add all users name to direct message
+    console.log(this.directMessage.name);
     this.firestore
       .collection('directMessage')
       .add(this.directMessage)

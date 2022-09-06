@@ -39,7 +39,7 @@
                 <mat-selection-list #directMSG [multiple]="false">
                     <mat-list-option (click)="toogelSideNav()" class="channel-list" *ngFor="let Directchannel of DM_channels" [routerLink]="['/chat/' + Directchannel.dmID]" [value]="directMSG">
                         <a class="link-to-channel">
-                            # {{Directchannel.name}}
+                            <!-- # {{username}}	 -->
                         </a>
                     </mat-list-option>
                 </mat-selection-list>
