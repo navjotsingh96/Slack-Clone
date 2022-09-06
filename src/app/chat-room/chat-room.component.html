@@ -36,12 +36,13 @@
                         <mat-icon>more_vert</mat-icon>
                       </button>
                     <mat-menu #editMessage="matMenu">
-                        <button (click)="openDialog(msg.customIdName)" mat-menu-item>Edit</button>
+                        <button (click)="openDialog(msg.customIdName)" mat-menu-item><mat-icon>edit_outline</mat-icon>Edit</button>
+                        <button class="red-color" (click)="deleteMesage(msg.customIdName, msg.image)" mat-menu-item><mat-icon>delete_outline</mat-icon>Delete</button>
                     </mat-menu>
 
-                    <span class="thread"> 
-                        <a [replaceUrl]="true" [routerLink]="['/chat/'+ msg.channelID + '/thread/' + msg.customIdName]">Show Therad </a></span>
-                    <mat-icon *ngIf="user.uid == msg.user" class="right-down-corner" (click)="deleteMesage(msg.customIdName, msg.image)">delete_outline</mat-icon>
+                    <span class="thread right-down-corner"> 
+                        <a [replaceUrl]="true" [routerLink]="['/chat/'+ msg.channelID + '/thread/' + msg.customIdName]">Show Therad </a>
+                    </span>
                 </div>
 
             </div>
@@ -74,7 +75,7 @@
 
         <div class="text-con">
             <div class="file-upload">
-                <button class="upload-button" type="button" mat-raised-button (click)="fileInput.click()">{{ fileName ||'Choose File'}}</button>
+                <button class="upload-button" type="button" mat-raised-button (click)="fileInput.click()">{{ fileName ||'Choose File'}} <mat-icon>image_outlined</mat-icon> </button>
                 <input class="upload-input" hidden #fileInput (change)="uploadFile($event)" type="file" id="file" name="image" accept=".png, .jpg">
             </div>
             <div class="msg-btn">

@@ -3,7 +3,7 @@
         <div class="channels m-left-20 ">
             <div class="chat">
                 <div class="chat-user">
-                    <div class="chat-text" *ngIf="authService.currentUser$ |async as user; ">
+                    <div *ngIf="authService.currentUser$ |async as user; ">
                         <div class="user-image"><img [src]="user.photoURL ?? 'assets/profile-img/profile-1.png'"></div>
                         <span class="user-name-sidenav"> {{user.displayName}}</span>
                         <span> {{user.email}}</span>
