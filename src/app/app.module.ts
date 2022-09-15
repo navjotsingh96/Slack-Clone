@@ -47,6 +47,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ImprintComponent } from './imprint/imprint.component';
 import { LegalNoticeComponent } from './legal-notice/legal-notice.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { DeleteAccountComponent } from './delete-account/delete-account.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +71,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     GuestNameComponent,
     FooterComponent,
     ImprintComponent,
-    LegalNoticeComponent
+    LegalNoticeComponent,
+    DeleteAccountComponent
 
   ],
   imports: [

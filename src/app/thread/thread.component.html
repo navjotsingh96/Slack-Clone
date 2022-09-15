@@ -22,7 +22,7 @@
 </div>
 <div *ngIf="threadmsg?.length" class="msg-box m-left-20 m-right-20 thread-container" #ThreadContainer>
 
-    <div class="msg-box m-left-20 border-bottom" *ngFor="let thread of threadmsg">
+    <div class="msg-box m-left-20" *ngFor="let thread of threadmsg">
         <div class="user-img" (click)="UserDetails(thread?.user)">
             <img [src]="findUSerbyId(thread?.user)?.photoURL || 'assets/profile-img/profile-1.png'" alt="User-Image">
             <div class="user-name">{{findUSerbyId(thread?.user)?.name || 'Guest'}}
@@ -31,7 +31,7 @@
         </div>
         <div class="chat-messages">
             <span [innerHTML]="thread?.message"></span>
-            <button mat-icon-button class="edit-option" [matMenuTriggerFor]="editMessage">
+            <button mat-icon-button *ngIf="user.uid == thread.user" class="edit-option" [matMenuTriggerFor]="editMessage">
                 <mat-icon>more_vert</mat-icon>
               </button>
             <div *ngIf="thread?.image" class="image-container">

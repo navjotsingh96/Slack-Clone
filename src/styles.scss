@@ -347,6 +347,11 @@ pre {
     flex-wrap: wrap !important;
 }
 
+.danger {
+    color: red !important;
+    background: #ff000033 !important;
+}
+
 @media(max-width: 1000px) {
     mat-drawer-content {
         overflow-x: hidden !important;

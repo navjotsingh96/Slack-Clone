@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { PageListComponent } from '../page-list/page-list.component';
 import { MatDrawer, MatDrawerContainer, MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { SideNavService } from '../services/sidenav.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteAccountComponent } from '../delete-account/delete-account.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -20,7 +22,8 @@ export class HeaderComponent implements OnInit {
     public authService: AuthenticationService,
     private router: Router,
     public Sidnav: PageListComponent,
-    public draw: SideNavService
+    public draw: SideNavService,
+    public dialog: MatDialog
   ) { }
 
 
@@ -44,7 +47,8 @@ export class HeaderComponent implements OnInit {
 
   // delete account form Firebase 
   deleteAccount() {
-    this.authService.deleteUser();
+    this.dialog.open(DeleteAccountComponent)
+  /*   this.authService.deleteUser();
     setTimeout(() => {
       window.location.reload();
       this.authService.loggedIn = false;
@@ -52,6 +56,6 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['login']);
 
     }, 3000);
-
+ */
   }
 }
